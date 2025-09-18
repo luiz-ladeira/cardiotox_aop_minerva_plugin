@@ -1,5 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-var css = "body {\n  font-family: Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.4;\n}\n.table-wrapper {\n  width: 100%;\n  height: 100%;\n  max-height: 500px;\n  overflow-x: auto;\n  overflow-y: auto;\n  border: 1px solid #ddd;\n  background: #fff;\n  padding: 5px;\n}\n.table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.table th,\n.table td {\n  white-space: nowrap;\n  padding: 6px 10px;\n  border: 1px solid #ccc;\n  text-align: left;\n}\n.table th {\n  background: #f8f9fa;\n  position: sticky;\n  top: 0;\n  z-index: 2;\n}\n.table tr:hover {\n  background: #f1f1f1;\n}\n.d-flex {\n  margin-bottom: 8px;\n}\n/*# sourceMappingURL=styles.css.map */\n"; (require("browserify-css").createStyle(css, { "href": "__tmp_minerva_plugin\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = "body {\n  font-family: Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.4;\n}\n.table-wrapper {\n  width: 100%;\n  height: 100%;\n  max-height: 600px;\n  overflow-x: auto;\n  overflow-y: auto;\n  border: 1px solid #ddd;\n  background: #fff;\n  padding: 5px;\n}\n.table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.table th,\n.table td {\n  white-space: nowrap;\n  padding: 6px 10px;\n  border: 1px solid #ccc;\n  text-align: left;\n}\n.table th {\n  background: #f8f9fa;\n  position: sticky;\n  top: 0;\n  z-index: 2;\n}\n.table tr:hover {\n  background: #f1f1f1;\n}\n.entity-match {\n  background-color: #e6ffe6;\n  cursor: pointer;\n}\n.entity-match:hover {\n  background-color: #ccffcc;\n}\n.d-flex {\n  margin-bottom: 8px;\n}\n/*# sourceMappingURL=styles.css.map */\n"; (require("browserify-css").createStyle(css, { "href": "__tmp_minerva_plugin\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":4}],2:[function(require,module,exports){
 "use strict";
 
@@ -40,7 +40,7 @@ require('./minervaAPI');
 
 // ================= CONFIG =================
 var PLUGIN_NAME = 'KE Mapper';
-var PLUGIN_VERSION = '1.0.0';
+var PLUGIN_VERSION = '1.1.0';
 var PLUGIN_URL = 'https://raw.githubusercontent.com/luiz-ladeira/cardiotox_aop_minerva_plugin/master/plugin.js';
 var SPREADSHEET_ID = '1lYtwYLNLfGlhj7gbbkaNCwYNsuGKM5L6uJSydlXEGLE';
 var API_KEY = 'AIzaSyAIaStdq_ebxgOE7l5K5mBrBSRrf3Ywayg';
@@ -48,30 +48,51 @@ var SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/".concat(SPREADSHE
 var ANCHOR_COLUMN = 'ke_name';
 // ==========================================
 
-// Fetch Google Sheet
+// Fetch Google Sheet (first tab automatically)
 function fetchSheetData() {
   return _fetchSheetData.apply(this, arguments);
 } // Render spreadsheet as table
 function _fetchSheetData() {
   _fetchSheetData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-    var url, resp;
+    var metaUrl, metaResp, meta, sheetName, url, resp;
     return _regenerator().w(function (_context) {
       while (1) switch (_context.n) {
         case 0:
-          url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/Sheet1?key=").concat(API_KEY);
+          // 1. Get metadata
+          metaUrl = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "?key=").concat(API_KEY);
           _context.n = 1;
-          return fetch(url);
+          return fetch(metaUrl);
         case 1:
-          resp = _context.v;
-          if (resp.ok) {
+          metaResp = _context.v;
+          if (metaResp.ok) {
             _context.n = 2;
             break;
           }
-          throw new Error("Google Sheets fetch failed: ".concat(resp.statusText));
+          throw new Error("Failed to fetch sheet metadata: ".concat(metaResp.statusText));
         case 2:
           _context.n = 3;
-          return resp.json();
+          return metaResp.json();
         case 3:
+          meta = _context.v;
+          // 2. Use first tab name
+          sheetName = meta.sheets[0].properties.title;
+          console.log("Using sheet:", sheetName);
+
+          // 3. Fetch data
+          url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/").concat(sheetName, "?key=").concat(API_KEY);
+          _context.n = 4;
+          return fetch(url);
+        case 4:
+          resp = _context.v;
+          if (resp.ok) {
+            _context.n = 5;
+            break;
+          }
+          throw new Error("Google Sheets fetch failed: ".concat(resp.statusText));
+        case 5:
+          _context.n = 6;
+          return resp.json();
+        case 6:
           return _context.a(2, _context.v);
       }
     }, _callee);
@@ -106,14 +127,14 @@ function renderUI(container, sheet, bioEntities) {
       return $row.append("<td>".concat(cell || '', "</td>"));
     });
 
-    // If matches a BioEntity, make row clickable
+    // If matches a BioEntity, mark and make clickable
     if (anchorIdx !== -1 && row[anchorIdx]) {
       var ke = row[anchorIdx];
       var match = bioEntities.find(function (be) {
         return be.name === ke;
       });
       if (match) {
-        $row.css('cursor', 'pointer');
+        $row.addClass('entity-match');
         $row.on('click', function () {
           minerva.data.bioEntities.addSingleMarker({
             id: "E" + match.id,
@@ -167,7 +188,9 @@ function _register() {
           _minerva$plugins$regi = minerva.plugins.registerPlugin({
             pluginName: PLUGIN_NAME,
             pluginVersion: PLUGIN_VERSION,
-            pluginUrl: PLUGIN_URL
+            pluginUrl: PLUGIN_URL,
+            minWidth: 600,
+            defaultWidth: 900
           }), element = _minerva$plugins$regi.element;
           _context2.p = 2;
           _context2.n = 3;
