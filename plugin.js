@@ -1,5 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-var css = "body {\n  font-family: Arial, sans-serif;\n  font-size: 14px;\n}\n.table-wrapper {\n  width: 100%;\n  height: 100%;\n  max-height: 600px;\n  overflow-x: auto;\n  overflow-y: auto;\n  border: 1px solid #ddd;\n  background: #fff;\n  padding: 5px;\n}\n.table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.table th,\n.table td {\n  white-space: nowrap;\n  padding: 6px 10px;\n  border: 1px solid #ccc;\n  text-align: left;\n}\n.table th {\n  background: #f8f9fa;\n  position: sticky;\n  top: 0;\n  z-index: 2;\n}\n.table tr:hover {\n  background: #f1f1f1;\n}\n.entity-match {\n  background-color: #e6ffe6;\n  cursor: pointer;\n}\n.entity-match:hover {\n  background-color: #ccffcc;\n}\n/*# sourceMappingURL=styles.css.map */\n"; (require("browserify-css").createStyle(css, { "href": "__tmp_minerva_plugin\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = "body {\n  font-family: Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.4;\n}\n.table-wrapper {\n  width: 100%;\n  height: 100%;\n  max-height: 500px;\n  overflow-x: auto;\n  overflow-y: auto;\n  border: 1px solid #ddd;\n  background: #fff;\n  padding: 5px;\n}\n.table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.table th,\n.table td {\n  white-space: nowrap;\n  padding: 6px 10px;\n  border: 1px solid #ccc;\n  text-align: left;\n}\n.table th {\n  background: #f8f9fa;\n  position: sticky;\n  top: 0;\n  z-index: 2;\n}\n.table tr:hover {\n  background: #f1f1f1;\n}\n.d-flex {\n  margin-bottom: 8px;\n}\n/*# sourceMappingURL=styles.css.map */\n"; (require("browserify-css").createStyle(css, { "href": "__tmp_minerva_plugin\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":4}],2:[function(require,module,exports){
 "use strict";
 
@@ -22,14 +22,14 @@ require("core-js/modules/es.string.includes.js");
 require("core-js/modules/es.string.iterator.js");
 require("core-js/modules/web.dom-collections.for-each.js");
 require("core-js/modules/web.dom-collections.iterator.js");
-function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 var $ = require('jquery');
@@ -38,118 +38,92 @@ require('./minervaAPI');
 
 /* globals minerva:MinervaAPI */
 
-var pluginName = 'KE Mapper';
-var pluginVersion = '1.2.0';
-var pluginUrl = 'https://raw.githubusercontent.com/luiz-ladeira/cardiotox_aop_minerva_plugin/master/dist/plugin.js';
+// ================= CONFIG =================
+var PLUGIN_NAME = 'KE Mapper';
+var PLUGIN_VERSION = '1.0.0';
+var PLUGIN_URL = 'https://raw.githubusercontent.com/luiz-ladeira/cardiotox_aop_minerva_plugin/master/plugin.js';
 var SPREADSHEET_ID = '1lYtwYLNLfGlhj7gbbkaNCwYNsuGKM5L6uJSydlXEGLE';
 var API_KEY = 'AIzaSyAIaStdq_ebxgOE7l5K5mBrBSRrf3Ywayg';
 var SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/".concat(SPREADSHEET_ID);
 var ANCHOR_COLUMN = 'ke_name';
-var pluginContainer;
-var minervaApiUrl;
+// ==========================================
 
-// ============================================================
-// Google Sheets fetch
-// ============================================================
+// Fetch Google Sheet
 function fetchSheetData() {
   return _fetchSheetData.apply(this, arguments);
-} // ============================================================
-// Insert marker in Minerva map
-// ============================================================
+} // Render spreadsheet as table
 function _fetchSheetData() {
-  _fetchSheetData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-    var metaUrl, metaResp, meta, sheetName, url, resp;
-    return _regenerator().w(function (_context2) {
-      while (1) switch (_context2.n) {
+  _fetchSheetData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+    var url, resp;
+    return _regenerator().w(function (_context) {
+      while (1) switch (_context.n) {
         case 0:
-          metaUrl = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "?key=").concat(API_KEY);
-          _context2.n = 1;
-          return fetch(metaUrl);
-        case 1:
-          metaResp = _context2.v;
-          if (metaResp.ok) {
-            _context2.n = 2;
-            break;
-          }
-          throw new Error("Failed to fetch sheet metadata: ".concat(metaResp.statusText));
-        case 2:
-          _context2.n = 3;
-          return metaResp.json();
-        case 3:
-          meta = _context2.v;
-          sheetName = meta.sheets[0].properties.title;
-          console.log("Using sheet:", sheetName);
-          url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/").concat(sheetName, "?key=").concat(API_KEY);
-          _context2.n = 4;
+          url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/Sheet1?key=").concat(API_KEY);
+          _context.n = 1;
           return fetch(url);
-        case 4:
-          resp = _context2.v;
+        case 1:
+          resp = _context.v;
           if (resp.ok) {
-            _context2.n = 5;
+            _context.n = 2;
             break;
           }
           throw new Error("Google Sheets fetch failed: ".concat(resp.statusText));
-        case 5:
-          _context2.n = 6;
+        case 2:
+          _context.n = 3;
           return resp.json();
-        case 6:
-          return _context2.a(2, _context2.v);
+        case 3:
+          return _context.a(2, _context.v);
       }
-    }, _callee2);
+    }, _callee);
   }));
   return _fetchSheetData.apply(this, arguments);
 }
-function addMarkerForEntity(entity) {
-  minerva.data.bioEntities.addSingleMarker({
-    id: "E" + entity.id,
-    modelId: entity.modelId ? entity.modelId : entity.model,
-    type: "pin",
-    color: "#00FF00",
-    opacity: 0.8,
-    x: entity.x + entity.width / 2,
-    y: entity.y + entity.height / 2
-  });
-}
-
-// ============================================================
-// Render spreadsheet as table
-// ============================================================
-function renderUI(sheet, bioEntities) {
-  pluginContainer.empty();
+function renderUI(container, sheet, bioEntities) {
+  var $el = $(container);
+  $el.empty();
   var header = sheet.values[0];
   var rows = sheet.values.slice(1);
+
+  // Controls
   var $controls = $("\n    <div class=\"d-flex justify-content-between mb-2\">\n      <input type=\"text\" id=\"search-box\" class=\"form-control form-control-sm w-50\" placeholder=\"Search...\">\n      <button class=\"btn btn-sm btn-primary\" id=\"access-data-btn\">Access data</button>\n    </div>\n  ");
   var $wrapper = $('<div class="table-wrapper"></div>');
   var $table = $('<table class="table table-bordered table-sm"></table>');
   var $thead = $('<thead><tr></tr></thead>');
   var $tbody = $('<tbody></tbody>');
 
-  // build header
+  // Build header
   header.forEach(function (h) {
     return $thead.find('tr').append("<th>".concat(h, "</th>"));
   });
+
+  // Find anchor col index
   var anchorIdx = header.indexOf(ANCHOR_COLUMN);
 
-  // build rows
+  // Build rows
   rows.forEach(function (row) {
     var $row = $('<tr></tr>');
     row.forEach(function (cell) {
       return $row.append("<td>".concat(cell || '', "</td>"));
     });
+
+    // If matches a BioEntity, make row clickable
     if (anchorIdx !== -1 && row[anchorIdx]) {
       var ke = row[anchorIdx];
       var match = bioEntities.find(function (be) {
         return be.name === ke;
       });
       if (match) {
-        $row.addClass('entity-match');
-
-        // 1) Add marker automatically when rendering
-        addMarkerForEntity(match);
-
-        // 2) On row click, add marker again (refresh highlight)
+        $row.css('cursor', 'pointer');
         $row.on('click', function () {
-          addMarkerForEntity(match);
+          minerva.data.bioEntities.addSingleMarker({
+            id: "E" + match.id,
+            modelId: match.modelId,
+            type: "pin",
+            color: "#00FF00",
+            opacity: 0.7,
+            x: match.x + match.width / 2,
+            y: match.y + match.height / 2
+          });
         });
       }
     }
@@ -157,9 +131,9 @@ function renderUI(sheet, bioEntities) {
   });
   $table.append($thead).append($tbody);
   $wrapper.append($table);
-  pluginContainer.append($controls, $wrapper);
+  $el.append($controls, $wrapper);
 
-  // events
+  // Events
   $('#access-data-btn').on('click', function () {
     return window.open(SPREADSHEET_URL, '_blank');
   });
@@ -172,59 +146,54 @@ function renderUI(sheet, bioEntities) {
   });
 }
 
-// ============================================================
-// Plugin Registration
-// ============================================================
-var register = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-    var pluginData, _yield$Promise$all, _yield$Promise$all2, sheet, elements, _t;
-    return _regenerator().w(function (_context) {
-      while (1) switch (_context.p = _context.n) {
+// ================= MAIN =================
+function register() {
+  return _register.apply(this, arguments);
+}
+function _register() {
+  _register = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+    var _minerva$plugins$regi, element, _yield$Promise$all, _yield$Promise$all2, sheet, elements, _t;
+    return _regenerator().w(function (_context2) {
+      while (1) switch (_context2.p = _context2.n) {
         case 0:
-          console.log('registering ' + pluginName + ' plugin');
-          if (!(minerva.plugins === undefined || minerva.plugins.registerPlugin === undefined)) {
-            _context.n = 1;
+          console.log("Registering ".concat(PLUGIN_NAME, " plugin"));
+          if (!(!minerva.plugins || !minerva.plugins.registerPlugin)) {
+            _context2.n = 1;
             break;
           }
-          alert('Minerva version not supported. Required version 18.0 or later');
-          return _context.a(2);
+          alert('Minerva v18 or later required');
+          return _context2.a(2);
         case 1:
-          pluginData = minerva.plugins.registerPlugin({
-            pluginName: pluginName,
-            pluginVersion: pluginVersion,
-            pluginUrl: pluginUrl,
-            minWidth: 600,
-            defaultWidth: 900
-          });
-          pluginContainer = $(pluginData.element);
-          minervaApiUrl = minerva.project.data.getApiUrls().baseApiUrl;
-          _context.p = 2;
-          _context.n = 3;
-          return Promise.all([fetchSheetData(), fetch("".concat(minervaApiUrl, "/projects/").concat(minerva.project.data.getProjectId(), "/models/*/bioEntities/elements/")).then(function (r) {
+          _minerva$plugins$regi = minerva.plugins.registerPlugin({
+            pluginName: PLUGIN_NAME,
+            pluginVersion: PLUGIN_VERSION,
+            pluginUrl: PLUGIN_URL
+          }), element = _minerva$plugins$regi.element;
+          _context2.p = 2;
+          _context2.n = 3;
+          return Promise.all([fetchSheetData(), fetch("".concat(minerva.project.data.getApiUrls().baseApiUrl, "/projects/").concat(minerva.project.data.getProjectId(), "/models/*/bioEntities/elements/")).then(function (r) {
             return r.json();
           })]);
         case 3:
-          _yield$Promise$all = _context.v;
+          _yield$Promise$all = _context2.v;
           _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
           sheet = _yield$Promise$all2[0];
           elements = _yield$Promise$all2[1];
-          renderUI(sheet, elements);
-          _context.n = 5;
+          renderUI(element, sheet, elements);
+          _context2.n = 5;
           break;
         case 4:
-          _context.p = 4;
-          _t = _context.v;
-          pluginContainer.html("<p style=\"color:red;\">".concat(_t.message, "</p>"));
+          _context2.p = 4;
+          _t = _context2.v;
+          $(element).html("<p style=\"color:red;\">".concat(_t.message, "</p>"));
           console.error(_t);
         case 5:
-          return _context.a(2);
+          return _context2.a(2);
       }
-    }, _callee, null, [[2, 4]]);
+    }, _callee2, null, [[2, 4]]);
   }));
-  return function register() {
-    return _ref.apply(this, arguments);
-  };
-}();
+  return _register.apply(this, arguments);
+}
 register();
 },{"../css/styles.css":1,"./minervaAPI":3,"core-js/modules/es.array.concat.js":155,"core-js/modules/es.array.find.js":156,"core-js/modules/es.array.from.js":157,"core-js/modules/es.array.includes.js":158,"core-js/modules/es.array.index-of.js":159,"core-js/modules/es.array.iterator.js":160,"core-js/modules/es.array.slice.js":161,"core-js/modules/es.object.get-prototype-of.js":164,"core-js/modules/es.object.to-string.js":165,"core-js/modules/es.promise.js":169,"core-js/modules/es.regexp.exec.js":173,"core-js/modules/es.regexp.to-string.js":174,"core-js/modules/es.string.includes.js":175,"core-js/modules/es.string.iterator.js":176,"core-js/modules/es.symbol.description.js":178,"core-js/modules/es.symbol.iterator.js":180,"core-js/modules/es.symbol.js":181,"core-js/modules/web.dom-collections.for-each.js":183,"core-js/modules/web.dom-collections.iterator.js":184,"jquery":185}],3:[function(require,module,exports){
 /**
