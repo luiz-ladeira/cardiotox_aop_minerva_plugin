@@ -1,33 +1,21 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-var css = "body {\n  font-family: Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.4;\n}\n.table-wrapper {\n  width: 100%;\n  height: 100%;\n  max-height: 600px;\n  overflow-x: auto;\n  overflow-y: auto;\n  border: 1px solid #ddd;\n  background: #fff;\n  padding: 5px;\n}\n.table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.table th,\n.table td {\n  white-space: nowrap;\n  padding: 6px 10px;\n  border: 1px solid #ccc;\n  text-align: left;\n}\n.table th {\n  background: #f8f9fa;\n  position: sticky;\n  top: 0;\n  z-index: 2;\n}\n.table tr:hover {\n  background: #f1f1f1;\n}\n.entity-match {\n  background-color: #e6ffe6;\n  cursor: pointer;\n}\n.entity-match:hover {\n  background-color: #ccffcc;\n}\n.d-flex {\n  margin-bottom: 8px;\n}\n/*# sourceMappingURL=styles.css.map */\n"; (require("browserify-css").createStyle(css, { "href": "__tmp_minerva_plugin\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = "@charset \"UTF-8\";\n/* Plugin container */\n.plugin-container {\n  width: 600px !important;\n  max-width: 100%;\n  font-family: Arial, sans-serif;\n}\n/* Controls */\n.controls {\n  margin-bottom: 12px;\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n}\n/* Access Data Button */\n.access-data-btn {\n  background-color: #007bff;\n  color: #fff;\n  border: none;\n  padding: 8px 16px;\n  font-size: 14px;\n  border-radius: 4px;\n  cursor: pointer;\n}\n.access-data-btn:hover {\n  background-color: #0056b3;\n}\n/* Search bar */\n.search-container {\n  display: flex;\n  align-items: center;\n}\n.search-input {\n  flex: 1;\n  padding: 6px 8px;\n  border: 1px solid #ccc;\n  border-radius: 4px 0 0 4px;\n}\n.search-btn {\n  background-color: #007bff;\n  border: none;\n  padding: 6px 10px;\n  border-radius: 0 4px 4px 0;\n  cursor: pointer;\n}\n.search-btn::before {\n  content: \"🔍\";\n  /* magnifying glass */\n  font-size: 14px;\n  color: white;\n}\n/* Data table */\n.data-table {\n  border-collapse: collapse;\n  width: 100%;\n  margin-top: 12px;\n}\n.data-table th,\n.data-table td {\n  border: 1px solid #ccc;\n  padding: 6px 8px;\n  text-align: left;\n}\n.data-table th {\n  background-color: #f5f5f5;\n}\n/*# sourceMappingURL=styles.css.map */\n"; (require("browserify-css").createStyle(css, { "href": "__tmp_minerva_plugin\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":4}],2:[function(require,module,exports){
 "use strict";
 
 require("core-js/modules/es.symbol.js");
 require("core-js/modules/es.symbol.description.js");
-require("core-js/modules/es.symbol.iterator.js");
-require("core-js/modules/es.array.from.js");
 require("core-js/modules/es.object.get-prototype-of.js");
-require("core-js/modules/es.regexp.exec.js");
-require("core-js/modules/es.regexp.to-string.js");
 require("core-js/modules/es.array.concat.js");
 require("core-js/modules/es.array.find.js");
 require("core-js/modules/es.array.includes.js");
-require("core-js/modules/es.array.index-of.js");
 require("core-js/modules/es.array.iterator.js");
 require("core-js/modules/es.array.slice.js");
 require("core-js/modules/es.object.to-string.js");
 require("core-js/modules/es.promise.js");
 require("core-js/modules/es.string.includes.js");
-require("core-js/modules/es.string.iterator.js");
 require("core-js/modules/web.dom-collections.for-each.js");
 require("core-js/modules/web.dom-collections.iterator.js");
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -51,174 +39,145 @@ var ANCHOR_COLUMN = 'ke_name';
 // Fetch Google Sheet (first tab automatically)
 function fetchSheetData() {
   return _fetchSheetData.apply(this, arguments);
-} // Render spreadsheet as table
+} // Render spreadsheet as table + controls
 function _fetchSheetData() {
-  _fetchSheetData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+  _fetchSheetData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
     var metaUrl, metaResp, meta, sheetName, url, resp;
-    return _regenerator().w(function (_context) {
-      while (1) switch (_context.n) {
+    return _regenerator().w(function (_context2) {
+      while (1) switch (_context2.n) {
         case 0:
-          // 1. Get metadata
           metaUrl = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "?key=").concat(API_KEY);
-          _context.n = 1;
+          _context2.n = 1;
           return fetch(metaUrl);
         case 1:
-          metaResp = _context.v;
+          metaResp = _context2.v;
           if (metaResp.ok) {
-            _context.n = 2;
+            _context2.n = 2;
             break;
           }
           throw new Error("Failed to fetch sheet metadata: ".concat(metaResp.statusText));
         case 2:
-          _context.n = 3;
+          _context2.n = 3;
           return metaResp.json();
         case 3:
-          meta = _context.v;
-          // 2. Use first tab name
+          meta = _context2.v;
           sheetName = meta.sheets[0].properties.title;
           console.log("Using sheet:", sheetName);
-
-          // 3. Fetch data
           url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/").concat(sheetName, "?key=").concat(API_KEY);
-          _context.n = 4;
+          _context2.n = 4;
           return fetch(url);
         case 4:
-          resp = _context.v;
+          resp = _context2.v;
           if (resp.ok) {
-            _context.n = 5;
+            _context2.n = 5;
             break;
           }
           throw new Error("Google Sheets fetch failed: ".concat(resp.statusText));
         case 5:
-          _context.n = 6;
+          _context2.n = 6;
           return resp.json();
         case 6:
-          return _context.a(2, _context.v);
+          return _context2.a(2, _context2.v);
       }
-    }, _callee);
+    }, _callee2);
   }));
   return _fetchSheetData.apply(this, arguments);
 }
 function renderUI(container, sheet, bioEntities) {
   var $el = $(container);
-  $el.empty();
+  $el.empty().addClass('plugin-container');
   var header = sheet.values[0];
   var rows = sheet.values.slice(1);
 
-  // Controls
-  var $controls = $("\n    <div class=\"d-flex justify-content-between mb-2\">\n      <input type=\"text\" id=\"search-box\" class=\"form-control form-control-sm w-50\" placeholder=\"Search...\">\n      <button class=\"btn btn-sm btn-primary\" id=\"access-data-btn\">Access data</button>\n    </div>\n  ");
-  var $wrapper = $('<div class="table-wrapper"></div>');
-  var $table = $('<table class="table table-bordered table-sm"></table>');
-  var $thead = $('<thead><tr></tr></thead>');
-  var $tbody = $('<tbody></tbody>');
+  // --- Controls ---
+  var $controls = $('<div class="controls"></div>');
 
-  // Build header
+  // Blue Access Data button
+  $controls.append('<button id="access-data" class="access-data-btn">Access Data</button>');
+
+  // Search bar with magnifying glass
+  $controls.append("\n    <div class=\"search-container\">\n      <input type=\"text\" id=\"search-box\" class=\"search-input\" placeholder=\"Search...\" />\n      <button id=\"search-btn\" class=\"search-btn\"></button>\n    </div>\n  ");
+  $el.append($controls);
+
+  // --- Table ---
+  var $table = $('<table class="data-table"></table>');
+  var $thead = $('<thead><tr></tr></thead>');
   header.forEach(function (h) {
     return $thead.find('tr').append("<th>".concat(h, "</th>"));
   });
-
-  // Find anchor col index
-  var anchorIdx = header.indexOf(ANCHOR_COLUMN);
-
-  // Build rows
-  rows.forEach(function (row) {
-    var $row = $('<tr></tr>');
-    row.forEach(function (cell) {
-      return $row.append("<td>".concat(cell || '', "</td>"));
+  $table.append($thead);
+  var $tbody = $('<tbody></tbody>');
+  rows.forEach(function (r) {
+    var $tr = $('<tr></tr>');
+    r.forEach(function (c) {
+      return $tr.append("<td>".concat(c, "</td>"));
     });
+    $tbody.append($tr);
+  });
+  $table.append($tbody);
+  $el.append($table);
 
-    // If matches a BioEntity, mark and make clickable
-    if (anchorIdx !== -1 && row[anchorIdx]) {
-      var ke = row[anchorIdx];
-      var match = bioEntities.find(function (be) {
-        return be.name === ke;
-      });
-      if (match) {
-        $row.addClass('entity-match');
-        $row.on('click', function () {
-          minerva.data.bioEntities.addSingleMarker({
-            id: "E" + match.id,
-            modelId: match.modelId,
-            type: "pin",
-            color: "#00FF00",
-            opacity: 0.7,
-            x: match.x + match.width / 2,
-            y: match.y + match.height / 2
-          });
+  // --- Event handlers ---
+  $('#access-data').on('click', function () {
+    window.open(SPREADSHEET_URL, '_blank');
+  });
+  $('#search-btn').on('click', function () {
+    var query = $('#search-box').val().toLowerCase();
+    var match = rows.find(function (r) {
+      return r.join(' ').toLowerCase().includes(query);
+    });
+    if (match) {
+      var entityId = match[0];
+      var entity = bioEntities[entityId];
+      if (entity) {
+        // Add marker tag above entity
+        bioEntities.addSingleMarker({
+          type: "pin",
+          id: "tag-".concat(entityId),
+          color: "#007bff",
+          opacity: 0.9,
+          x: entity.x,
+          y: entity.y - 20,
+          number: 1,
+          modelId: entity.modelId
         });
       }
+    } else {
+      alert("No match found");
     }
-    $tbody.append($row);
-  });
-  $table.append($thead).append($tbody);
-  $wrapper.append($table);
-  $el.append($controls, $wrapper);
-
-  // Events
-  $('#access-data-btn').on('click', function () {
-    return window.open(SPREADSHEET_URL, '_blank');
-  });
-  $('#search-box').on('input', function () {
-    var val = $(this).val().toLowerCase();
-    $tbody.find('tr').each(function () {
-      var rowText = $(this).text().toLowerCase();
-      $(this).toggle(rowText.includes(val));
-    });
   });
 }
 
-// ================= MAIN =================
-function register() {
-  return _register.apply(this, arguments);
-}
-function _register() {
-  _register = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-    var _minerva$plugins$regi, element, _yield$Promise$all, _yield$Promise$all2, sheet, elements, _t;
-    return _regenerator().w(function (_context2) {
-      while (1) switch (_context2.p = _context2.n) {
-        case 0:
-          console.log("Registering ".concat(PLUGIN_NAME, " plugin"));
-          if (!(!minerva.plugins || !minerva.plugins.registerPlugin)) {
-            _context2.n = 1;
-            break;
-          }
-          alert('Minerva v18 or later required');
-          return _context2.a(2);
-        case 1:
-          _minerva$plugins$regi = minerva.plugins.registerPlugin({
-            pluginName: PLUGIN_NAME,
-            pluginVersion: PLUGIN_VERSION,
-            pluginUrl: PLUGIN_URL,
-            minWidth: 600,
-            defaultWidth: 900
-          }), element = _minerva$plugins$regi.element;
-          _context2.p = 2;
-          _context2.n = 3;
-          return Promise.all([fetchSheetData(), fetch("".concat(minerva.project.data.getApiUrls().baseApiUrl, "/projects/").concat(minerva.project.data.getProjectId(), "/models/*/bioEntities/elements/")).then(function (r) {
-            return r.json();
-          })]);
-        case 3:
-          _yield$Promise$all = _context2.v;
-          _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
-          sheet = _yield$Promise$all2[0];
-          elements = _yield$Promise$all2[1];
-          renderUI(element, sheet, elements);
-          _context2.n = 5;
-          break;
-        case 4:
-          _context2.p = 4;
-          _t = _context2.v;
-          $(element).html("<p style=\"color:red;\">".concat(_t.message, "</p>"));
-          console.error(_t);
-        case 5:
-          return _context2.a(2);
-      }
-    }, _callee2, null, [[2, 4]]);
-  }));
-  return _register.apply(this, arguments);
-}
-register();
-},{"../css/styles.css":1,"./minervaAPI":3,"core-js/modules/es.array.concat.js":155,"core-js/modules/es.array.find.js":156,"core-js/modules/es.array.from.js":157,"core-js/modules/es.array.includes.js":158,"core-js/modules/es.array.index-of.js":159,"core-js/modules/es.array.iterator.js":160,"core-js/modules/es.array.slice.js":161,"core-js/modules/es.object.get-prototype-of.js":164,"core-js/modules/es.object.to-string.js":165,"core-js/modules/es.promise.js":169,"core-js/modules/es.regexp.exec.js":173,"core-js/modules/es.regexp.to-string.js":174,"core-js/modules/es.string.includes.js":175,"core-js/modules/es.string.iterator.js":176,"core-js/modules/es.symbol.description.js":178,"core-js/modules/es.symbol.iterator.js":180,"core-js/modules/es.symbol.js":181,"core-js/modules/web.dom-collections.for-each.js":183,"core-js/modules/web.dom-collections.iterator.js":184,"jquery":185}],3:[function(require,module,exports){
+// Plugin registration
+minerva.plugins.registerPlugin({
+  pluginName: PLUGIN_NAME,
+  pluginVersion: PLUGIN_VERSION,
+  pluginUrl: PLUGIN_URL
+}).element.innerHTML = "\n  <div id=\"plugin-root\"></div>\n";
+_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+  var sheet, container, _t;
+  return _regenerator().w(function (_context) {
+    while (1) switch (_context.p = _context.n) {
+      case 0:
+        _context.p = 0;
+        _context.n = 1;
+        return fetchSheetData();
+      case 1:
+        sheet = _context.v;
+        container = document.getElementById('plugin-root');
+        renderUI(container, sheet, minerva.data.bioEntities);
+        _context.n = 3;
+        break;
+      case 2:
+        _context.p = 2;
+        _t = _context.v;
+        console.error(_t);
+      case 3:
+        return _context.a(2);
+    }
+  }, _callee, null, [[0, 2]]);
+}))();
+},{"../css/styles.css":1,"./minervaAPI":3,"core-js/modules/es.array.concat.js":145,"core-js/modules/es.array.find.js":146,"core-js/modules/es.array.includes.js":147,"core-js/modules/es.array.iterator.js":148,"core-js/modules/es.array.slice.js":149,"core-js/modules/es.object.get-prototype-of.js":152,"core-js/modules/es.object.to-string.js":153,"core-js/modules/es.promise.js":157,"core-js/modules/es.string.includes.js":161,"core-js/modules/es.symbol.description.js":163,"core-js/modules/es.symbol.js":165,"core-js/modules/web.dom-collections.for-each.js":167,"core-js/modules/web.dom-collections.iterator.js":168,"jquery":169}],3:[function(require,module,exports){
 /**
  * Definitions of minerva plugin API.
  */
@@ -284,7 +243,7 @@ register();
  * @property {number} [width]
  * @property {number} [height]
  * @property {number} [number]
- * @property {number} [modelId]
+ * @property {number} [modelId}
  *
  */
 
@@ -293,86 +252,6 @@ register();
  * @property {Object} bioEntities
  * @property {function} bioEntities.removeSingleMarker
  * @property {function({MarkerData})} bioEntities.addSingleMarker
- * @property {function} bioEntities.removeAllMarkers
- *
- */
-
-/**
- * @typedef {Object} MinervaAPI
- * @property {MinervaPlugin} plugins
- * @property {MinervaProject} project
- * @property {MinervaMap} map
- * @property {MinervaData} data
- */
-
-/**
- * @typedef {Object} MinervaElement
- * @property {number} id
- * @property {number} modelId
- * @property {number} x
- * @property {number} y
- * @property {number} width
- * @property {number} height
- */
-
-/**
- * @typedef {Object} MinervaSegment
- * @property {number} x1
- * @property {number} y1
- * @property {number} x2
- * @property {number} y2
- */
-
-/**
- * @typedef {Object} MinervaReactant
- * @property {MinervaSegment[]} line.segments
- */
-/**
- * @typedef {Object} MinervaOperator
- * @property {MinervaSegment[]} line.segments
- */
-/**
- * @typedef {Object} MinervaModifier
- * @property {MinervaSegment[]} line.segments
- */
-/**
- * @typedef {Object} MinervaProduct
- * @property {MinervaSegment[]} line.segments
- */
-
-/**
- * @typedef {Object} MinervaReaction
- * @property {number} id
- * @property {number} modelId
- * @property {string} idReaction
- * @property {MinervaSegment[]} line.segments
- * @property {MinervaOperator[]} operators
- * @property {MinervaReactant[]} reactants
- * @property {MinervaProduct[]} products
- * @property {MinervaModifier[]} modifiers
- *
- */
-
-/**
- * @typedef {Object} MinervaElementId
- * @property {number} id
- * @property {number} modelId
- * @property {("ALIAS"|"REACTION")} type
- */
-
-/**
- * @typedef {Object} MinervaSearchResult
- * @property {Object} bioEntity
- * @property {boolean} perfect
- *
- */
-
-/**
- * @typedef {Object} MinervaSearchListenerData
- * @property {("bioEntity"|"drugs"|"chemicals")} type
- * @property {Object[]} searchValues
- * @property {MinervaSearchResult[]} results
- *
  */
 "use strict";
 },{}],4:[function(require,module,exports){
@@ -465,7 +344,7 @@ module.exports = function (argument) {
   throw new $TypeError(tryToString(argument) + ' is not a function');
 };
 
-},{"../internals/is-callable":73,"../internals/try-to-string":146}],6:[function(require,module,exports){
+},{"../internals/is-callable":71,"../internals/try-to-string":136}],6:[function(require,module,exports){
 'use strict';
 var isConstructor = require('../internals/is-constructor');
 var tryToString = require('../internals/try-to-string');
@@ -478,7 +357,7 @@ module.exports = function (argument) {
   throw new $TypeError(tryToString(argument) + ' is not a constructor');
 };
 
-},{"../internals/is-constructor":74,"../internals/try-to-string":146}],7:[function(require,module,exports){
+},{"../internals/is-constructor":72,"../internals/try-to-string":136}],7:[function(require,module,exports){
 'use strict';
 var isPossiblePrototype = require('../internals/is-possible-prototype');
 
@@ -490,7 +369,7 @@ module.exports = function (argument) {
   throw new $TypeError("Can't set " + $String(argument) + ' as a prototype');
 };
 
-},{"../internals/is-possible-prototype":78}],8:[function(require,module,exports){
+},{"../internals/is-possible-prototype":76}],8:[function(require,module,exports){
 'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var create = require('../internals/object-create');
@@ -513,7 +392,7 @@ module.exports = function (key) {
   ArrayPrototype[UNSCOPABLES][key] = true;
 };
 
-},{"../internals/object-create":94,"../internals/object-define-property":96,"../internals/well-known-symbol":154}],9:[function(require,module,exports){
+},{"../internals/object-create":92,"../internals/object-define-property":94,"../internals/well-known-symbol":144}],9:[function(require,module,exports){
 'use strict';
 var isPrototypeOf = require('../internals/object-is-prototype-of');
 
@@ -524,7 +403,7 @@ module.exports = function (it, Prototype) {
   throw new $TypeError('Incorrect invocation');
 };
 
-},{"../internals/object-is-prototype-of":102}],10:[function(require,module,exports){
+},{"../internals/object-is-prototype-of":100}],10:[function(require,module,exports){
 'use strict';
 var isObject = require('../internals/is-object');
 
@@ -537,7 +416,7 @@ module.exports = function (argument) {
   throw new $TypeError($String(argument) + ' is not an object');
 };
 
-},{"../internals/is-object":77}],11:[function(require,module,exports){
+},{"../internals/is-object":75}],11:[function(require,module,exports){
 'use strict';
 var $forEach = require('../internals/array-iteration').forEach;
 var arrayMethodIsStrict = require('../internals/array-method-is-strict');
@@ -551,55 +430,7 @@ module.exports = !STRICT_METHOD ? function forEach(callbackfn /* , thisArg */) {
 // eslint-disable-next-line es/no-array-prototype-foreach -- safe
 } : [].forEach;
 
-},{"../internals/array-iteration":14,"../internals/array-method-is-strict":16}],12:[function(require,module,exports){
-'use strict';
-var bind = require('../internals/function-bind-context');
-var call = require('../internals/function-call');
-var toObject = require('../internals/to-object');
-var callWithSafeIterationClosing = require('../internals/call-with-safe-iteration-closing');
-var isArrayIteratorMethod = require('../internals/is-array-iterator-method');
-var isConstructor = require('../internals/is-constructor');
-var lengthOfArrayLike = require('../internals/length-of-array-like');
-var createProperty = require('../internals/create-property');
-var getIterator = require('../internals/get-iterator');
-var getIteratorMethod = require('../internals/get-iterator-method');
-
-var $Array = Array;
-
-// `Array.from` method implementation
-// https://tc39.es/ecma262/#sec-array.from
-module.exports = function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
-  var O = toObject(arrayLike);
-  var IS_CONSTRUCTOR = isConstructor(this);
-  var argumentsLength = arguments.length;
-  var mapfn = argumentsLength > 1 ? arguments[1] : undefined;
-  var mapping = mapfn !== undefined;
-  if (mapping) mapfn = bind(mapfn, argumentsLength > 2 ? arguments[2] : undefined);
-  var iteratorMethod = getIteratorMethod(O);
-  var index = 0;
-  var length, result, step, iterator, next, value;
-  // if the target is not iterable or it's an array with the default iterator - use a simple case
-  if (iteratorMethod && !(this === $Array && isArrayIteratorMethod(iteratorMethod))) {
-    result = IS_CONSTRUCTOR ? new this() : [];
-    iterator = getIterator(O, iteratorMethod);
-    next = iterator.next;
-    for (;!(step = call(next, iterator)).done; index++) {
-      value = mapping ? callWithSafeIterationClosing(iterator, mapfn, [step.value, index], true) : step.value;
-      createProperty(result, index, value);
-    }
-  } else {
-    length = lengthOfArrayLike(O);
-    result = IS_CONSTRUCTOR ? new this(length) : $Array(length);
-    for (;length > index; index++) {
-      value = mapping ? mapfn(O[index], index) : O[index];
-      createProperty(result, index, value);
-    }
-  }
-  result.length = index;
-  return result;
-};
-
-},{"../internals/call-with-safe-iteration-closing":20,"../internals/create-property":30,"../internals/function-bind-context":50,"../internals/function-call":52,"../internals/get-iterator":59,"../internals/get-iterator-method":58,"../internals/is-array-iterator-method":71,"../internals/is-constructor":74,"../internals/length-of-array-like":88,"../internals/to-object":141}],13:[function(require,module,exports){
+},{"../internals/array-iteration":13,"../internals/array-method-is-strict":15}],12:[function(require,module,exports){
 'use strict';
 var toIndexedObject = require('../internals/to-indexed-object');
 var toAbsoluteIndex = require('../internals/to-absolute-index');
@@ -635,7 +466,7 @@ module.exports = {
   indexOf: createMethod(false)
 };
 
-},{"../internals/length-of-array-like":88,"../internals/to-absolute-index":137,"../internals/to-indexed-object":138}],14:[function(require,module,exports){
+},{"../internals/length-of-array-like":86,"../internals/to-absolute-index":127,"../internals/to-indexed-object":128}],13:[function(require,module,exports){
 'use strict';
 var bind = require('../internals/function-bind-context');
 var uncurryThis = require('../internals/function-uncurry-this');
@@ -711,7 +542,7 @@ module.exports = {
   filterReject: createMethod(7)
 };
 
-},{"../internals/array-species-create":19,"../internals/function-bind-context":50,"../internals/function-uncurry-this":56,"../internals/indexed-object":68,"../internals/length-of-array-like":88,"../internals/to-object":141}],15:[function(require,module,exports){
+},{"../internals/array-species-create":18,"../internals/function-bind-context":48,"../internals/function-uncurry-this":54,"../internals/indexed-object":66,"../internals/length-of-array-like":86,"../internals/to-object":131}],14:[function(require,module,exports){
 'use strict';
 var fails = require('../internals/fails');
 var wellKnownSymbol = require('../internals/well-known-symbol');
@@ -733,7 +564,7 @@ module.exports = function (METHOD_NAME) {
   });
 };
 
-},{"../internals/environment-v8-version":45,"../internals/fails":48,"../internals/well-known-symbol":154}],16:[function(require,module,exports){
+},{"../internals/environment-v8-version":43,"../internals/fails":46,"../internals/well-known-symbol":144}],15:[function(require,module,exports){
 'use strict';
 var fails = require('../internals/fails');
 
@@ -745,13 +576,13 @@ module.exports = function (METHOD_NAME, argument) {
   });
 };
 
-},{"../internals/fails":48}],17:[function(require,module,exports){
+},{"../internals/fails":46}],16:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 
 module.exports = uncurryThis([].slice);
 
-},{"../internals/function-uncurry-this":56}],18:[function(require,module,exports){
+},{"../internals/function-uncurry-this":54}],17:[function(require,module,exports){
 'use strict';
 var isArray = require('../internals/is-array');
 var isConstructor = require('../internals/is-constructor');
@@ -776,7 +607,7 @@ module.exports = function (originalArray) {
   } return C === undefined ? $Array : C;
 };
 
-},{"../internals/is-array":72,"../internals/is-constructor":74,"../internals/is-object":77,"../internals/well-known-symbol":154}],19:[function(require,module,exports){
+},{"../internals/is-array":70,"../internals/is-constructor":72,"../internals/is-object":75,"../internals/well-known-symbol":144}],18:[function(require,module,exports){
 'use strict';
 var arraySpeciesConstructor = require('../internals/array-species-constructor');
 
@@ -786,21 +617,7 @@ module.exports = function (originalArray, length) {
   return new (arraySpeciesConstructor(originalArray))(length === 0 ? 0 : length);
 };
 
-},{"../internals/array-species-constructor":18}],20:[function(require,module,exports){
-'use strict';
-var anObject = require('../internals/an-object');
-var iteratorClose = require('../internals/iterator-close');
-
-// call something on iterator step with safe closing on error
-module.exports = function (iterator, fn, value, ENTRIES) {
-  try {
-    return ENTRIES ? fn(anObject(value)[0], value[1]) : fn(value);
-  } catch (error) {
-    iteratorClose(iterator, 'throw', error);
-  }
-};
-
-},{"../internals/an-object":10,"../internals/iterator-close":83}],21:[function(require,module,exports){
+},{"../internals/array-species-constructor":17}],19:[function(require,module,exports){
 'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
@@ -843,7 +660,7 @@ module.exports = function (exec, SKIP_CLOSING) {
   return ITERATION_SUPPORT;
 };
 
-},{"../internals/well-known-symbol":154}],22:[function(require,module,exports){
+},{"../internals/well-known-symbol":144}],20:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 
@@ -854,7 +671,7 @@ module.exports = function (it) {
   return stringSlice(toString(it), 8, -1);
 };
 
-},{"../internals/function-uncurry-this":56}],23:[function(require,module,exports){
+},{"../internals/function-uncurry-this":54}],21:[function(require,module,exports){
 'use strict';
 var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
 var isCallable = require('../internals/is-callable');
@@ -886,7 +703,7 @@ module.exports = TO_STRING_TAG_SUPPORT ? classofRaw : function (it) {
     : (result = classofRaw(O)) === 'Object' && isCallable(O.callee) ? 'Arguments' : result;
 };
 
-},{"../internals/classof-raw":22,"../internals/is-callable":73,"../internals/to-string-tag-support":144,"../internals/well-known-symbol":154}],24:[function(require,module,exports){
+},{"../internals/classof-raw":20,"../internals/is-callable":71,"../internals/to-string-tag-support":134,"../internals/well-known-symbol":144}],22:[function(require,module,exports){
 'use strict';
 var hasOwn = require('../internals/has-own-property');
 var ownKeys = require('../internals/own-keys');
@@ -905,7 +722,7 @@ module.exports = function (target, source, exceptions) {
   }
 };
 
-},{"../internals/has-own-property":63,"../internals/object-define-property":96,"../internals/object-get-own-property-descriptor":97,"../internals/own-keys":109}],25:[function(require,module,exports){
+},{"../internals/has-own-property":61,"../internals/object-define-property":94,"../internals/object-get-own-property-descriptor":95,"../internals/own-keys":107}],23:[function(require,module,exports){
 'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
@@ -923,7 +740,7 @@ module.exports = function (METHOD_NAME) {
   } return false;
 };
 
-},{"../internals/well-known-symbol":154}],26:[function(require,module,exports){
+},{"../internals/well-known-symbol":144}],24:[function(require,module,exports){
 'use strict';
 var fails = require('../internals/fails');
 
@@ -934,7 +751,7 @@ module.exports = !fails(function () {
   return Object.getPrototypeOf(new F()) !== F.prototype;
 });
 
-},{"../internals/fails":48}],27:[function(require,module,exports){
+},{"../internals/fails":46}],25:[function(require,module,exports){
 'use strict';
 // `CreateIterResultObject` abstract operation
 // https://tc39.es/ecma262/#sec-createiterresultobject
@@ -942,7 +759,7 @@ module.exports = function (value, done) {
   return { value: value, done: done };
 };
 
-},{}],28:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var definePropertyModule = require('../internals/object-define-property');
@@ -955,7 +772,7 @@ module.exports = DESCRIPTORS ? function (object, key, value) {
   return object;
 };
 
-},{"../internals/create-property-descriptor":29,"../internals/descriptors":34,"../internals/object-define-property":96}],29:[function(require,module,exports){
+},{"../internals/create-property-descriptor":27,"../internals/descriptors":32,"../internals/object-define-property":94}],27:[function(require,module,exports){
 'use strict';
 module.exports = function (bitmap, value) {
   return {
@@ -966,7 +783,7 @@ module.exports = function (bitmap, value) {
   };
 };
 
-},{}],30:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var definePropertyModule = require('../internals/object-define-property');
@@ -977,7 +794,7 @@ module.exports = function (object, key, value) {
   else object[key] = value;
 };
 
-},{"../internals/create-property-descriptor":29,"../internals/descriptors":34,"../internals/object-define-property":96}],31:[function(require,module,exports){
+},{"../internals/create-property-descriptor":27,"../internals/descriptors":32,"../internals/object-define-property":94}],29:[function(require,module,exports){
 'use strict';
 var makeBuiltIn = require('../internals/make-built-in');
 var defineProperty = require('../internals/object-define-property');
@@ -988,7 +805,7 @@ module.exports = function (target, name, descriptor) {
   return defineProperty.f(target, name, descriptor);
 };
 
-},{"../internals/make-built-in":89,"../internals/object-define-property":96}],32:[function(require,module,exports){
+},{"../internals/make-built-in":87,"../internals/object-define-property":94}],30:[function(require,module,exports){
 'use strict';
 var isCallable = require('../internals/is-callable');
 var definePropertyModule = require('../internals/object-define-property');
@@ -1018,7 +835,7 @@ module.exports = function (O, key, value, options) {
   } return O;
 };
 
-},{"../internals/define-global-property":33,"../internals/is-callable":73,"../internals/make-built-in":89,"../internals/object-define-property":96}],33:[function(require,module,exports){
+},{"../internals/define-global-property":31,"../internals/is-callable":71,"../internals/make-built-in":87,"../internals/object-define-property":94}],31:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 
@@ -1033,7 +850,7 @@ module.exports = function (key, value) {
   } return value;
 };
 
-},{"../internals/global-this":62}],34:[function(require,module,exports){
+},{"../internals/global-this":60}],32:[function(require,module,exports){
 'use strict';
 var fails = require('../internals/fails');
 
@@ -1043,7 +860,7 @@ module.exports = !fails(function () {
   return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] !== 7;
 });
 
-},{"../internals/fails":48}],35:[function(require,module,exports){
+},{"../internals/fails":46}],33:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var isObject = require('../internals/is-object');
@@ -1056,7 +873,7 @@ module.exports = function (it) {
   return EXISTS ? document.createElement(it) : {};
 };
 
-},{"../internals/global-this":62,"../internals/is-object":77}],36:[function(require,module,exports){
+},{"../internals/global-this":60,"../internals/is-object":75}],34:[function(require,module,exports){
 'use strict';
 var $TypeError = TypeError;
 var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF; // 2 ** 53 - 1 == 9007199254740991
@@ -1066,7 +883,7 @@ module.exports = function (it) {
   return it;
 };
 
-},{}],37:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 // iterable DOM collections
 // flag - `iterable` interface - 'entries', 'keys', 'values', 'forEach' methods
@@ -1104,7 +921,7 @@ module.exports = {
   TouchList: 0
 };
 
-},{}],38:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 'use strict';
 // in old WebKit versions, `element.classList` is not an instance of global `DOMTokenList`
 var documentCreateElement = require('../internals/document-create-element');
@@ -1114,7 +931,7 @@ var DOMTokenListPrototype = classList && classList.constructor && classList.cons
 
 module.exports = DOMTokenListPrototype === Object.prototype ? undefined : DOMTokenListPrototype;
 
-},{"../internals/document-create-element":35}],39:[function(require,module,exports){
+},{"../internals/document-create-element":33}],37:[function(require,module,exports){
 'use strict';
 // IE8- don't enum bug keys
 module.exports = [
@@ -1127,32 +944,32 @@ module.exports = [
   'valueOf'
 ];
 
-},{}],40:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 'use strict';
 var userAgent = require('../internals/environment-user-agent');
 
 module.exports = /ipad|iphone|ipod/i.test(userAgent) && typeof Pebble != 'undefined';
 
-},{"../internals/environment-user-agent":44}],41:[function(require,module,exports){
+},{"../internals/environment-user-agent":42}],39:[function(require,module,exports){
 'use strict';
 var userAgent = require('../internals/environment-user-agent');
 
 // eslint-disable-next-line redos/no-vulnerable -- safe
 module.exports = /(?:ipad|iphone|ipod).*applewebkit/i.test(userAgent);
 
-},{"../internals/environment-user-agent":44}],42:[function(require,module,exports){
+},{"../internals/environment-user-agent":42}],40:[function(require,module,exports){
 'use strict';
 var ENVIRONMENT = require('../internals/environment');
 
 module.exports = ENVIRONMENT === 'NODE';
 
-},{"../internals/environment":46}],43:[function(require,module,exports){
+},{"../internals/environment":44}],41:[function(require,module,exports){
 'use strict';
 var userAgent = require('../internals/environment-user-agent');
 
 module.exports = /web0s(?!.*chrome)/i.test(userAgent);
 
-},{"../internals/environment-user-agent":44}],44:[function(require,module,exports){
+},{"../internals/environment-user-agent":42}],42:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 
@@ -1161,7 +978,7 @@ var userAgent = navigator && navigator.userAgent;
 
 module.exports = userAgent ? String(userAgent) : '';
 
-},{"../internals/global-this":62}],45:[function(require,module,exports){
+},{"../internals/global-this":60}],43:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var userAgent = require('../internals/environment-user-agent');
@@ -1191,7 +1008,7 @@ if (!version && userAgent) {
 
 module.exports = version;
 
-},{"../internals/environment-user-agent":44,"../internals/global-this":62}],46:[function(require,module,exports){
+},{"../internals/environment-user-agent":42,"../internals/global-this":60}],44:[function(require,module,exports){
 'use strict';
 /* global Bun, Deno -- detection */
 var globalThis = require('../internals/global-this');
@@ -1214,7 +1031,7 @@ module.exports = (function () {
   return 'REST';
 })();
 
-},{"../internals/classof-raw":22,"../internals/environment-user-agent":44,"../internals/global-this":62}],47:[function(require,module,exports){
+},{"../internals/classof-raw":20,"../internals/environment-user-agent":42,"../internals/global-this":60}],45:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var getOwnPropertyDescriptor = require('../internals/object-get-own-property-descriptor').f;
@@ -1271,7 +1088,7 @@ module.exports = function (options, source) {
   }
 };
 
-},{"../internals/copy-constructor-properties":24,"../internals/create-non-enumerable-property":28,"../internals/define-built-in":32,"../internals/define-global-property":33,"../internals/global-this":62,"../internals/is-forced":75,"../internals/object-get-own-property-descriptor":97}],48:[function(require,module,exports){
+},{"../internals/copy-constructor-properties":22,"../internals/create-non-enumerable-property":26,"../internals/define-built-in":30,"../internals/define-global-property":31,"../internals/global-this":60,"../internals/is-forced":73,"../internals/object-get-own-property-descriptor":95}],46:[function(require,module,exports){
 'use strict';
 module.exports = function (exec) {
   try {
@@ -1281,7 +1098,7 @@ module.exports = function (exec) {
   }
 };
 
-},{}],49:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 'use strict';
 var NATIVE_BIND = require('../internals/function-bind-native');
 
@@ -1294,7 +1111,7 @@ module.exports = typeof Reflect == 'object' && Reflect.apply || (NATIVE_BIND ? c
   return call.apply(apply, arguments);
 });
 
-},{"../internals/function-bind-native":51}],50:[function(require,module,exports){
+},{"../internals/function-bind-native":49}],48:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this-clause');
 var aCallable = require('../internals/a-callable');
@@ -1310,7 +1127,7 @@ module.exports = function (fn, that) {
   };
 };
 
-},{"../internals/a-callable":5,"../internals/function-bind-native":51,"../internals/function-uncurry-this-clause":55}],51:[function(require,module,exports){
+},{"../internals/a-callable":5,"../internals/function-bind-native":49,"../internals/function-uncurry-this-clause":53}],49:[function(require,module,exports){
 'use strict';
 var fails = require('../internals/fails');
 
@@ -1321,7 +1138,7 @@ module.exports = !fails(function () {
   return typeof test != 'function' || test.hasOwnProperty('prototype');
 });
 
-},{"../internals/fails":48}],52:[function(require,module,exports){
+},{"../internals/fails":46}],50:[function(require,module,exports){
 'use strict';
 var NATIVE_BIND = require('../internals/function-bind-native');
 
@@ -1331,7 +1148,7 @@ module.exports = NATIVE_BIND ? call.bind(call) : function () {
   return call.apply(call, arguments);
 };
 
-},{"../internals/function-bind-native":51}],53:[function(require,module,exports){
+},{"../internals/function-bind-native":49}],51:[function(require,module,exports){
 'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var hasOwn = require('../internals/has-own-property');
@@ -1351,7 +1168,7 @@ module.exports = {
   CONFIGURABLE: CONFIGURABLE
 };
 
-},{"../internals/descriptors":34,"../internals/has-own-property":63}],54:[function(require,module,exports){
+},{"../internals/descriptors":32,"../internals/has-own-property":61}],52:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var aCallable = require('../internals/a-callable');
@@ -1363,7 +1180,7 @@ module.exports = function (object, key, method) {
   } catch (error) { /* empty */ }
 };
 
-},{"../internals/a-callable":5,"../internals/function-uncurry-this":56}],55:[function(require,module,exports){
+},{"../internals/a-callable":5,"../internals/function-uncurry-this":54}],53:[function(require,module,exports){
 'use strict';
 var classofRaw = require('../internals/classof-raw');
 var uncurryThis = require('../internals/function-uncurry-this');
@@ -1375,7 +1192,7 @@ module.exports = function (fn) {
   if (classofRaw(fn) === 'Function') return uncurryThis(fn);
 };
 
-},{"../internals/classof-raw":22,"../internals/function-uncurry-this":56}],56:[function(require,module,exports){
+},{"../internals/classof-raw":20,"../internals/function-uncurry-this":54}],54:[function(require,module,exports){
 'use strict';
 var NATIVE_BIND = require('../internals/function-bind-native');
 
@@ -1390,7 +1207,7 @@ module.exports = NATIVE_BIND ? uncurryThisWithBind : function (fn) {
   };
 };
 
-},{"../internals/function-bind-native":51}],57:[function(require,module,exports){
+},{"../internals/function-bind-native":49}],55:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var isCallable = require('../internals/is-callable');
@@ -1403,7 +1220,7 @@ module.exports = function (namespace, method) {
   return arguments.length < 2 ? aFunction(globalThis[namespace]) : globalThis[namespace] && globalThis[namespace][method];
 };
 
-},{"../internals/global-this":62,"../internals/is-callable":73}],58:[function(require,module,exports){
+},{"../internals/global-this":60,"../internals/is-callable":71}],56:[function(require,module,exports){
 'use strict';
 var classof = require('../internals/classof');
 var getMethod = require('../internals/get-method');
@@ -1419,7 +1236,7 @@ module.exports = function (it) {
     || Iterators[classof(it)];
 };
 
-},{"../internals/classof":23,"../internals/get-method":61,"../internals/is-null-or-undefined":76,"../internals/iterators":87,"../internals/well-known-symbol":154}],59:[function(require,module,exports){
+},{"../internals/classof":21,"../internals/get-method":59,"../internals/is-null-or-undefined":74,"../internals/iterators":85,"../internals/well-known-symbol":144}],57:[function(require,module,exports){
 'use strict';
 var call = require('../internals/function-call');
 var aCallable = require('../internals/a-callable');
@@ -1435,7 +1252,7 @@ module.exports = function (argument, usingIterator) {
   throw new $TypeError(tryToString(argument) + ' is not iterable');
 };
 
-},{"../internals/a-callable":5,"../internals/an-object":10,"../internals/function-call":52,"../internals/get-iterator-method":58,"../internals/try-to-string":146}],60:[function(require,module,exports){
+},{"../internals/a-callable":5,"../internals/an-object":10,"../internals/function-call":50,"../internals/get-iterator-method":56,"../internals/try-to-string":136}],58:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var isArray = require('../internals/is-array');
@@ -1467,7 +1284,7 @@ module.exports = function (replacer) {
   };
 };
 
-},{"../internals/classof-raw":22,"../internals/function-uncurry-this":56,"../internals/is-array":72,"../internals/is-callable":73,"../internals/to-string":145}],61:[function(require,module,exports){
+},{"../internals/classof-raw":20,"../internals/function-uncurry-this":54,"../internals/is-array":70,"../internals/is-callable":71,"../internals/to-string":135}],59:[function(require,module,exports){
 'use strict';
 var aCallable = require('../internals/a-callable');
 var isNullOrUndefined = require('../internals/is-null-or-undefined');
@@ -1479,7 +1296,7 @@ module.exports = function (V, P) {
   return isNullOrUndefined(func) ? undefined : aCallable(func);
 };
 
-},{"../internals/a-callable":5,"../internals/is-null-or-undefined":76}],62:[function(require,module,exports){
+},{"../internals/a-callable":5,"../internals/is-null-or-undefined":74}],60:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
 var check = function (it) {
@@ -1499,7 +1316,7 @@ module.exports =
   (function () { return this; })() || Function('return this')();
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],63:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var toObject = require('../internals/to-object');
@@ -1513,11 +1330,11 @@ module.exports = Object.hasOwn || function hasOwn(it, key) {
   return hasOwnProperty(toObject(it), key);
 };
 
-},{"../internals/function-uncurry-this":56,"../internals/to-object":141}],64:[function(require,module,exports){
+},{"../internals/function-uncurry-this":54,"../internals/to-object":131}],62:[function(require,module,exports){
 'use strict';
 module.exports = {};
 
-},{}],65:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 'use strict';
 module.exports = function (a, b) {
   try {
@@ -1526,13 +1343,13 @@ module.exports = function (a, b) {
   } catch (error) { /* empty */ }
 };
 
-},{}],66:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 'use strict';
 var getBuiltIn = require('../internals/get-built-in');
 
 module.exports = getBuiltIn('document', 'documentElement');
 
-},{"../internals/get-built-in":57}],67:[function(require,module,exports){
+},{"../internals/get-built-in":55}],65:[function(require,module,exports){
 'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var fails = require('../internals/fails');
@@ -1546,7 +1363,7 @@ module.exports = !DESCRIPTORS && !fails(function () {
   }).a !== 7;
 });
 
-},{"../internals/descriptors":34,"../internals/document-create-element":35,"../internals/fails":48}],68:[function(require,module,exports){
+},{"../internals/descriptors":32,"../internals/document-create-element":33,"../internals/fails":46}],66:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var fails = require('../internals/fails');
@@ -1564,7 +1381,7 @@ module.exports = fails(function () {
   return classof(it) === 'String' ? split(it, '') : $Object(it);
 } : $Object;
 
-},{"../internals/classof-raw":22,"../internals/fails":48,"../internals/function-uncurry-this":56}],69:[function(require,module,exports){
+},{"../internals/classof-raw":20,"../internals/fails":46,"../internals/function-uncurry-this":54}],67:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var isCallable = require('../internals/is-callable');
@@ -1581,7 +1398,7 @@ if (!isCallable(store.inspectSource)) {
 
 module.exports = store.inspectSource;
 
-},{"../internals/function-uncurry-this":56,"../internals/is-callable":73,"../internals/shared-store":129}],70:[function(require,module,exports){
+},{"../internals/function-uncurry-this":54,"../internals/is-callable":71,"../internals/shared-store":120}],68:[function(require,module,exports){
 'use strict';
 var NATIVE_WEAK_MAP = require('../internals/weak-map-basic-detection');
 var globalThis = require('../internals/global-this');
@@ -1654,7 +1471,7 @@ module.exports = {
   getterFor: getterFor
 };
 
-},{"../internals/create-non-enumerable-property":28,"../internals/global-this":62,"../internals/has-own-property":63,"../internals/hidden-keys":64,"../internals/is-object":77,"../internals/shared-key":128,"../internals/shared-store":129,"../internals/weak-map-basic-detection":151}],71:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":26,"../internals/global-this":60,"../internals/has-own-property":61,"../internals/hidden-keys":62,"../internals/is-object":75,"../internals/shared-key":119,"../internals/shared-store":120,"../internals/weak-map-basic-detection":141}],69:[function(require,module,exports){
 'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 var Iterators = require('../internals/iterators');
@@ -1667,7 +1484,7 @@ module.exports = function (it) {
   return it !== undefined && (Iterators.Array === it || ArrayPrototype[ITERATOR] === it);
 };
 
-},{"../internals/iterators":87,"../internals/well-known-symbol":154}],72:[function(require,module,exports){
+},{"../internals/iterators":85,"../internals/well-known-symbol":144}],70:[function(require,module,exports){
 'use strict';
 var classof = require('../internals/classof-raw');
 
@@ -1678,7 +1495,7 @@ module.exports = Array.isArray || function isArray(argument) {
   return classof(argument) === 'Array';
 };
 
-},{"../internals/classof-raw":22}],73:[function(require,module,exports){
+},{"../internals/classof-raw":20}],71:[function(require,module,exports){
 'use strict';
 // https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot
 var documentAll = typeof document == 'object' && document.all;
@@ -1692,7 +1509,7 @@ module.exports = typeof documentAll == 'undefined' && documentAll !== undefined 
   return typeof argument == 'function';
 };
 
-},{}],74:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var fails = require('../internals/fails');
@@ -1746,7 +1563,7 @@ module.exports = !construct || fails(function () {
     || called;
 }) ? isConstructorLegacy : isConstructorModern;
 
-},{"../internals/classof":23,"../internals/fails":48,"../internals/function-uncurry-this":56,"../internals/get-built-in":57,"../internals/inspect-source":69,"../internals/is-callable":73}],75:[function(require,module,exports){
+},{"../internals/classof":21,"../internals/fails":46,"../internals/function-uncurry-this":54,"../internals/get-built-in":55,"../internals/inspect-source":67,"../internals/is-callable":71}],73:[function(require,module,exports){
 'use strict';
 var fails = require('../internals/fails');
 var isCallable = require('../internals/is-callable');
@@ -1771,7 +1588,7 @@ var POLYFILL = isForced.POLYFILL = 'P';
 
 module.exports = isForced;
 
-},{"../internals/fails":48,"../internals/is-callable":73}],76:[function(require,module,exports){
+},{"../internals/fails":46,"../internals/is-callable":71}],74:[function(require,module,exports){
 'use strict';
 // we can't use just `it == null` since of `document.all` special case
 // https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot-aec
@@ -1779,7 +1596,7 @@ module.exports = function (it) {
   return it === null || it === undefined;
 };
 
-},{}],77:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 'use strict';
 var isCallable = require('../internals/is-callable');
 
@@ -1787,7 +1604,7 @@ module.exports = function (it) {
   return typeof it == 'object' ? it !== null : isCallable(it);
 };
 
-},{"../internals/is-callable":73}],78:[function(require,module,exports){
+},{"../internals/is-callable":71}],76:[function(require,module,exports){
 'use strict';
 var isObject = require('../internals/is-object');
 
@@ -1795,11 +1612,11 @@ module.exports = function (argument) {
   return isObject(argument) || argument === null;
 };
 
-},{"../internals/is-object":77}],79:[function(require,module,exports){
+},{"../internals/is-object":75}],77:[function(require,module,exports){
 'use strict';
 module.exports = false;
 
-},{}],80:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 'use strict';
 var isObject = require('../internals/is-object');
 var classof = require('../internals/classof-raw');
@@ -1814,7 +1631,7 @@ module.exports = function (it) {
   return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : classof(it) === 'RegExp');
 };
 
-},{"../internals/classof-raw":22,"../internals/is-object":77,"../internals/well-known-symbol":154}],81:[function(require,module,exports){
+},{"../internals/classof-raw":20,"../internals/is-object":75,"../internals/well-known-symbol":144}],79:[function(require,module,exports){
 'use strict';
 var getBuiltIn = require('../internals/get-built-in');
 var isCallable = require('../internals/is-callable');
@@ -1830,7 +1647,7 @@ module.exports = USE_SYMBOL_AS_UID ? function (it) {
   return isCallable($Symbol) && isPrototypeOf($Symbol.prototype, $Object(it));
 };
 
-},{"../internals/get-built-in":57,"../internals/is-callable":73,"../internals/object-is-prototype-of":102,"../internals/use-symbol-as-uid":148}],82:[function(require,module,exports){
+},{"../internals/get-built-in":55,"../internals/is-callable":71,"../internals/object-is-prototype-of":100,"../internals/use-symbol-as-uid":138}],80:[function(require,module,exports){
 'use strict';
 var bind = require('../internals/function-bind-context');
 var call = require('../internals/function-call');
@@ -1901,7 +1718,7 @@ module.exports = function (iterable, unboundFunction, options) {
   } return new Result(false);
 };
 
-},{"../internals/an-object":10,"../internals/function-bind-context":50,"../internals/function-call":52,"../internals/get-iterator":59,"../internals/get-iterator-method":58,"../internals/is-array-iterator-method":71,"../internals/iterator-close":83,"../internals/length-of-array-like":88,"../internals/object-is-prototype-of":102,"../internals/try-to-string":146}],83:[function(require,module,exports){
+},{"../internals/an-object":10,"../internals/function-bind-context":48,"../internals/function-call":50,"../internals/get-iterator":57,"../internals/get-iterator-method":56,"../internals/is-array-iterator-method":69,"../internals/iterator-close":81,"../internals/length-of-array-like":86,"../internals/object-is-prototype-of":100,"../internals/try-to-string":136}],81:[function(require,module,exports){
 'use strict';
 var call = require('../internals/function-call');
 var anObject = require('../internals/an-object');
@@ -1927,7 +1744,7 @@ module.exports = function (iterator, kind, value) {
   return value;
 };
 
-},{"../internals/an-object":10,"../internals/function-call":52,"../internals/get-method":61}],84:[function(require,module,exports){
+},{"../internals/an-object":10,"../internals/function-call":50,"../internals/get-method":59}],82:[function(require,module,exports){
 'use strict';
 var IteratorPrototype = require('../internals/iterators-core').IteratorPrototype;
 var create = require('../internals/object-create');
@@ -1945,7 +1762,7 @@ module.exports = function (IteratorConstructor, NAME, next, ENUMERABLE_NEXT) {
   return IteratorConstructor;
 };
 
-},{"../internals/create-property-descriptor":29,"../internals/iterators":87,"../internals/iterators-core":86,"../internals/object-create":94,"../internals/set-to-string-tag":127}],85:[function(require,module,exports){
+},{"../internals/create-property-descriptor":27,"../internals/iterators":85,"../internals/iterators-core":84,"../internals/object-create":92,"../internals/set-to-string-tag":118}],83:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var call = require('../internals/function-call');
@@ -2049,7 +1866,7 @@ module.exports = function (Iterable, NAME, IteratorConstructor, next, DEFAULT, I
   return methods;
 };
 
-},{"../internals/create-non-enumerable-property":28,"../internals/define-built-in":32,"../internals/export":47,"../internals/function-call":52,"../internals/function-name":53,"../internals/is-callable":73,"../internals/is-pure":79,"../internals/iterator-create-constructor":84,"../internals/iterators":87,"../internals/iterators-core":86,"../internals/object-get-prototype-of":101,"../internals/object-set-prototype-of":106,"../internals/set-to-string-tag":127,"../internals/well-known-symbol":154}],86:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":26,"../internals/define-built-in":30,"../internals/export":45,"../internals/function-call":50,"../internals/function-name":51,"../internals/is-callable":71,"../internals/is-pure":77,"../internals/iterator-create-constructor":82,"../internals/iterators":85,"../internals/iterators-core":84,"../internals/object-get-prototype-of":99,"../internals/object-set-prototype-of":104,"../internals/set-to-string-tag":118,"../internals/well-known-symbol":144}],84:[function(require,module,exports){
 'use strict';
 var fails = require('../internals/fails');
 var isCallable = require('../internals/is-callable');
@@ -2100,9 +1917,9 @@ module.exports = {
   BUGGY_SAFARI_ITERATORS: BUGGY_SAFARI_ITERATORS
 };
 
-},{"../internals/define-built-in":32,"../internals/fails":48,"../internals/is-callable":73,"../internals/is-object":77,"../internals/is-pure":79,"../internals/object-create":94,"../internals/object-get-prototype-of":101,"../internals/well-known-symbol":154}],87:[function(require,module,exports){
-arguments[4][64][0].apply(exports,arguments)
-},{"dup":64}],88:[function(require,module,exports){
+},{"../internals/define-built-in":30,"../internals/fails":46,"../internals/is-callable":71,"../internals/is-object":75,"../internals/is-pure":77,"../internals/object-create":92,"../internals/object-get-prototype-of":99,"../internals/well-known-symbol":144}],85:[function(require,module,exports){
+arguments[4][62][0].apply(exports,arguments)
+},{"dup":62}],86:[function(require,module,exports){
 'use strict';
 var toLength = require('../internals/to-length');
 
@@ -2112,7 +1929,7 @@ module.exports = function (obj) {
   return toLength(obj.length);
 };
 
-},{"../internals/to-length":140}],89:[function(require,module,exports){
+},{"../internals/to-length":130}],87:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var fails = require('../internals/fails');
@@ -2169,7 +1986,7 @@ Function.prototype.toString = makeBuiltIn(function toString() {
   return isCallable(this) && getInternalState(this).source || inspectSource(this);
 }, 'toString');
 
-},{"../internals/descriptors":34,"../internals/fails":48,"../internals/function-name":53,"../internals/function-uncurry-this":56,"../internals/has-own-property":63,"../internals/inspect-source":69,"../internals/internal-state":70,"../internals/is-callable":73}],90:[function(require,module,exports){
+},{"../internals/descriptors":32,"../internals/fails":46,"../internals/function-name":51,"../internals/function-uncurry-this":54,"../internals/has-own-property":61,"../internals/inspect-source":67,"../internals/internal-state":68,"../internals/is-callable":71}],88:[function(require,module,exports){
 'use strict';
 var ceil = Math.ceil;
 var floor = Math.floor;
@@ -2182,7 +1999,7 @@ module.exports = Math.trunc || function trunc(x) {
   return (n > 0 ? floor : ceil)(n);
 };
 
-},{}],91:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var safeGetBuiltIn = require('../internals/safe-get-built-in');
@@ -2263,7 +2080,7 @@ if (!microtask) {
 
 module.exports = microtask;
 
-},{"../internals/environment-is-ios":41,"../internals/environment-is-ios-pebble":40,"../internals/environment-is-node":42,"../internals/environment-is-webos-webkit":43,"../internals/function-bind-context":50,"../internals/global-this":62,"../internals/queue":116,"../internals/safe-get-built-in":125,"../internals/task":136}],92:[function(require,module,exports){
+},{"../internals/environment-is-ios":39,"../internals/environment-is-ios-pebble":38,"../internals/environment-is-node":40,"../internals/environment-is-webos-webkit":41,"../internals/function-bind-context":48,"../internals/global-this":60,"../internals/queue":114,"../internals/safe-get-built-in":116,"../internals/task":126}],90:[function(require,module,exports){
 'use strict';
 var aCallable = require('../internals/a-callable');
 
@@ -2286,7 +2103,7 @@ module.exports.f = function (C) {
   return new PromiseCapability(C);
 };
 
-},{"../internals/a-callable":5}],93:[function(require,module,exports){
+},{"../internals/a-callable":5}],91:[function(require,module,exports){
 'use strict';
 var isRegExp = require('../internals/is-regexp');
 
@@ -2298,7 +2115,7 @@ module.exports = function (it) {
   } return it;
 };
 
-},{"../internals/is-regexp":80}],94:[function(require,module,exports){
+},{"../internals/is-regexp":78}],92:[function(require,module,exports){
 'use strict';
 /* global ActiveXObject -- old IE, WSH */
 var anObject = require('../internals/an-object');
@@ -2385,7 +2202,7 @@ module.exports = Object.create || function create(O, Properties) {
   return Properties === undefined ? result : definePropertiesModule.f(result, Properties);
 };
 
-},{"../internals/an-object":10,"../internals/document-create-element":35,"../internals/enum-bug-keys":39,"../internals/hidden-keys":64,"../internals/html":66,"../internals/object-define-properties":95,"../internals/shared-key":128}],95:[function(require,module,exports){
+},{"../internals/an-object":10,"../internals/document-create-element":33,"../internals/enum-bug-keys":37,"../internals/hidden-keys":62,"../internals/html":64,"../internals/object-define-properties":93,"../internals/shared-key":119}],93:[function(require,module,exports){
 'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var V8_PROTOTYPE_DEFINE_BUG = require('../internals/v8-prototype-define-bug');
@@ -2408,7 +2225,7 @@ exports.f = DESCRIPTORS && !V8_PROTOTYPE_DEFINE_BUG ? Object.defineProperties : 
   return O;
 };
 
-},{"../internals/an-object":10,"../internals/descriptors":34,"../internals/object-define-property":96,"../internals/object-keys":104,"../internals/to-indexed-object":138,"../internals/v8-prototype-define-bug":149}],96:[function(require,module,exports){
+},{"../internals/an-object":10,"../internals/descriptors":32,"../internals/object-define-property":94,"../internals/object-keys":102,"../internals/to-indexed-object":128,"../internals/v8-prototype-define-bug":139}],94:[function(require,module,exports){
 'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var IE8_DOM_DEFINE = require('../internals/ie8-dom-define');
@@ -2454,7 +2271,7 @@ exports.f = DESCRIPTORS ? V8_PROTOTYPE_DEFINE_BUG ? function defineProperty(O, P
   return O;
 };
 
-},{"../internals/an-object":10,"../internals/descriptors":34,"../internals/ie8-dom-define":67,"../internals/to-property-key":143,"../internals/v8-prototype-define-bug":149}],97:[function(require,module,exports){
+},{"../internals/an-object":10,"../internals/descriptors":32,"../internals/ie8-dom-define":65,"../internals/to-property-key":133,"../internals/v8-prototype-define-bug":139}],95:[function(require,module,exports){
 'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var call = require('../internals/function-call');
@@ -2479,7 +2296,7 @@ exports.f = DESCRIPTORS ? $getOwnPropertyDescriptor : function getOwnPropertyDes
   if (hasOwn(O, P)) return createPropertyDescriptor(!call(propertyIsEnumerableModule.f, O, P), O[P]);
 };
 
-},{"../internals/create-property-descriptor":29,"../internals/descriptors":34,"../internals/function-call":52,"../internals/has-own-property":63,"../internals/ie8-dom-define":67,"../internals/object-property-is-enumerable":105,"../internals/to-indexed-object":138,"../internals/to-property-key":143}],98:[function(require,module,exports){
+},{"../internals/create-property-descriptor":27,"../internals/descriptors":32,"../internals/function-call":50,"../internals/has-own-property":61,"../internals/ie8-dom-define":65,"../internals/object-property-is-enumerable":103,"../internals/to-indexed-object":128,"../internals/to-property-key":133}],96:[function(require,module,exports){
 'use strict';
 /* eslint-disable es/no-object-getownpropertynames -- safe */
 var classof = require('../internals/classof-raw');
@@ -2505,7 +2322,7 @@ module.exports.f = function getOwnPropertyNames(it) {
     : $getOwnPropertyNames(toIndexedObject(it));
 };
 
-},{"../internals/array-slice":17,"../internals/classof-raw":22,"../internals/object-get-own-property-names":99,"../internals/to-indexed-object":138}],99:[function(require,module,exports){
+},{"../internals/array-slice":16,"../internals/classof-raw":20,"../internals/object-get-own-property-names":97,"../internals/to-indexed-object":128}],97:[function(require,module,exports){
 'use strict';
 var internalObjectKeys = require('../internals/object-keys-internal');
 var enumBugKeys = require('../internals/enum-bug-keys');
@@ -2519,12 +2336,12 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return internalObjectKeys(O, hiddenKeys);
 };
 
-},{"../internals/enum-bug-keys":39,"../internals/object-keys-internal":103}],100:[function(require,module,exports){
+},{"../internals/enum-bug-keys":37,"../internals/object-keys-internal":101}],98:[function(require,module,exports){
 'use strict';
 // eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
 exports.f = Object.getOwnPropertySymbols;
 
-},{}],101:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 'use strict';
 var hasOwn = require('../internals/has-own-property');
 var isCallable = require('../internals/is-callable');
@@ -2548,13 +2365,13 @@ module.exports = CORRECT_PROTOTYPE_GETTER ? $Object.getPrototypeOf : function (O
   } return object instanceof $Object ? ObjectPrototype : null;
 };
 
-},{"../internals/correct-prototype-getter":26,"../internals/has-own-property":63,"../internals/is-callable":73,"../internals/shared-key":128,"../internals/to-object":141}],102:[function(require,module,exports){
+},{"../internals/correct-prototype-getter":24,"../internals/has-own-property":61,"../internals/is-callable":71,"../internals/shared-key":119,"../internals/to-object":131}],100:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 
 module.exports = uncurryThis({}.isPrototypeOf);
 
-},{"../internals/function-uncurry-this":56}],103:[function(require,module,exports){
+},{"../internals/function-uncurry-this":54}],101:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 var hasOwn = require('../internals/has-own-property');
@@ -2577,7 +2394,7 @@ module.exports = function (object, names) {
   return result;
 };
 
-},{"../internals/array-includes":13,"../internals/function-uncurry-this":56,"../internals/has-own-property":63,"../internals/hidden-keys":64,"../internals/to-indexed-object":138}],104:[function(require,module,exports){
+},{"../internals/array-includes":12,"../internals/function-uncurry-this":54,"../internals/has-own-property":61,"../internals/hidden-keys":62,"../internals/to-indexed-object":128}],102:[function(require,module,exports){
 'use strict';
 var internalObjectKeys = require('../internals/object-keys-internal');
 var enumBugKeys = require('../internals/enum-bug-keys');
@@ -2589,7 +2406,7 @@ module.exports = Object.keys || function keys(O) {
   return internalObjectKeys(O, enumBugKeys);
 };
 
-},{"../internals/enum-bug-keys":39,"../internals/object-keys-internal":103}],105:[function(require,module,exports){
+},{"../internals/enum-bug-keys":37,"../internals/object-keys-internal":101}],103:[function(require,module,exports){
 'use strict';
 var $propertyIsEnumerable = {}.propertyIsEnumerable;
 // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
@@ -2605,7 +2422,7 @@ exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
   return !!descriptor && descriptor.enumerable;
 } : $propertyIsEnumerable;
 
-},{}],106:[function(require,module,exports){
+},{}],104:[function(require,module,exports){
 'use strict';
 /* eslint-disable no-proto -- safe */
 var uncurryThisAccessor = require('../internals/function-uncurry-this-accessor');
@@ -2636,7 +2453,7 @@ module.exports = Object.setPrototypeOf || ('__proto__' in {} ? function () {
   };
 }() : undefined);
 
-},{"../internals/a-possible-prototype":7,"../internals/function-uncurry-this-accessor":54,"../internals/is-object":77,"../internals/require-object-coercible":124}],107:[function(require,module,exports){
+},{"../internals/a-possible-prototype":7,"../internals/function-uncurry-this-accessor":52,"../internals/is-object":75,"../internals/require-object-coercible":115}],105:[function(require,module,exports){
 'use strict';
 var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
 var classof = require('../internals/classof');
@@ -2647,7 +2464,7 @@ module.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {
   return '[object ' + classof(this) + ']';
 };
 
-},{"../internals/classof":23,"../internals/to-string-tag-support":144}],108:[function(require,module,exports){
+},{"../internals/classof":21,"../internals/to-string-tag-support":134}],106:[function(require,module,exports){
 'use strict';
 var call = require('../internals/function-call');
 var isCallable = require('../internals/is-callable');
@@ -2665,7 +2482,7 @@ module.exports = function (input, pref) {
   throw new $TypeError("Can't convert object to primitive value");
 };
 
-},{"../internals/function-call":52,"../internals/is-callable":73,"../internals/is-object":77}],109:[function(require,module,exports){
+},{"../internals/function-call":50,"../internals/is-callable":71,"../internals/is-object":75}],107:[function(require,module,exports){
 'use strict';
 var getBuiltIn = require('../internals/get-built-in');
 var uncurryThis = require('../internals/function-uncurry-this');
@@ -2682,13 +2499,13 @@ module.exports = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
   return getOwnPropertySymbols ? concat(keys, getOwnPropertySymbols(it)) : keys;
 };
 
-},{"../internals/an-object":10,"../internals/function-uncurry-this":56,"../internals/get-built-in":57,"../internals/object-get-own-property-names":99,"../internals/object-get-own-property-symbols":100}],110:[function(require,module,exports){
+},{"../internals/an-object":10,"../internals/function-uncurry-this":54,"../internals/get-built-in":55,"../internals/object-get-own-property-names":97,"../internals/object-get-own-property-symbols":98}],108:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 
 module.exports = globalThis;
 
-},{"../internals/global-this":62}],111:[function(require,module,exports){
+},{"../internals/global-this":60}],109:[function(require,module,exports){
 'use strict';
 module.exports = function (exec) {
   try {
@@ -2698,7 +2515,7 @@ module.exports = function (exec) {
   }
 };
 
-},{}],112:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var NativePromiseConstructor = require('../internals/promise-native-constructor');
@@ -2747,13 +2564,13 @@ module.exports = {
   SUBCLASSING: SUBCLASSING
 };
 
-},{"../internals/environment":46,"../internals/environment-v8-version":45,"../internals/global-this":62,"../internals/inspect-source":69,"../internals/is-callable":73,"../internals/is-forced":75,"../internals/is-pure":79,"../internals/promise-native-constructor":113,"../internals/well-known-symbol":154}],113:[function(require,module,exports){
+},{"../internals/environment":44,"../internals/environment-v8-version":43,"../internals/global-this":60,"../internals/inspect-source":67,"../internals/is-callable":71,"../internals/is-forced":73,"../internals/is-pure":77,"../internals/promise-native-constructor":111,"../internals/well-known-symbol":144}],111:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 
 module.exports = globalThis.Promise;
 
-},{"../internals/global-this":62}],114:[function(require,module,exports){
+},{"../internals/global-this":60}],112:[function(require,module,exports){
 'use strict';
 var anObject = require('../internals/an-object');
 var isObject = require('../internals/is-object');
@@ -2768,7 +2585,7 @@ module.exports = function (C, x) {
   return promiseCapability.promise;
 };
 
-},{"../internals/an-object":10,"../internals/is-object":77,"../internals/new-promise-capability":92}],115:[function(require,module,exports){
+},{"../internals/an-object":10,"../internals/is-object":75,"../internals/new-promise-capability":90}],113:[function(require,module,exports){
 'use strict';
 var NativePromiseConstructor = require('../internals/promise-native-constructor');
 var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
@@ -2778,7 +2595,7 @@ module.exports = FORCED_PROMISE_CONSTRUCTOR || !checkCorrectnessOfIteration(func
   NativePromiseConstructor.all(iterable).then(undefined, function () { /* empty */ });
 });
 
-},{"../internals/check-correctness-of-iteration":21,"../internals/promise-constructor-detection":112,"../internals/promise-native-constructor":113}],116:[function(require,module,exports){
+},{"../internals/check-correctness-of-iteration":19,"../internals/promise-constructor-detection":110,"../internals/promise-native-constructor":111}],114:[function(require,module,exports){
 'use strict';
 var Queue = function () {
   this.head = null;
@@ -2805,273 +2622,7 @@ Queue.prototype = {
 
 module.exports = Queue;
 
-},{}],117:[function(require,module,exports){
-'use strict';
-/* eslint-disable regexp/no-empty-capturing-group, regexp/no-empty-group, regexp/no-lazy-ends -- testing */
-/* eslint-disable regexp/no-useless-quantifier -- testing */
-var call = require('../internals/function-call');
-var uncurryThis = require('../internals/function-uncurry-this');
-var toString = require('../internals/to-string');
-var regexpFlags = require('../internals/regexp-flags');
-var stickyHelpers = require('../internals/regexp-sticky-helpers');
-var shared = require('../internals/shared');
-var create = require('../internals/object-create');
-var getInternalState = require('../internals/internal-state').get;
-var UNSUPPORTED_DOT_ALL = require('../internals/regexp-unsupported-dot-all');
-var UNSUPPORTED_NCG = require('../internals/regexp-unsupported-ncg');
-
-var nativeReplace = shared('native-string-replace', String.prototype.replace);
-var nativeExec = RegExp.prototype.exec;
-var patchedExec = nativeExec;
-var charAt = uncurryThis(''.charAt);
-var indexOf = uncurryThis(''.indexOf);
-var replace = uncurryThis(''.replace);
-var stringSlice = uncurryThis(''.slice);
-
-var UPDATES_LAST_INDEX_WRONG = (function () {
-  var re1 = /a/;
-  var re2 = /b*/g;
-  call(nativeExec, re1, 'a');
-  call(nativeExec, re2, 'a');
-  return re1.lastIndex !== 0 || re2.lastIndex !== 0;
-})();
-
-var UNSUPPORTED_Y = stickyHelpers.BROKEN_CARET;
-
-// nonparticipating capturing group, copied from es5-shim's String#split patch.
-var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined;
-
-var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y || UNSUPPORTED_DOT_ALL || UNSUPPORTED_NCG;
-
-if (PATCH) {
-  patchedExec = function exec(string) {
-    var re = this;
-    var state = getInternalState(re);
-    var str = toString(string);
-    var raw = state.raw;
-    var result, reCopy, lastIndex, match, i, object, group;
-
-    if (raw) {
-      raw.lastIndex = re.lastIndex;
-      result = call(patchedExec, raw, str);
-      re.lastIndex = raw.lastIndex;
-      return result;
-    }
-
-    var groups = state.groups;
-    var sticky = UNSUPPORTED_Y && re.sticky;
-    var flags = call(regexpFlags, re);
-    var source = re.source;
-    var charsAdded = 0;
-    var strCopy = str;
-
-    if (sticky) {
-      flags = replace(flags, 'y', '');
-      if (indexOf(flags, 'g') === -1) {
-        flags += 'g';
-      }
-
-      strCopy = stringSlice(str, re.lastIndex);
-      // Support anchored sticky behavior.
-      if (re.lastIndex > 0 && (!re.multiline || re.multiline && charAt(str, re.lastIndex - 1) !== '\n')) {
-        source = '(?: ' + source + ')';
-        strCopy = ' ' + strCopy;
-        charsAdded++;
-      }
-      // ^(? + rx + ) is needed, in combination with some str slicing, to
-      // simulate the 'y' flag.
-      reCopy = new RegExp('^(?:' + source + ')', flags);
-    }
-
-    if (NPCG_INCLUDED) {
-      reCopy = new RegExp('^' + source + '$(?!\\s)', flags);
-    }
-    if (UPDATES_LAST_INDEX_WRONG) lastIndex = re.lastIndex;
-
-    match = call(nativeExec, sticky ? reCopy : re, strCopy);
-
-    if (sticky) {
-      if (match) {
-        match.input = stringSlice(match.input, charsAdded);
-        match[0] = stringSlice(match[0], charsAdded);
-        match.index = re.lastIndex;
-        re.lastIndex += match[0].length;
-      } else re.lastIndex = 0;
-    } else if (UPDATES_LAST_INDEX_WRONG && match) {
-      re.lastIndex = re.global ? match.index + match[0].length : lastIndex;
-    }
-    if (NPCG_INCLUDED && match && match.length > 1) {
-      // Fix browsers whose `exec` methods don't consistently return `undefined`
-      // for NPCG, like IE8. NOTE: This doesn't work for /(.?)?/
-      call(nativeReplace, match[0], reCopy, function () {
-        for (i = 1; i < arguments.length - 2; i++) {
-          if (arguments[i] === undefined) match[i] = undefined;
-        }
-      });
-    }
-
-    if (match && groups) {
-      match.groups = object = create(null);
-      for (i = 0; i < groups.length; i++) {
-        group = groups[i];
-        object[group[0]] = match[group[1]];
-      }
-    }
-
-    return match;
-  };
-}
-
-module.exports = patchedExec;
-
-},{"../internals/function-call":52,"../internals/function-uncurry-this":56,"../internals/internal-state":70,"../internals/object-create":94,"../internals/regexp-flags":119,"../internals/regexp-sticky-helpers":121,"../internals/regexp-unsupported-dot-all":122,"../internals/regexp-unsupported-ncg":123,"../internals/shared":130,"../internals/to-string":145}],118:[function(require,module,exports){
-'use strict';
-var globalThis = require('../internals/global-this');
-var fails = require('../internals/fails');
-
-// babel-minify and Closure Compiler transpiles RegExp('.', 'd') -> /./d and it causes SyntaxError
-var RegExp = globalThis.RegExp;
-
-var FLAGS_GETTER_IS_CORRECT = !fails(function () {
-  var INDICES_SUPPORT = true;
-  try {
-    RegExp('.', 'd');
-  } catch (error) {
-    INDICES_SUPPORT = false;
-  }
-
-  var O = {};
-  // modern V8 bug
-  var calls = '';
-  var expected = INDICES_SUPPORT ? 'dgimsy' : 'gimsy';
-
-  var addGetter = function (key, chr) {
-    // eslint-disable-next-line es/no-object-defineproperty -- safe
-    Object.defineProperty(O, key, { get: function () {
-      calls += chr;
-      return true;
-    } });
-  };
-
-  var pairs = {
-    dotAll: 's',
-    global: 'g',
-    ignoreCase: 'i',
-    multiline: 'm',
-    sticky: 'y'
-  };
-
-  if (INDICES_SUPPORT) pairs.hasIndices = 'd';
-
-  for (var key in pairs) addGetter(key, pairs[key]);
-
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-  var result = Object.getOwnPropertyDescriptor(RegExp.prototype, 'flags').get.call(O);
-
-  return result !== expected || calls !== expected;
-});
-
-module.exports = { correct: FLAGS_GETTER_IS_CORRECT };
-
-},{"../internals/fails":48,"../internals/global-this":62}],119:[function(require,module,exports){
-'use strict';
-var anObject = require('../internals/an-object');
-
-// `RegExp.prototype.flags` getter implementation
-// https://tc39.es/ecma262/#sec-get-regexp.prototype.flags
-module.exports = function () {
-  var that = anObject(this);
-  var result = '';
-  if (that.hasIndices) result += 'd';
-  if (that.global) result += 'g';
-  if (that.ignoreCase) result += 'i';
-  if (that.multiline) result += 'm';
-  if (that.dotAll) result += 's';
-  if (that.unicode) result += 'u';
-  if (that.unicodeSets) result += 'v';
-  if (that.sticky) result += 'y';
-  return result;
-};
-
-},{"../internals/an-object":10}],120:[function(require,module,exports){
-'use strict';
-var call = require('../internals/function-call');
-var hasOwn = require('../internals/has-own-property');
-var isPrototypeOf = require('../internals/object-is-prototype-of');
-var regExpFlagsDetection = require('../internals/regexp-flags-detection');
-var regExpFlagsGetterImplementation = require('../internals/regexp-flags');
-
-var RegExpPrototype = RegExp.prototype;
-
-module.exports = regExpFlagsDetection.correct ? function (it) {
-  return it.flags;
-} : function (it) {
-  return (!regExpFlagsDetection.correct && isPrototypeOf(RegExpPrototype, it) && !hasOwn(it, 'flags'))
-    ? call(regExpFlagsGetterImplementation, it)
-    : it.flags;
-};
-
-},{"../internals/function-call":52,"../internals/has-own-property":63,"../internals/object-is-prototype-of":102,"../internals/regexp-flags":119,"../internals/regexp-flags-detection":118}],121:[function(require,module,exports){
-'use strict';
-var fails = require('../internals/fails');
-var globalThis = require('../internals/global-this');
-
-// babel-minify and Closure Compiler transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError
-var $RegExp = globalThis.RegExp;
-
-var UNSUPPORTED_Y = fails(function () {
-  var re = $RegExp('a', 'y');
-  re.lastIndex = 2;
-  return re.exec('abcd') !== null;
-});
-
-// UC Browser bug
-// https://github.com/zloirock/core-js/issues/1008
-var MISSED_STICKY = UNSUPPORTED_Y || fails(function () {
-  return !$RegExp('a', 'y').sticky;
-});
-
-var BROKEN_CARET = UNSUPPORTED_Y || fails(function () {
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=773687
-  var re = $RegExp('^r', 'gy');
-  re.lastIndex = 2;
-  return re.exec('str') !== null;
-});
-
-module.exports = {
-  BROKEN_CARET: BROKEN_CARET,
-  MISSED_STICKY: MISSED_STICKY,
-  UNSUPPORTED_Y: UNSUPPORTED_Y
-};
-
-},{"../internals/fails":48,"../internals/global-this":62}],122:[function(require,module,exports){
-'use strict';
-var fails = require('../internals/fails');
-var globalThis = require('../internals/global-this');
-
-// babel-minify and Closure Compiler transpiles RegExp('.', 's') -> /./s and it causes SyntaxError
-var $RegExp = globalThis.RegExp;
-
-module.exports = fails(function () {
-  var re = $RegExp('.', 's');
-  return !(re.dotAll && re.test('\n') && re.flags === 's');
-});
-
-},{"../internals/fails":48,"../internals/global-this":62}],123:[function(require,module,exports){
-'use strict';
-var fails = require('../internals/fails');
-var globalThis = require('../internals/global-this');
-
-// babel-minify and Closure Compiler transpiles RegExp('(?<a>b)', 'g') -> /(?<a>b)/g and it causes SyntaxError
-var $RegExp = globalThis.RegExp;
-
-module.exports = fails(function () {
-  var re = $RegExp('(?<a>b)', 'g');
-  return re.exec('b').groups.a !== 'b' ||
-    'b'.replace(re, '$<a>c') !== 'bc';
-});
-
-},{"../internals/fails":48,"../internals/global-this":62}],124:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 'use strict';
 var isNullOrUndefined = require('../internals/is-null-or-undefined');
 
@@ -3084,7 +2635,7 @@ module.exports = function (it) {
   return it;
 };
 
-},{"../internals/is-null-or-undefined":76}],125:[function(require,module,exports){
+},{"../internals/is-null-or-undefined":74}],116:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var DESCRIPTORS = require('../internals/descriptors');
@@ -3099,7 +2650,7 @@ module.exports = function (name) {
   return descriptor && descriptor.value;
 };
 
-},{"../internals/descriptors":34,"../internals/global-this":62}],126:[function(require,module,exports){
+},{"../internals/descriptors":32,"../internals/global-this":60}],117:[function(require,module,exports){
 'use strict';
 var getBuiltIn = require('../internals/get-built-in');
 var defineBuiltInAccessor = require('../internals/define-built-in-accessor');
@@ -3119,7 +2670,7 @@ module.exports = function (CONSTRUCTOR_NAME) {
   }
 };
 
-},{"../internals/define-built-in-accessor":31,"../internals/descriptors":34,"../internals/get-built-in":57,"../internals/well-known-symbol":154}],127:[function(require,module,exports){
+},{"../internals/define-built-in-accessor":29,"../internals/descriptors":32,"../internals/get-built-in":55,"../internals/well-known-symbol":144}],118:[function(require,module,exports){
 'use strict';
 var defineProperty = require('../internals/object-define-property').f;
 var hasOwn = require('../internals/has-own-property');
@@ -3134,7 +2685,7 @@ module.exports = function (target, TAG, STATIC) {
   }
 };
 
-},{"../internals/has-own-property":63,"../internals/object-define-property":96,"../internals/well-known-symbol":154}],128:[function(require,module,exports){
+},{"../internals/has-own-property":61,"../internals/object-define-property":94,"../internals/well-known-symbol":144}],119:[function(require,module,exports){
 'use strict';
 var shared = require('../internals/shared');
 var uid = require('../internals/uid');
@@ -3145,7 +2696,7 @@ module.exports = function (key) {
   return keys[key] || (keys[key] = uid(key));
 };
 
-},{"../internals/shared":130,"../internals/uid":147}],129:[function(require,module,exports){
+},{"../internals/shared":121,"../internals/uid":137}],120:[function(require,module,exports){
 'use strict';
 var IS_PURE = require('../internals/is-pure');
 var globalThis = require('../internals/global-this');
@@ -3162,7 +2713,7 @@ var store = module.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, 
   source: 'https://github.com/zloirock/core-js'
 });
 
-},{"../internals/define-global-property":33,"../internals/global-this":62,"../internals/is-pure":79}],130:[function(require,module,exports){
+},{"../internals/define-global-property":31,"../internals/global-this":60,"../internals/is-pure":77}],121:[function(require,module,exports){
 'use strict';
 var store = require('../internals/shared-store');
 
@@ -3170,7 +2721,7 @@ module.exports = function (key, value) {
   return store[key] || (store[key] = value || {});
 };
 
-},{"../internals/shared-store":129}],131:[function(require,module,exports){
+},{"../internals/shared-store":120}],122:[function(require,module,exports){
 'use strict';
 var anObject = require('../internals/an-object');
 var aConstructor = require('../internals/a-constructor');
@@ -3187,46 +2738,7 @@ module.exports = function (O, defaultConstructor) {
   return C === undefined || isNullOrUndefined(S = anObject(C)[SPECIES]) ? defaultConstructor : aConstructor(S);
 };
 
-},{"../internals/a-constructor":6,"../internals/an-object":10,"../internals/is-null-or-undefined":76,"../internals/well-known-symbol":154}],132:[function(require,module,exports){
-'use strict';
-var uncurryThis = require('../internals/function-uncurry-this');
-var toIntegerOrInfinity = require('../internals/to-integer-or-infinity');
-var toString = require('../internals/to-string');
-var requireObjectCoercible = require('../internals/require-object-coercible');
-
-var charAt = uncurryThis(''.charAt);
-var charCodeAt = uncurryThis(''.charCodeAt);
-var stringSlice = uncurryThis(''.slice);
-
-var createMethod = function (CONVERT_TO_STRING) {
-  return function ($this, pos) {
-    var S = toString(requireObjectCoercible($this));
-    var position = toIntegerOrInfinity(pos);
-    var size = S.length;
-    var first, second;
-    if (position < 0 || position >= size) return CONVERT_TO_STRING ? '' : undefined;
-    first = charCodeAt(S, position);
-    return first < 0xD800 || first > 0xDBFF || position + 1 === size
-      || (second = charCodeAt(S, position + 1)) < 0xDC00 || second > 0xDFFF
-        ? CONVERT_TO_STRING
-          ? charAt(S, position)
-          : first
-        : CONVERT_TO_STRING
-          ? stringSlice(S, position, position + 2)
-          : (first - 0xD800 << 10) + (second - 0xDC00) + 0x10000;
-  };
-};
-
-module.exports = {
-  // `String.prototype.codePointAt` method
-  // https://tc39.es/ecma262/#sec-string.prototype.codepointat
-  codeAt: createMethod(false),
-  // `String.prototype.at` method
-  // https://github.com/mathiasbynens/String.prototype.at
-  charAt: createMethod(true)
-};
-
-},{"../internals/function-uncurry-this":56,"../internals/require-object-coercible":124,"../internals/to-integer-or-infinity":139,"../internals/to-string":145}],133:[function(require,module,exports){
+},{"../internals/a-constructor":6,"../internals/an-object":10,"../internals/is-null-or-undefined":74,"../internals/well-known-symbol":144}],123:[function(require,module,exports){
 'use strict';
 /* eslint-disable es/no-symbol -- required for testing */
 var V8_VERSION = require('../internals/environment-v8-version');
@@ -3247,7 +2759,7 @@ module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
     !Symbol.sham && V8_VERSION && V8_VERSION < 41;
 });
 
-},{"../internals/environment-v8-version":45,"../internals/fails":48,"../internals/global-this":62}],134:[function(require,module,exports){
+},{"../internals/environment-v8-version":43,"../internals/fails":46,"../internals/global-this":60}],124:[function(require,module,exports){
 'use strict';
 var call = require('../internals/function-call');
 var getBuiltIn = require('../internals/get-built-in');
@@ -3270,14 +2782,14 @@ module.exports = function () {
   }
 };
 
-},{"../internals/define-built-in":32,"../internals/function-call":52,"../internals/get-built-in":57,"../internals/well-known-symbol":154}],135:[function(require,module,exports){
+},{"../internals/define-built-in":30,"../internals/function-call":50,"../internals/get-built-in":55,"../internals/well-known-symbol":144}],125:[function(require,module,exports){
 'use strict';
 var NATIVE_SYMBOL = require('../internals/symbol-constructor-detection');
 
 /* eslint-disable es/no-symbol -- safe */
 module.exports = NATIVE_SYMBOL && !!Symbol['for'] && !!Symbol.keyFor;
 
-},{"../internals/symbol-constructor-detection":133}],136:[function(require,module,exports){
+},{"../internals/symbol-constructor-detection":123}],126:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var apply = require('../internals/function-apply');
@@ -3396,7 +2908,7 @@ module.exports = {
   clear: clear
 };
 
-},{"../internals/array-slice":17,"../internals/document-create-element":35,"../internals/environment-is-ios":41,"../internals/environment-is-node":42,"../internals/fails":48,"../internals/function-apply":49,"../internals/function-bind-context":50,"../internals/global-this":62,"../internals/has-own-property":63,"../internals/html":66,"../internals/is-callable":73,"../internals/validate-arguments-length":150}],137:[function(require,module,exports){
+},{"../internals/array-slice":16,"../internals/document-create-element":33,"../internals/environment-is-ios":39,"../internals/environment-is-node":40,"../internals/fails":46,"../internals/function-apply":47,"../internals/function-bind-context":48,"../internals/global-this":60,"../internals/has-own-property":61,"../internals/html":64,"../internals/is-callable":71,"../internals/validate-arguments-length":140}],127:[function(require,module,exports){
 'use strict';
 var toIntegerOrInfinity = require('../internals/to-integer-or-infinity');
 
@@ -3411,7 +2923,7 @@ module.exports = function (index, length) {
   return integer < 0 ? max(integer + length, 0) : min(integer, length);
 };
 
-},{"../internals/to-integer-or-infinity":139}],138:[function(require,module,exports){
+},{"../internals/to-integer-or-infinity":129}],128:[function(require,module,exports){
 'use strict';
 // toObject with fallback for non-array-like ES3 strings
 var IndexedObject = require('../internals/indexed-object');
@@ -3421,7 +2933,7 @@ module.exports = function (it) {
   return IndexedObject(requireObjectCoercible(it));
 };
 
-},{"../internals/indexed-object":68,"../internals/require-object-coercible":124}],139:[function(require,module,exports){
+},{"../internals/indexed-object":66,"../internals/require-object-coercible":115}],129:[function(require,module,exports){
 'use strict';
 var trunc = require('../internals/math-trunc');
 
@@ -3433,7 +2945,7 @@ module.exports = function (argument) {
   return number !== number || number === 0 ? 0 : trunc(number);
 };
 
-},{"../internals/math-trunc":90}],140:[function(require,module,exports){
+},{"../internals/math-trunc":88}],130:[function(require,module,exports){
 'use strict';
 var toIntegerOrInfinity = require('../internals/to-integer-or-infinity');
 
@@ -3446,7 +2958,7 @@ module.exports = function (argument) {
   return len > 0 ? min(len, 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
 };
 
-},{"../internals/to-integer-or-infinity":139}],141:[function(require,module,exports){
+},{"../internals/to-integer-or-infinity":129}],131:[function(require,module,exports){
 'use strict';
 var requireObjectCoercible = require('../internals/require-object-coercible');
 
@@ -3458,7 +2970,7 @@ module.exports = function (argument) {
   return $Object(requireObjectCoercible(argument));
 };
 
-},{"../internals/require-object-coercible":124}],142:[function(require,module,exports){
+},{"../internals/require-object-coercible":115}],132:[function(require,module,exports){
 'use strict';
 var call = require('../internals/function-call');
 var isObject = require('../internals/is-object');
@@ -3486,7 +2998,7 @@ module.exports = function (input, pref) {
   return ordinaryToPrimitive(input, pref);
 };
 
-},{"../internals/function-call":52,"../internals/get-method":61,"../internals/is-object":77,"../internals/is-symbol":81,"../internals/ordinary-to-primitive":108,"../internals/well-known-symbol":154}],143:[function(require,module,exports){
+},{"../internals/function-call":50,"../internals/get-method":59,"../internals/is-object":75,"../internals/is-symbol":79,"../internals/ordinary-to-primitive":106,"../internals/well-known-symbol":144}],133:[function(require,module,exports){
 'use strict';
 var toPrimitive = require('../internals/to-primitive');
 var isSymbol = require('../internals/is-symbol');
@@ -3498,7 +3010,7 @@ module.exports = function (argument) {
   return isSymbol(key) ? key : key + '';
 };
 
-},{"../internals/is-symbol":81,"../internals/to-primitive":142}],144:[function(require,module,exports){
+},{"../internals/is-symbol":79,"../internals/to-primitive":132}],134:[function(require,module,exports){
 'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
@@ -3509,7 +3021,7 @@ test[TO_STRING_TAG] = 'z';
 
 module.exports = String(test) === '[object z]';
 
-},{"../internals/well-known-symbol":154}],145:[function(require,module,exports){
+},{"../internals/well-known-symbol":144}],135:[function(require,module,exports){
 'use strict';
 var classof = require('../internals/classof');
 
@@ -3520,7 +3032,7 @@ module.exports = function (argument) {
   return $String(argument);
 };
 
-},{"../internals/classof":23}],146:[function(require,module,exports){
+},{"../internals/classof":21}],136:[function(require,module,exports){
 'use strict';
 var $String = String;
 
@@ -3532,7 +3044,7 @@ module.exports = function (argument) {
   }
 };
 
-},{}],147:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 'use strict';
 var uncurryThis = require('../internals/function-uncurry-this');
 
@@ -3544,7 +3056,7 @@ module.exports = function (key) {
   return 'Symbol(' + (key === undefined ? '' : key) + ')_' + toString(++id + postfix, 36);
 };
 
-},{"../internals/function-uncurry-this":56}],148:[function(require,module,exports){
+},{"../internals/function-uncurry-this":54}],138:[function(require,module,exports){
 'use strict';
 /* eslint-disable es/no-symbol -- required for testing */
 var NATIVE_SYMBOL = require('../internals/symbol-constructor-detection');
@@ -3553,7 +3065,7 @@ module.exports = NATIVE_SYMBOL &&
   !Symbol.sham &&
   typeof Symbol.iterator == 'symbol';
 
-},{"../internals/symbol-constructor-detection":133}],149:[function(require,module,exports){
+},{"../internals/symbol-constructor-detection":123}],139:[function(require,module,exports){
 'use strict';
 var DESCRIPTORS = require('../internals/descriptors');
 var fails = require('../internals/fails');
@@ -3568,7 +3080,7 @@ module.exports = DESCRIPTORS && fails(function () {
   }).prototype !== 42;
 });
 
-},{"../internals/descriptors":34,"../internals/fails":48}],150:[function(require,module,exports){
+},{"../internals/descriptors":32,"../internals/fails":46}],140:[function(require,module,exports){
 'use strict';
 var $TypeError = TypeError;
 
@@ -3577,7 +3089,7 @@ module.exports = function (passed, required) {
   return passed;
 };
 
-},{}],151:[function(require,module,exports){
+},{}],141:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var isCallable = require('../internals/is-callable');
@@ -3586,7 +3098,7 @@ var WeakMap = globalThis.WeakMap;
 
 module.exports = isCallable(WeakMap) && /native code/.test(String(WeakMap));
 
-},{"../internals/global-this":62,"../internals/is-callable":73}],152:[function(require,module,exports){
+},{"../internals/global-this":60,"../internals/is-callable":71}],142:[function(require,module,exports){
 'use strict';
 var path = require('../internals/path');
 var hasOwn = require('../internals/has-own-property');
@@ -3600,13 +3112,13 @@ module.exports = function (NAME) {
   });
 };
 
-},{"../internals/has-own-property":63,"../internals/object-define-property":96,"../internals/path":110,"../internals/well-known-symbol-wrapped":153}],153:[function(require,module,exports){
+},{"../internals/has-own-property":61,"../internals/object-define-property":94,"../internals/path":108,"../internals/well-known-symbol-wrapped":143}],143:[function(require,module,exports){
 'use strict';
 var wellKnownSymbol = require('../internals/well-known-symbol');
 
 exports.f = wellKnownSymbol;
 
-},{"../internals/well-known-symbol":154}],154:[function(require,module,exports){
+},{"../internals/well-known-symbol":144}],144:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var shared = require('../internals/shared');
@@ -3627,7 +3139,7 @@ module.exports = function (name) {
   } return WellKnownSymbolsStore[name];
 };
 
-},{"../internals/global-this":62,"../internals/has-own-property":63,"../internals/shared":130,"../internals/symbol-constructor-detection":133,"../internals/uid":147,"../internals/use-symbol-as-uid":148}],155:[function(require,module,exports){
+},{"../internals/global-this":60,"../internals/has-own-property":61,"../internals/shared":121,"../internals/symbol-constructor-detection":123,"../internals/uid":137,"../internals/use-symbol-as-uid":138}],145:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var fails = require('../internals/fails');
@@ -3687,7 +3199,7 @@ $({ target: 'Array', proto: true, arity: 1, forced: FORCED }, {
   }
 });
 
-},{"../internals/array-method-has-species-support":15,"../internals/array-species-create":19,"../internals/create-property":30,"../internals/does-not-exceed-safe-integer":36,"../internals/environment-v8-version":45,"../internals/export":47,"../internals/fails":48,"../internals/is-array":72,"../internals/is-object":77,"../internals/length-of-array-like":88,"../internals/to-object":141,"../internals/well-known-symbol":154}],156:[function(require,module,exports){
+},{"../internals/array-method-has-species-support":14,"../internals/array-species-create":18,"../internals/create-property":28,"../internals/does-not-exceed-safe-integer":34,"../internals/environment-v8-version":43,"../internals/export":45,"../internals/fails":46,"../internals/is-array":70,"../internals/is-object":75,"../internals/length-of-array-like":86,"../internals/to-object":131,"../internals/well-known-symbol":144}],146:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var $find = require('../internals/array-iteration').find;
@@ -3711,24 +3223,7 @@ $({ target: 'Array', proto: true, forced: SKIPS_HOLES }, {
 // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
 addToUnscopables(FIND);
 
-},{"../internals/add-to-unscopables":8,"../internals/array-iteration":14,"../internals/export":47}],157:[function(require,module,exports){
-'use strict';
-var $ = require('../internals/export');
-var from = require('../internals/array-from');
-var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
-
-var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function (iterable) {
-  // eslint-disable-next-line es/no-array-from -- required for testing
-  Array.from(iterable);
-});
-
-// `Array.from` method
-// https://tc39.es/ecma262/#sec-array.from
-$({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
-  from: from
-});
-
-},{"../internals/array-from":12,"../internals/check-correctness-of-iteration":21,"../internals/export":47}],158:[function(require,module,exports){
+},{"../internals/add-to-unscopables":8,"../internals/array-iteration":13,"../internals/export":45}],147:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var $includes = require('../internals/array-includes').includes;
@@ -3752,32 +3247,7 @@ $({ target: 'Array', proto: true, forced: BROKEN_ON_SPARSE }, {
 // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
 addToUnscopables('includes');
 
-},{"../internals/add-to-unscopables":8,"../internals/array-includes":13,"../internals/export":47,"../internals/fails":48}],159:[function(require,module,exports){
-'use strict';
-/* eslint-disable es/no-array-prototype-indexof -- required for testing */
-var $ = require('../internals/export');
-var uncurryThis = require('../internals/function-uncurry-this-clause');
-var $indexOf = require('../internals/array-includes').indexOf;
-var arrayMethodIsStrict = require('../internals/array-method-is-strict');
-
-var nativeIndexOf = uncurryThis([].indexOf);
-
-var NEGATIVE_ZERO = !!nativeIndexOf && 1 / nativeIndexOf([1], 1, -0) < 0;
-var FORCED = NEGATIVE_ZERO || !arrayMethodIsStrict('indexOf');
-
-// `Array.prototype.indexOf` method
-// https://tc39.es/ecma262/#sec-array.prototype.indexof
-$({ target: 'Array', proto: true, forced: FORCED }, {
-  indexOf: function indexOf(searchElement /* , fromIndex = 0 */) {
-    var fromIndex = arguments.length > 1 ? arguments[1] : undefined;
-    return NEGATIVE_ZERO
-      // convert -0 to +0
-      ? nativeIndexOf(this, searchElement, fromIndex) || 0
-      : $indexOf(this, searchElement, fromIndex);
-  }
-});
-
-},{"../internals/array-includes":13,"../internals/array-method-is-strict":16,"../internals/export":47,"../internals/function-uncurry-this-clause":55}],160:[function(require,module,exports){
+},{"../internals/add-to-unscopables":8,"../internals/array-includes":12,"../internals/export":45,"../internals/fails":46}],148:[function(require,module,exports){
 'use strict';
 var toIndexedObject = require('../internals/to-indexed-object');
 var addToUnscopables = require('../internals/add-to-unscopables');
@@ -3841,7 +3311,7 @@ if (!IS_PURE && DESCRIPTORS && values.name !== 'values') try {
   defineProperty(values, 'name', { value: 'values' });
 } catch (error) { /* empty */ }
 
-},{"../internals/add-to-unscopables":8,"../internals/create-iter-result-object":27,"../internals/descriptors":34,"../internals/internal-state":70,"../internals/is-pure":79,"../internals/iterator-define":85,"../internals/iterators":87,"../internals/object-define-property":96,"../internals/to-indexed-object":138}],161:[function(require,module,exports){
+},{"../internals/add-to-unscopables":8,"../internals/create-iter-result-object":25,"../internals/descriptors":32,"../internals/internal-state":68,"../internals/is-pure":77,"../internals/iterator-define":83,"../internals/iterators":85,"../internals/object-define-property":94,"../internals/to-indexed-object":128}],149:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var isArray = require('../internals/is-array');
@@ -3892,7 +3362,7 @@ $({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT }, {
   }
 });
 
-},{"../internals/array-method-has-species-support":15,"../internals/array-slice":17,"../internals/create-property":30,"../internals/export":47,"../internals/is-array":72,"../internals/is-constructor":74,"../internals/is-object":77,"../internals/length-of-array-like":88,"../internals/to-absolute-index":137,"../internals/to-indexed-object":138,"../internals/well-known-symbol":154}],162:[function(require,module,exports){
+},{"../internals/array-method-has-species-support":14,"../internals/array-slice":16,"../internals/create-property":28,"../internals/export":45,"../internals/is-array":70,"../internals/is-constructor":72,"../internals/is-object":75,"../internals/length-of-array-like":86,"../internals/to-absolute-index":127,"../internals/to-indexed-object":128,"../internals/well-known-symbol":144}],150:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var getBuiltIn = require('../internals/get-built-in');
@@ -3967,7 +3437,7 @@ if ($stringify) {
   });
 }
 
-},{"../internals/array-slice":17,"../internals/export":47,"../internals/fails":48,"../internals/function-apply":49,"../internals/function-call":52,"../internals/function-uncurry-this":56,"../internals/get-built-in":57,"../internals/get-json-replacer-function":60,"../internals/is-callable":73,"../internals/is-symbol":81,"../internals/symbol-constructor-detection":133}],163:[function(require,module,exports){
+},{"../internals/array-slice":16,"../internals/export":45,"../internals/fails":46,"../internals/function-apply":47,"../internals/function-call":50,"../internals/function-uncurry-this":54,"../internals/get-built-in":55,"../internals/get-json-replacer-function":58,"../internals/is-callable":71,"../internals/is-symbol":79,"../internals/symbol-constructor-detection":123}],151:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var NATIVE_SYMBOL = require('../internals/symbol-constructor-detection');
@@ -3988,7 +3458,7 @@ $({ target: 'Object', stat: true, forced: FORCED }, {
   }
 });
 
-},{"../internals/export":47,"../internals/fails":48,"../internals/object-get-own-property-symbols":100,"../internals/symbol-constructor-detection":133,"../internals/to-object":141}],164:[function(require,module,exports){
+},{"../internals/export":45,"../internals/fails":46,"../internals/object-get-own-property-symbols":98,"../internals/symbol-constructor-detection":123,"../internals/to-object":131}],152:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var fails = require('../internals/fails');
@@ -4007,7 +3477,7 @@ $({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES, sham: !CORRECT_PR
 });
 
 
-},{"../internals/correct-prototype-getter":26,"../internals/export":47,"../internals/fails":48,"../internals/object-get-prototype-of":101,"../internals/to-object":141}],165:[function(require,module,exports){
+},{"../internals/correct-prototype-getter":24,"../internals/export":45,"../internals/fails":46,"../internals/object-get-prototype-of":99,"../internals/to-object":131}],153:[function(require,module,exports){
 'use strict';
 var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
 var defineBuiltIn = require('../internals/define-built-in');
@@ -4019,7 +3489,7 @@ if (!TO_STRING_TAG_SUPPORT) {
   defineBuiltIn(Object.prototype, 'toString', toString, { unsafe: true });
 }
 
-},{"../internals/define-built-in":32,"../internals/object-to-string":107,"../internals/to-string-tag-support":144}],166:[function(require,module,exports){
+},{"../internals/define-built-in":30,"../internals/object-to-string":105,"../internals/to-string-tag-support":134}],154:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var call = require('../internals/function-call');
@@ -4060,7 +3530,7 @@ $({ target: 'Promise', stat: true, forced: PROMISE_STATICS_INCORRECT_ITERATION }
   }
 });
 
-},{"../internals/a-callable":5,"../internals/export":47,"../internals/function-call":52,"../internals/iterate":82,"../internals/new-promise-capability":92,"../internals/perform":111,"../internals/promise-statics-incorrect-iteration":115}],167:[function(require,module,exports){
+},{"../internals/a-callable":5,"../internals/export":45,"../internals/function-call":50,"../internals/iterate":80,"../internals/new-promise-capability":90,"../internals/perform":109,"../internals/promise-statics-incorrect-iteration":113}],155:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var IS_PURE = require('../internals/is-pure');
@@ -4088,7 +3558,7 @@ if (!IS_PURE && isCallable(NativePromiseConstructor)) {
   }
 }
 
-},{"../internals/define-built-in":32,"../internals/export":47,"../internals/get-built-in":57,"../internals/is-callable":73,"../internals/is-pure":79,"../internals/promise-constructor-detection":112,"../internals/promise-native-constructor":113}],168:[function(require,module,exports){
+},{"../internals/define-built-in":30,"../internals/export":45,"../internals/get-built-in":55,"../internals/is-callable":71,"../internals/is-pure":77,"../internals/promise-constructor-detection":110,"../internals/promise-native-constructor":111}],156:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var IS_PURE = require('../internals/is-pure');
@@ -4383,7 +3853,7 @@ PromiseWrapper = path.Promise;
 setToStringTag(PromiseConstructor, PROMISE, false, true);
 setSpecies(PROMISE);
 
-},{"../internals/a-callable":5,"../internals/an-instance":9,"../internals/define-built-in":32,"../internals/environment-is-node":42,"../internals/export":47,"../internals/function-call":52,"../internals/global-this":62,"../internals/host-report-errors":65,"../internals/internal-state":70,"../internals/is-callable":73,"../internals/is-object":77,"../internals/is-pure":79,"../internals/microtask":91,"../internals/new-promise-capability":92,"../internals/object-set-prototype-of":106,"../internals/path":110,"../internals/perform":111,"../internals/promise-constructor-detection":112,"../internals/promise-native-constructor":113,"../internals/queue":116,"../internals/set-species":126,"../internals/set-to-string-tag":127,"../internals/species-constructor":131,"../internals/task":136}],169:[function(require,module,exports){
+},{"../internals/a-callable":5,"../internals/an-instance":9,"../internals/define-built-in":30,"../internals/environment-is-node":40,"../internals/export":45,"../internals/function-call":50,"../internals/global-this":60,"../internals/host-report-errors":63,"../internals/internal-state":68,"../internals/is-callable":71,"../internals/is-object":75,"../internals/is-pure":77,"../internals/microtask":89,"../internals/new-promise-capability":90,"../internals/object-set-prototype-of":104,"../internals/path":108,"../internals/perform":109,"../internals/promise-constructor-detection":110,"../internals/promise-native-constructor":111,"../internals/queue":114,"../internals/set-species":117,"../internals/set-to-string-tag":118,"../internals/species-constructor":122,"../internals/task":126}],157:[function(require,module,exports){
 'use strict';
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require('../modules/es.promise.constructor');
@@ -4393,7 +3863,7 @@ require('../modules/es.promise.race');
 require('../modules/es.promise.reject');
 require('../modules/es.promise.resolve');
 
-},{"../modules/es.promise.all":166,"../modules/es.promise.catch":167,"../modules/es.promise.constructor":168,"../modules/es.promise.race":170,"../modules/es.promise.reject":171,"../modules/es.promise.resolve":172}],170:[function(require,module,exports){
+},{"../modules/es.promise.all":154,"../modules/es.promise.catch":155,"../modules/es.promise.constructor":156,"../modules/es.promise.race":158,"../modules/es.promise.reject":159,"../modules/es.promise.resolve":160}],158:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var call = require('../internals/function-call');
@@ -4421,7 +3891,7 @@ $({ target: 'Promise', stat: true, forced: PROMISE_STATICS_INCORRECT_ITERATION }
   }
 });
 
-},{"../internals/a-callable":5,"../internals/export":47,"../internals/function-call":52,"../internals/iterate":82,"../internals/new-promise-capability":92,"../internals/perform":111,"../internals/promise-statics-incorrect-iteration":115}],171:[function(require,module,exports){
+},{"../internals/a-callable":5,"../internals/export":45,"../internals/function-call":50,"../internals/iterate":80,"../internals/new-promise-capability":90,"../internals/perform":109,"../internals/promise-statics-incorrect-iteration":113}],159:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var newPromiseCapabilityModule = require('../internals/new-promise-capability');
@@ -4438,7 +3908,7 @@ $({ target: 'Promise', stat: true, forced: FORCED_PROMISE_CONSTRUCTOR }, {
   }
 });
 
-},{"../internals/export":47,"../internals/new-promise-capability":92,"../internals/promise-constructor-detection":112}],172:[function(require,module,exports){
+},{"../internals/export":45,"../internals/new-promise-capability":90,"../internals/promise-constructor-detection":110}],160:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var getBuiltIn = require('../internals/get-built-in');
@@ -4458,46 +3928,7 @@ $({ target: 'Promise', stat: true, forced: IS_PURE || FORCED_PROMISE_CONSTRUCTOR
   }
 });
 
-},{"../internals/export":47,"../internals/get-built-in":57,"../internals/is-pure":79,"../internals/promise-constructor-detection":112,"../internals/promise-native-constructor":113,"../internals/promise-resolve":114}],173:[function(require,module,exports){
-'use strict';
-var $ = require('../internals/export');
-var exec = require('../internals/regexp-exec');
-
-// `RegExp.prototype.exec` method
-// https://tc39.es/ecma262/#sec-regexp.prototype.exec
-$({ target: 'RegExp', proto: true, forced: /./.exec !== exec }, {
-  exec: exec
-});
-
-},{"../internals/export":47,"../internals/regexp-exec":117}],174:[function(require,module,exports){
-'use strict';
-var PROPER_FUNCTION_NAME = require('../internals/function-name').PROPER;
-var defineBuiltIn = require('../internals/define-built-in');
-var anObject = require('../internals/an-object');
-var $toString = require('../internals/to-string');
-var fails = require('../internals/fails');
-var getRegExpFlags = require('../internals/regexp-get-flags');
-
-var TO_STRING = 'toString';
-var RegExpPrototype = RegExp.prototype;
-var nativeToString = RegExpPrototype[TO_STRING];
-
-var NOT_GENERIC = fails(function () { return nativeToString.call({ source: 'a', flags: 'b' }) !== '/a/b'; });
-// FF44- RegExp#toString has a wrong name
-var INCORRECT_NAME = PROPER_FUNCTION_NAME && nativeToString.name !== TO_STRING;
-
-// `RegExp.prototype.toString` method
-// https://tc39.es/ecma262/#sec-regexp.prototype.tostring
-if (NOT_GENERIC || INCORRECT_NAME) {
-  defineBuiltIn(RegExpPrototype, TO_STRING, function toString() {
-    var R = anObject(this);
-    var pattern = $toString(R.source);
-    var flags = $toString(getRegExpFlags(R));
-    return '/' + pattern + '/' + flags;
-  }, { unsafe: true });
-}
-
-},{"../internals/an-object":10,"../internals/define-built-in":32,"../internals/fails":48,"../internals/function-name":53,"../internals/regexp-get-flags":120,"../internals/to-string":145}],175:[function(require,module,exports){
+},{"../internals/export":45,"../internals/get-built-in":55,"../internals/is-pure":77,"../internals/promise-constructor-detection":110,"../internals/promise-native-constructor":111,"../internals/promise-resolve":112}],161:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var uncurryThis = require('../internals/function-uncurry-this');
@@ -4520,40 +3951,7 @@ $({ target: 'String', proto: true, forced: !correctIsRegExpLogic('includes') }, 
   }
 });
 
-},{"../internals/correct-is-regexp-logic":25,"../internals/export":47,"../internals/function-uncurry-this":56,"../internals/not-a-regexp":93,"../internals/require-object-coercible":124,"../internals/to-string":145}],176:[function(require,module,exports){
-'use strict';
-var charAt = require('../internals/string-multibyte').charAt;
-var toString = require('../internals/to-string');
-var InternalStateModule = require('../internals/internal-state');
-var defineIterator = require('../internals/iterator-define');
-var createIterResultObject = require('../internals/create-iter-result-object');
-
-var STRING_ITERATOR = 'String Iterator';
-var setInternalState = InternalStateModule.set;
-var getInternalState = InternalStateModule.getterFor(STRING_ITERATOR);
-
-// `String.prototype[@@iterator]` method
-// https://tc39.es/ecma262/#sec-string.prototype-@@iterator
-defineIterator(String, 'String', function (iterated) {
-  setInternalState(this, {
-    type: STRING_ITERATOR,
-    string: toString(iterated),
-    index: 0
-  });
-// `%StringIteratorPrototype%.next` method
-// https://tc39.es/ecma262/#sec-%stringiteratorprototype%.next
-}, function next() {
-  var state = getInternalState(this);
-  var string = state.string;
-  var index = state.index;
-  var point;
-  if (index >= string.length) return createIterResultObject(undefined, true);
-  point = charAt(string, index);
-  state.index += point.length;
-  return createIterResultObject(point, false);
-});
-
-},{"../internals/create-iter-result-object":27,"../internals/internal-state":70,"../internals/iterator-define":85,"../internals/string-multibyte":132,"../internals/to-string":145}],177:[function(require,module,exports){
+},{"../internals/correct-is-regexp-logic":23,"../internals/export":45,"../internals/function-uncurry-this":54,"../internals/not-a-regexp":91,"../internals/require-object-coercible":115,"../internals/to-string":135}],162:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var globalThis = require('../internals/global-this');
@@ -4818,7 +4216,7 @@ setToStringTag($Symbol, SYMBOL);
 
 hiddenKeys[HIDDEN] = true;
 
-},{"../internals/an-object":10,"../internals/array-iteration":14,"../internals/create-property-descriptor":29,"../internals/define-built-in":32,"../internals/define-built-in-accessor":31,"../internals/descriptors":34,"../internals/export":47,"../internals/fails":48,"../internals/function-call":52,"../internals/function-uncurry-this":56,"../internals/global-this":62,"../internals/has-own-property":63,"../internals/hidden-keys":64,"../internals/internal-state":70,"../internals/is-pure":79,"../internals/object-create":94,"../internals/object-define-properties":95,"../internals/object-define-property":96,"../internals/object-get-own-property-descriptor":97,"../internals/object-get-own-property-names":99,"../internals/object-get-own-property-names-external":98,"../internals/object-get-own-property-symbols":100,"../internals/object-is-prototype-of":102,"../internals/object-keys":104,"../internals/object-property-is-enumerable":105,"../internals/set-to-string-tag":127,"../internals/shared":130,"../internals/shared-key":128,"../internals/symbol-constructor-detection":133,"../internals/symbol-define-to-primitive":134,"../internals/to-indexed-object":138,"../internals/to-property-key":143,"../internals/to-string":145,"../internals/uid":147,"../internals/well-known-symbol":154,"../internals/well-known-symbol-define":152,"../internals/well-known-symbol-wrapped":153}],178:[function(require,module,exports){
+},{"../internals/an-object":10,"../internals/array-iteration":13,"../internals/create-property-descriptor":27,"../internals/define-built-in":30,"../internals/define-built-in-accessor":29,"../internals/descriptors":32,"../internals/export":45,"../internals/fails":46,"../internals/function-call":50,"../internals/function-uncurry-this":54,"../internals/global-this":60,"../internals/has-own-property":61,"../internals/hidden-keys":62,"../internals/internal-state":68,"../internals/is-pure":77,"../internals/object-create":92,"../internals/object-define-properties":93,"../internals/object-define-property":94,"../internals/object-get-own-property-descriptor":95,"../internals/object-get-own-property-names":97,"../internals/object-get-own-property-names-external":96,"../internals/object-get-own-property-symbols":98,"../internals/object-is-prototype-of":100,"../internals/object-keys":102,"../internals/object-property-is-enumerable":103,"../internals/set-to-string-tag":118,"../internals/shared":121,"../internals/shared-key":119,"../internals/symbol-constructor-detection":123,"../internals/symbol-define-to-primitive":124,"../internals/to-indexed-object":128,"../internals/to-property-key":133,"../internals/to-string":135,"../internals/uid":137,"../internals/well-known-symbol":144,"../internals/well-known-symbol-define":142,"../internals/well-known-symbol-wrapped":143}],163:[function(require,module,exports){
 // `Symbol.prototype.description` getter
 // https://tc39.es/ecma262/#sec-symbol.prototype.description
 'use strict';
@@ -4880,7 +4278,7 @@ if (DESCRIPTORS && isCallable(NativeSymbol) && (!('description' in SymbolPrototy
   });
 }
 
-},{"../internals/copy-constructor-properties":24,"../internals/define-built-in-accessor":31,"../internals/descriptors":34,"../internals/export":47,"../internals/function-uncurry-this":56,"../internals/global-this":62,"../internals/has-own-property":63,"../internals/is-callable":73,"../internals/object-is-prototype-of":102,"../internals/to-string":145}],179:[function(require,module,exports){
+},{"../internals/copy-constructor-properties":22,"../internals/define-built-in-accessor":29,"../internals/descriptors":32,"../internals/export":45,"../internals/function-uncurry-this":54,"../internals/global-this":60,"../internals/has-own-property":61,"../internals/is-callable":71,"../internals/object-is-prototype-of":100,"../internals/to-string":135}],164:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var getBuiltIn = require('../internals/get-built-in');
@@ -4905,15 +4303,7 @@ $({ target: 'Symbol', stat: true, forced: !NATIVE_SYMBOL_REGISTRY }, {
   }
 });
 
-},{"../internals/export":47,"../internals/get-built-in":57,"../internals/has-own-property":63,"../internals/shared":130,"../internals/symbol-registry-detection":135,"../internals/to-string":145}],180:[function(require,module,exports){
-'use strict';
-var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
-
-// `Symbol.iterator` well-known symbol
-// https://tc39.es/ecma262/#sec-symbol.iterator
-defineWellKnownSymbol('iterator');
-
-},{"../internals/well-known-symbol-define":152}],181:[function(require,module,exports){
+},{"../internals/export":45,"../internals/get-built-in":55,"../internals/has-own-property":61,"../internals/shared":121,"../internals/symbol-registry-detection":125,"../internals/to-string":135}],165:[function(require,module,exports){
 'use strict';
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require('../modules/es.symbol.constructor');
@@ -4922,7 +4312,7 @@ require('../modules/es.symbol.key-for');
 require('../modules/es.json.stringify');
 require('../modules/es.object.get-own-property-symbols');
 
-},{"../modules/es.json.stringify":162,"../modules/es.object.get-own-property-symbols":163,"../modules/es.symbol.constructor":177,"../modules/es.symbol.for":179,"../modules/es.symbol.key-for":182}],182:[function(require,module,exports){
+},{"../modules/es.json.stringify":150,"../modules/es.object.get-own-property-symbols":151,"../modules/es.symbol.constructor":162,"../modules/es.symbol.for":164,"../modules/es.symbol.key-for":166}],166:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var hasOwn = require('../internals/has-own-property');
@@ -4942,7 +4332,7 @@ $({ target: 'Symbol', stat: true, forced: !NATIVE_SYMBOL_REGISTRY }, {
   }
 });
 
-},{"../internals/export":47,"../internals/has-own-property":63,"../internals/is-symbol":81,"../internals/shared":130,"../internals/symbol-registry-detection":135,"../internals/try-to-string":146}],183:[function(require,module,exports){
+},{"../internals/export":45,"../internals/has-own-property":61,"../internals/is-symbol":79,"../internals/shared":121,"../internals/symbol-registry-detection":125,"../internals/try-to-string":136}],167:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var DOMIterables = require('../internals/dom-iterables');
@@ -4967,7 +4357,7 @@ for (var COLLECTION_NAME in DOMIterables) {
 
 handlePrototype(DOMTokenListPrototype);
 
-},{"../internals/array-for-each":11,"../internals/create-non-enumerable-property":28,"../internals/dom-iterables":37,"../internals/dom-token-list-prototype":38,"../internals/global-this":62}],184:[function(require,module,exports){
+},{"../internals/array-for-each":11,"../internals/create-non-enumerable-property":26,"../internals/dom-iterables":35,"../internals/dom-token-list-prototype":36,"../internals/global-this":60}],168:[function(require,module,exports){
 'use strict';
 var globalThis = require('../internals/global-this');
 var DOMIterables = require('../internals/dom-iterables');
@@ -5006,7 +4396,7 @@ for (var COLLECTION_NAME in DOMIterables) {
 
 handlePrototype(DOMTokenListPrototype, 'DOMTokenList');
 
-},{"../internals/create-non-enumerable-property":28,"../internals/dom-iterables":37,"../internals/dom-token-list-prototype":38,"../internals/global-this":62,"../internals/set-to-string-tag":127,"../internals/well-known-symbol":154,"../modules/es.array.iterator":160}],185:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":26,"../internals/dom-iterables":35,"../internals/dom-token-list-prototype":36,"../internals/global-this":60,"../internals/set-to-string-tag":118,"../internals/well-known-symbol":144,"../modules/es.array.iterator":148}],169:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.7.1
  * https://jquery.com/
