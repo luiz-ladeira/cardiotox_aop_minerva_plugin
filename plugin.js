@@ -115,6 +115,7 @@ function renderUI(container, sheet, bioEntities) {
       if (match) {
         $row.css('cursor', 'pointer');
         $row.on('click', function () {
+          // Add marker (v18-compatible)
           minerva.data.bioEntities.addSingleMarker({
             id: "E" + match.id,
             modelId: match.modelId,
