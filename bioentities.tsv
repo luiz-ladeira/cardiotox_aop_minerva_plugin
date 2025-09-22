@@ -1,0 +1,98 @@
+elementId	name
+ign27	Heart failure (KE1535, KE1964)
+ign32	Increase, COX-2 expression (KE1269)
+ign9	Atherosclerosis (KE1443)
+ign7	Altered, Action Potential (KE698)
+ign47	Inhibition, Cyclooxygenase 1 activity 
+(KE1103)
+ign42	Increased, Cardiac fibrosis (KE1924)
+ign13	Cell injury/death (KE55)
+ign14	Decrease LV function (KE2215)
+ign45	Increased, Vascular smooth muscle 
+cell activation (KE1925)
+ign55	Occurrence, tophi (urate) deposition 
+(KE1102)
+ign3	Activation, AhR (KE18)
+ign40	Increased, blood uric acid 
+concentration (KE1096)
+ign4	Activation, Inflammatory cytokines, 
+chemokines, cytoprotective gene 
+pathways (KE151)
+ign35	Increased Cholinergic Signaling (KE39)
+ign39	Increased, blood potassium 
+concentration (KE1098)
+ign49	Inhibition, organic anion transporter 1 
+(OAT1) (KE877)
+ign50	Inhibition, sodium channel (KE584)
+ign64	Vascular remodeling (KE2003)
+ign38	Increased, Atrioventricular block and 
+bradycardia (KE444)
+ign16	Decrease, Calcium currents (KE1530)
+ign58	Prolongation of QT interval (KE1962)
+ign26	Endothelial cell dysfunction 
+(KE1913, KE110)
+ign18	Decrease, Cardiac ejection fraction 
+(KE1533)
+ign19	Decrease, Population growth rate 
+(KE360)
+ign44	Increased, secretion of 
+catecholamine (KE2004)
+ign22	Decreased, Sodium conductance 1 
+(KE585)
+ign51	Mitochondrial dysfunction (KE177, KE40)
+ign43	Increased, Myocardial apoptosis 
+(KE1918)
+ign59	Reduced dimerization, ARNT /
+HIF1-alpha (KE945)
+ign37	Increased, amputations (KE591)
+ign52	Occurrence, cardiac arrhythmia 
+(KE1106)
+ign36	Increased Mortality 
+(KE351, KE947, KE1929)
+ign12	Cardiovascular dysregulation (KE1703)
+ign17	Decrease, Cardiac contractility 
+(KE1532)
+ign29	Hypoxia (KE590)
+ign46	Inhibition of rapid delayed rectifying 
+potassium current (KE2100)
+ign5	Activation, Macrophages (KE1198)
+ign6	Activation, Nicotinic acetylcholine 
+receptor (KE559)
+ign21	Decreased, Prostaglandin F2alpha 
+concentration, plasma (KE1104)
+ign48	Inhibition, ETC complexes of the 
+respiratory chain (KE105)
+ign65	Ventricular remodeling (KE2002)
+ign11	Cardiac hypertrophy (KE2001)
+ign20	Decrease, sox9 expression (KE2020)
+ign63	Vascular calcification (KE2000)
+ign25	Disruption, Sarcomere assembly 
+(KE1537)
+ign61	Respiratory distress / arrest (KE445)
+ign8	Altered, Cardiovascular development /
+function (KE317)
+ign28	hERG channel blockade (KE2099)
+ign60	Reduced production, VEGF (KE948)
+ign53	Occurrence, renal ischemia (KE1105)
+ign10	Blockade, L-Type Calcium Channels 
+(KE1529)
+ign24	Disruption, Intracellular calcium 
+mobilization (KE1536)
+ign1	ACh Synaptic Accumulation (KE10)
+ign57	Prolongation of Action Potential 
+(KE1961)
+ign31	Increase, Cardiac remodelling (KE2084)
+ign56	Oxidative Stress (KE1392, KE1115)
+ign15	Decrease, Calcium binding to 
+Troponin C (KE1531)
+ign30	Impaired, ion channels (KE697)
+ign62	Torsades de Pointes (KE1963)
+ign33	Increase, slincR expression (KE2021)
+ign23	Dimerization, AHR/ARNT (KE944)
+ign2	AchE Inhibition (KE12)
+ign41	Increased, cardiac arrthymia (KE699)
+ign54	Occurrence, renal proximal tubular 
+necrosis (KE1097)
+ign34	Increased cellular proliferation and 
+differentiation (KE1500)
+art0	Adverse Outcome Network of Cardiotoxicity
