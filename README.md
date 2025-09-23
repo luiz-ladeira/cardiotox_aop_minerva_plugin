@@ -73,6 +73,12 @@ When loaded in MINERVA:
 
 ------------------------------------------------------------------------
 
+# Licencing
+
+-   **CC BY 4.0**: Attribution 4.0 International\
+
+------------------------------------------------------------------------
+
 # References
 
 -   [Minerva API documentation](https://minerva.pages.uni.lu/doc/)\
