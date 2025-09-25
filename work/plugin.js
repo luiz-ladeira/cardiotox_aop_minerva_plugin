@@ -42,7 +42,7 @@ function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 /**
  * KE Methods Mapper Plugin for Minerva v18
- * Author: Luiz Ladeira
+ * Author: Luiz Ladeira & Hesam Korki
  *
  * Loads a Google Sheet with KE data, renders a searchable table,
  * and highlights corresponding BioEntities in the Minerva map when clicked.
@@ -55,15 +55,12 @@ require("./minervaAPI");
 /* globals minerva:MinervaAPI */
 
 var PLUGIN_NAME = "KE Methods Mapper";
-var PLUGIN_VERSION = "1.0.1";
+var PLUGIN_VERSION = "1.0.0";
 var PLUGIN_URL = "https://raw.githubusercontent.com/luiz-ladeira/cardiotox_aop_minerva_plugin/master/plugin.js";
 var SPREADSHEET_ID = "1lYtwYLNLfGlhj7gbbkaNCwYNsuGKM5L6uJSydlXEGLE";
 var API_KEY = "AIzaSyAIaStdq_ebxgOE7l5K5mBrBSRrf3Ywayg";
 var SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/".concat(SPREADSHEET_ID);
 var KE_NAME_COLUMN = "ke_name";
-
-// Track if we already did the initial highlight
-var initialHighlightDone = false;
 
 // ===== Utils =====
 function normalizeName(name) {
@@ -88,7 +85,7 @@ function _fetchSheetData() {
     return _regenerator().w(function (_context3) {
       while (1) switch (_context3.n) {
         case 0:
-          url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/data?key=").concat(API_KEY);
+          url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/Sheet1?key=").concat(API_KEY);
           _context3.n = 1;
           return fetch(url);
         case 1:
@@ -260,8 +257,6 @@ function renderUI(container, sheet, bioEntities) {
     deHighlightAll();
     $("#search-box").val("");
     $tbody.find("tr").show();
-    // after clean, no automatic re-highlighting
-    initialHighlightDone = true;
   });
   $("#search-box").on("input", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
     var val, visibleMatches;
@@ -292,20 +287,17 @@ function renderUI(container, sheet, bioEntities) {
     }, _callee2, this);
   })));
 
-  // ===== Initial highlight (only once) =====
-  if (!initialHighlightDone) {
-    var allMatches = [];
-    $tbody.find("tr").each(function () {
-      var rowCells = $(this).find("td");
-      if (keNameIdx !== -1) {
-        var ke = rowCells.eq(keNameIdx).text();
-        var match = entityIndex[normalizeName(ke)];
-        if (match) allMatches.push(match);
-      }
-    });
-    highlightMultiple(allMatches);
-    initialHighlightDone = true;
-  }
+  // ===== Initial highlight =====
+  var allMatches = [];
+  $tbody.find("tr").each(function () {
+    var rowCells = $(this).find("td");
+    if (keNameIdx !== -1) {
+      var ke = rowCells.eq(keNameIdx).text();
+      var match = entityIndex[normalizeName(ke)];
+      if (match) allMatches.push(match);
+    }
+  });
+  highlightMultiple(allMatches);
 }
 
 // ===== Main =====
