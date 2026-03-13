@@ -55,7 +55,7 @@ require("./minervaAPI");
 /* globals minerva:MinervaAPI */
 
 var PLUGIN_NAME = "KE Methods Mapper";
-var PLUGIN_VERSION = "1.5.0";
+var PLUGIN_VERSION = "1.6.0";
 var PLUGIN_URL = "https://raw.githubusercontent.com/luiz-ladeira/cardiotox_aop_minerva_plugin/master/plugin.js";
 var SPREADSHEET_ID = "1lYtwYLNLfGlhj7gbbkaNCwYNsuGKM5L6uJSydlXEGLE";
 var API_KEY = "AIzaSyAIaStdq_ebxgOE7l5K5mBrBSRrf3Ywayg";
@@ -96,7 +96,10 @@ function _fetchSheetData() {
           }
           throw new Error("Google Sheets fetch failed: ".concat(resp.statusText));
         case 2:
-          return _context3.a(2, resp.json());
+          _context3.n = 3;
+          return resp.json();
+        case 3:
+          return _context3.a(2, _context3.v);
       }
     }, _callee3);
   }));
@@ -107,33 +110,24 @@ function fetchElementDetails(_x) {
 }
 function _fetchElementDetails() {
   _fetchElementDetails = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(element) {
-    var modelId, baseUrl, projectId, url, resp;
+    var modelId, url;
     return _regenerator().w(function (_context4) {
       while (1) switch (_context4.n) {
         case 0:
-          // CRITICAL FIX: The wildcard fetch often returns 'model', not 'modelId'.
-          // We must fall back to element.model, otherwise the URL will contain 'undefined'.
-          modelId = element.modelId || element.model;
+          // CRITICAL FIX: Fallback to element.model. 
+          // If this is undefined, the fetch URL will be malformed and tagging fails.
+          modelId = element.modelId ? element.modelId : element.model;
           if (modelId) {
             _context4.n = 1;
             break;
           }
-          throw new Error("Missing model ID for element ".concat(element.id));
+          console.warn("Missing model ID for element", element);
+          return _context4.a(2, null);
         case 1:
-          baseUrl = minerva.project.data.getApiUrls().baseNewApiUrl;
-          projectId = minerva.project.data.getProjectId();
-          url = "".concat(baseUrl, "/projects/").concat(projectId, "/models/").concat(modelId, "/bioEntities/elements/").concat(element.id);
-          _context4.n = 2;
-          return fetch(url);
-        case 2:
-          resp = _context4.v;
-          if (resp.ok) {
-            _context4.n = 3;
-            break;
-          }
-          throw new Error("Failed to fetch details for element ".concat(element.id));
-        case 3:
-          return _context4.a(2, resp.json());
+          url = minerva.project.data.getApiUrls().baseNewApiUrl + "/projects/" + minerva.project.data.getProjectId() + "/models/" + modelId + "/bioEntities/elements/" + element.id;
+          return _context4.a(2, fetch(url).then(function (r) {
+            return r.json();
+          }));
       }
     }, _callee4);
   }));
@@ -142,11 +136,11 @@ function _fetchElementDetails() {
 function elementToPinData(element) {
   return {
     id: "E" + element.id,
-    modelId: element.modelId || element.model,
+    modelId: element.modelId ? element.modelId : element.model,
     type: "pin",
     color: "#FF0000",
     opacity: 0.9,
-    // Provide safe fallbacks for geometry math to prevent NaN coordinates
+    // Safely handle missing width/height to prevent NaN geometry errors
     x: element.x + (element.width ? element.width / 2 : 0),
     y: element.y + (element.height ? element.height / 2 : 0)
   };
@@ -195,7 +189,7 @@ function _highlightMultiple() {
         case 5:
           _context5.p = 5;
           _t = _context5.v;
-          console.error("[".concat(PLUGIN_NAME, "] Error highlighting element:"), m, _t);
+          console.error("Error highlighting", m, _t);
         case 6:
           _context5.n = 2;
           break;
@@ -220,40 +214,29 @@ function _highlightMultiple() {
 function renderUI(container, sheet, bioEntities) {
   var $el = $(container);
   $el.empty();
-  if (!sheet.values || sheet.values.length < 2) {
-    $el.html('<p style="color:red;">Spreadsheet data is empty or malformed.</p>');
-    return;
-  }
   var header = sheet.values[0];
   var rows = sheet.values.slice(1);
-
-  // Wrapper for namespace protection to complement the CSS fix
-  var $main = $('<div id="ke-mapper-plugin-container"></div>');
   var $controls = $("\n    <div class=\"d-flex justify-content-between mb-2\">\n      <input type=\"text\" id=\"search-box\" class=\"form-control form-control-sm w-50\" placeholder=\"Search...\">\n      <div>\n        <button class=\"btn btn-sm btn-primary access-btn\">Access data</button>\n        <button class=\"btn btn-sm btn-secondary clean-btn\">Clean</button>\n      </div>\n    </div>\n  ");
   var $wrapper = $('<div class="table-wrapper"></div>');
   var $table = $('<table class="table table-bordered table-sm"></table>');
   var $thead = $("<thead><tr></tr></thead>");
   var $tbody = $("<tbody></tbody>");
-  var theadHtml = "";
   header.forEach(function (h) {
-    theadHtml += "<th>".concat(h, "</th>");
+    return $thead.find("tr").append("<th>".concat(h, "</th>"));
   });
-  $thead.find("tr").append(theadHtml);
   var keNameIdx = header.indexOf(KE_NAME_COLUMN);
   var entityIndex = buildEntityIndex(bioEntities);
 
   // Build rows
   rows.forEach(function (row) {
     var $row = $("<tr></tr>");
-    var rowHtml = "";
     row.forEach(function (cell, idx) {
       var value = cell || "";
       if (header[idx].toLowerCase() === "url" && value) {
         value = "<a href=\"".concat(value, "\" target=\"_blank\" style=\"font-weight: normal;\">").concat(value, "</a>");
       }
-      rowHtml += "<td>".concat(value, "</td>");
+      $row.append("<td>".concat(value, "</td>"));
     });
-    $row.append(rowHtml);
     if (keNameIdx !== -1 && row[keNameIdx]) {
       var ke = row[keNameIdx];
       var match = entityIndex[normalizeName(ke)];
@@ -263,6 +246,7 @@ function renderUI(container, sheet, bioEntities) {
           return _regenerator().w(function (_context) {
             while (1) switch (_context.n) {
               case 0:
+                console.log("Clicked KE:", ke, "-> match:", match);
                 _context.n = 1;
                 return highlightMultiple([match]);
               case 1:
@@ -276,20 +260,18 @@ function renderUI(container, sheet, bioEntities) {
   });
   $table.append($thead).append($tbody);
   $wrapper.append($table);
-  $main.append($controls, $wrapper);
-  $el.append($main);
+  $el.append($controls, $wrapper);
 
   // ===== Events =====
-  // Scoped properly to the container to avoid global DOM pollution
-  $main.find(".access-btn").css("font-weight", "normal").on("click", function () {
+  $(".access-btn").css("font-weight", "normal").on("click", function () {
     return window.open(SPREADSHEET_URL, "_blank");
   });
-  $main.find(".clean-btn").on("click", function () {
+  $(".clean-btn").on("click", function () {
     deHighlightAll();
-    $main.find("#search-box").val("");
+    $("#search-box").val("");
     $tbody.find("tr").show();
   });
-  $main.find("#search-box").on("input", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+  $("#search-box").on("input", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
     var val, visibleMatches;
     return _regenerator().w(function (_context2) {
       while (1) switch (_context2.n) {
@@ -299,10 +281,13 @@ function renderUI(container, sheet, bioEntities) {
             var rowText = $(this).text().toLowerCase();
             $(this).toggle(rowText.includes(val));
           });
+
+          // highlight only visible rows
           visibleMatches = [];
           $tbody.find("tr:visible").each(function () {
+            var rowCells = $(this).find("td");
             if (keNameIdx !== -1) {
-              var ke = $(this).find("td").eq(keNameIdx).text();
+              var ke = rowCells.eq(keNameIdx).text();
               var match = entityIndex[normalizeName(ke)];
               if (match) visibleMatches.push(match);
             }
@@ -318,8 +303,9 @@ function renderUI(container, sheet, bioEntities) {
   // ===== Initial highlight =====
   var allMatches = [];
   $tbody.find("tr").each(function () {
+    var rowCells = $(this).find("td");
     if (keNameIdx !== -1) {
-      var ke = $(this).find("td").eq(keNameIdx).text();
+      var ke = rowCells.eq(keNameIdx).text();
       var match = entityIndex[normalizeName(ke)];
       if (match) allMatches.push(match);
     }
@@ -330,31 +316,29 @@ function renderUI(container, sheet, bioEntities) {
 // ===== Main =====
 function register() {
   return _register.apply(this, arguments);
-} // Execute immediately without document.ready wrappers
+}
 function _register() {
   _register = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
-    var _minerva$plugins$regi, element, baseUrl, projectId, _yield$Promise$all, _yield$Promise$all2, sheet, elements, _t3;
+    var _minerva$plugins$regi, element, _yield$Promise$all, _yield$Promise$all2, sheet, elements, _t3;
     return _regenerator().w(function (_context6) {
       while (1) switch (_context6.p = _context6.n) {
         case 0:
+          console.log("Registering ".concat(PLUGIN_NAME, " plugin"));
           if (!(!minerva.plugins || !minerva.plugins.registerPlugin)) {
             _context6.n = 1;
             break;
           }
-          console.error("[".concat(PLUGIN_NAME, "] Minerva v18 or later required."));
+          alert("Minerva v18 or later required");
           return _context6.a(2);
         case 1:
-          // Synchronous registration required by Minerva's plugin loader
           _minerva$plugins$regi = minerva.plugins.registerPlugin({
             pluginName: PLUGIN_NAME,
             pluginVersion: PLUGIN_VERSION,
             pluginUrl: PLUGIN_URL
           }), element = _minerva$plugins$regi.element;
           _context6.p = 2;
-          baseUrl = minerva.project.data.getApiUrls().baseApiUrl;
-          projectId = minerva.project.data.getProjectId();
           _context6.n = 3;
-          return Promise.all([fetchSheetData(), fetch("".concat(baseUrl, "/projects/").concat(projectId, "/models/*/bioEntities/elements/")).then(function (r) {
+          return Promise.all([fetchSheetData(), fetch("".concat(minerva.project.data.getApiUrls().baseApiUrl, "/projects/").concat(minerva.project.data.getProjectId(), "/models/*/bioEntities/elements/")).then(function (r) {
             return r.json();
           })]);
         case 3:
@@ -368,8 +352,8 @@ function _register() {
         case 4:
           _context6.p = 4;
           _t3 = _context6.v;
-          $(element).html("<p style=\"color:red; font-weight:bold;\">Initialization Error: ".concat(_t3.message, "</p>"));
-          console.error("[".concat(PLUGIN_NAME, "] Failure:"), _t3);
+          $(element).html("<p style=\"color:red;\">".concat(_t3.message, "</p>"));
+          console.error(_t3);
         case 5:
           return _context6.a(2);
       }
