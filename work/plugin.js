@@ -191,7 +191,7 @@ function renderUI(container, sheet, bioEntities) {
     row.forEach(function (cell, idx) {
       var value = cell || "";
       if (header[idx].toLowerCase() === "url" && value) {
-        value = "<a href=\"".concat(value, "\" target=\"_blank\" style=\"font-weight: normal;\">").concat(value, "</a>");
+        value = "<a href=\"".concat(value, "\" target=\"_blank\" style=\"font-weight: normal; color: #0000EE;\">").concat(value, "</a>");
       }
       $row.append("<td>".concat(value, "</td>"));
     });
