@@ -114,7 +114,7 @@ function _fetchElementDetails() {
     return _regenerator().w(function (_context4) {
       while (1) switch (_context4.n) {
         case 0:
-          url = minerva.project.data.getApiUrls().baseNewApiUrl + "/projects/" + minerva.project.data.getProjectId() + "/models/" + (element.modelId || element.model) + "/bioEntities/elements/" + element.id;
+          url = minerva.project.data.getApiUrls().baseNewApiUrl + "/projects/" + minerva.project.data.getProjectId() + "/models/" + element.modelId + "/bioEntities/elements/" + element.id;
           return _context4.a(2, fetch(url).then(function (r) {
             return r.json();
           }));
@@ -149,24 +149,53 @@ function highlightMultiple(_x2) {
  * Render KE table
  */
 function _highlightMultiple() {
-  _highlightMultiple = function _highlightMultiple(matches) {
-    // Fetch all details first, then clear and redraw atomically
-    var promises = matches.map(function (m) {
-      return fetchElementDetails(m).catch(function (err) {
-        console.error("Error fetching element details", m, err);
-        return null;
-      });
-    });
-    return Promise.all(promises).then(function (fullElements) {
-      deHighlightAll();
-      fullElements.forEach(function (full) {
-        if (full) {
-          var marker = elementToPinData(full);
+  _highlightMultiple = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(matches) {
+    var _iterator, _step, m, full, marker, _t, _t2;
+    return _regenerator().w(function (_context5) {
+      while (1) switch (_context5.p = _context5.n) {
+        case 0:
+          deHighlightAll();
+          _iterator = _createForOfIteratorHelper(matches);
+          _context5.p = 1;
+          _iterator.s();
+        case 2:
+          if ((_step = _iterator.n()).done) {
+            _context5.n = 7;
+            break;
+          }
+          m = _step.value;
+          _context5.p = 3;
+          _context5.n = 4;
+          return fetchElementDetails(m);
+        case 4:
+          full = _context5.v;
+          marker = elementToPinData(full);
           minerva.data.bioEntities.addSingleMarker(marker);
-        }
-      });
-    });
-  };
+          _context5.n = 6;
+          break;
+        case 5:
+          _context5.p = 5;
+          _t = _context5.v;
+          console.error("Error highlighting", m, _t);
+        case 6:
+          _context5.n = 2;
+          break;
+        case 7:
+          _context5.n = 9;
+          break;
+        case 8:
+          _context5.p = 8;
+          _t2 = _context5.v;
+          _iterator.e(_t2);
+        case 9:
+          _context5.p = 9;
+          _iterator.f();
+          return _context5.f(9);
+        case 10:
+          return _context5.a(2);
+      }
+    }, _callee5, null, [[3, 5], [1, 8, 9, 10]]);
+  }));
   return _highlightMultiple.apply(this, arguments);
 }
 function renderUI(container, sheet, bioEntities) {
@@ -257,6 +286,18 @@ function renderUI(container, sheet, bioEntities) {
       }
     }, _callee2, this);
   })));
+
+  // ===== Initial highlight =====
+  var allMatches = [];
+  $tbody.find("tr").each(function () {
+    var rowCells = $(this).find("td");
+    if (keNameIdx !== -1) {
+      var ke = rowCells.eq(keNameIdx).text();
+      var match = entityIndex[normalizeName(ke)];
+      if (match) allMatches.push(match);
+    }
+  });
+  highlightMultiple(allMatches);
 }
 
 // ===== Main =====
@@ -284,7 +325,7 @@ function _register() {
           }), element = _minerva$plugins$regi.element;
           _context6.p = 2;
           _context6.n = 3;
-          return Promise.all([fetchSheetData(), fetch("".concat(minerva.project.data.getApiUrls().baseNewApiUrl, "/projects/").concat(minerva.project.data.getProjectId(), "/models/*/bioEntities/elements/")).then(function (r) {
+          return Promise.all([fetchSheetData(), fetch("".concat(minerva.project.data.getApiUrls().baseApiUrl, "/projects/").concat(minerva.project.data.getProjectId(), "/models/*/bioEntities/elements/")).then(function (r) {
             return r.json();
           })]);
         case 3:
