@@ -10,8 +10,12 @@ let $ = require("jquery");
 require("../css/styles.css");
 require("./minervaAPI");
 
+/* globals minerva:MinervaAPI */
+
 const PLUGIN_NAME = "KE Methods Mapper";
 const PLUGIN_VERSION = "1.0.0";
+const PLUGIN_URL =
+  "https://raw.githubusercontent.com/luiz-ladeira/cardiotox_aop_minerva_plugin/master/plugin.js";
 
 const SPREADSHEET_ID = "1lYtwYLNLfGlhj7gbbkaNCwYNsuGKM5L6uJSydlXEGLE";
 const API_KEY = "AIzaSyAIaStdq_ebxgOE7l5K5mBrBSRrf3Ywayg";
@@ -47,11 +51,11 @@ async function fetchSheetData() {
   return await resp.json();
 }
 
-async function fetchElementDetails(element, minervaProxy) {
+async function fetchElementDetails(element) {
   const url =
-    minervaProxy.project.data.getApiUrls().baseNewApiUrl +
+    minerva.project.data.getApiUrls().baseNewApiUrl +
     "/projects/" +
-    minervaProxy.project.data.getProjectId() +
+    minerva.project.data.getProjectId() +
     "/models/" +
     element.modelId +
     "/bioEntities/elements/" +
@@ -71,20 +75,20 @@ function elementToPinData(element) {
   };
 }
 
-function deHighlightAll(minervaProxy) {
-  if (minervaProxy && minervaProxy.data && minervaProxy.data.bioEntities && minervaProxy.data.bioEntities.removeAllMarkers) {
-    minervaProxy.data.bioEntities.removeAllMarkers();
+function deHighlightAll() {
+  if (minerva?.data?.bioEntities?.removeAllMarkers) {
+    minerva.data.bioEntities.removeAllMarkers();
   }
 }
 
 // ===== Core =====
-async function highlightMultiple(matches, minervaProxy) {
-  deHighlightAll(minervaProxy);
+async function highlightMultiple(matches) {
+  deHighlightAll();
   for (const m of matches) {
     try {
-      const full = await fetchElementDetails(m, minervaProxy);
+      const full = await fetchElementDetails(m);
       const marker = elementToPinData(full);
-      minervaProxy.data.bioEntities.addSingleMarker(marker);
+      minerva.data.bioEntities.addSingleMarker(marker);
     } catch (err) {
       console.error("Error highlighting", m, err);
     }
@@ -94,7 +98,7 @@ async function highlightMultiple(matches, minervaProxy) {
 /**
  * Render KE table
  */
-function renderUI(container, sheet, bioEntities, minervaProxy) {
+function renderUI(container, sheet, bioEntities) {
   const $el = $(container);
   $el.empty();
 
@@ -139,7 +143,7 @@ function renderUI(container, sheet, bioEntities, minervaProxy) {
         $row.css("cursor", "pointer");
         $row.on("click", async () => {
           console.log("Clicked KE:", ke, "-> match:", match);
-          await highlightMultiple([match], minervaProxy); // Pass proxy
+          await highlightMultiple([match]); // only clicked KE
         });
       }
     }
@@ -157,7 +161,7 @@ function renderUI(container, sheet, bioEntities, minervaProxy) {
   );
 
   $(".clean-btn").on("click", () => {
-    deHighlightAll(minervaProxy); // Pass proxy
+    deHighlightAll();
     $("#search-box").val("");
     $tbody.find("tr").show();
   });
@@ -179,7 +183,7 @@ function renderUI(container, sheet, bioEntities, minervaProxy) {
         if (match) visibleMatches.push(match);
       }
     });
-    await highlightMultiple(visibleMatches, minervaProxy); // Pass proxy
+    await highlightMultiple(visibleMatches);
   });
 
   // ===== Initial highlight =====
@@ -192,38 +196,37 @@ function renderUI(container, sheet, bioEntities, minervaProxy) {
       if (match) allMatches.push(match);
     }
   });
-  highlightMultiple(allMatches, minervaProxy); // Pass proxy
+  highlightMultiple(allMatches);
 }
 
 // ===== Main =====
-window.minervaDefine = function () {
-  return {
-    register: async function (minervaProxy) {
-      console.log(`Registering ${PLUGIN_NAME} plugin`);
+async function register() {
+  console.log(`Registering ${PLUGIN_NAME} plugin`);
 
-      try {
-        const [sheet, elements] = await Promise.all([
-          fetchSheetData(),
-          fetch(
-            `${minervaProxy.project.data.getApiUrls().baseApiUrl}/projects/${minervaProxy.project.data.getProjectId()}/models/*/bioEntities/elements/`
-          ).then((r) => r.json()),
-        ]);
+  if (!minerva.plugins || !minerva.plugins.registerPlugin) {
+    alert("Minerva v18 or later required");
+    return;
+  }
 
-        renderUI(minervaProxy.element, sheet, elements, minervaProxy);
-      } catch (err) {
-        $(minervaProxy.element).html(`<p style="color:red;">${err.message}</p>`);
-        console.error("Plugin initialization failed:", err);
-      }
-    },
-    unregister: function () {
-      console.log(`Unregistering ${PLUGIN_NAME} plugin`);
-      // Any cleanup logic should go here.
-    },
-    getName: function () {
-      return PLUGIN_NAME;
-    },
-    getVersion: function () {
-      return PLUGIN_VERSION;
-    }
-  };
-};
+  const { element } = minerva.plugins.registerPlugin({
+    pluginName: PLUGIN_NAME,
+    pluginVersion: PLUGIN_VERSION,
+    pluginUrl: PLUGIN_URL,
+  });
+
+  try {
+    const [sheet, elements] = await Promise.all([
+      fetchSheetData(),
+      fetch(
+        `${minerva.project.data.getApiUrls().baseApiUrl}/projects/${minerva.project.data.getProjectId()}/models/*/bioEntities/elements/`
+      ).then((r) => r.json()),
+    ]);
+
+    renderUI(element, sheet, elements);
+  } catch (err) {
+    $(element).html(`<p style="color:red;">${err.message}</p>`);
+    console.error(err);
+  }
+}
+
+register();
