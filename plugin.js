@@ -69,7 +69,9 @@ function normalizeName(name) {
 function buildEntityIndex(bioEntities) {
   var index = {};
   bioEntities.forEach(function (be) {
-    var keys = [normalizeName(be.name)].concat(_toConsumableArray((be.labels || []).map(normalizeName)), _toConsumableArray((be.aliases || []).map(normalizeName)));
+    // CRITICAL FIX: Ensure we extract the name even if Minerva nests it in v18
+    var entityName = be.name || be.bioEntity && be.bioEntity.name || "";
+    var keys = [normalizeName(entityName)].concat(_toConsumableArray((be.labels || []).map(normalizeName)), _toConsumableArray((be.aliases || []).map(normalizeName)));
     keys.forEach(function (k) {
       if (k) index[k] = be;
     });
@@ -105,13 +107,55 @@ function _fetchSheetData() {
   }));
   return _fetchSheetData.apply(this, arguments);
 }
+function fetchElementDetails(_x) {
+  return _fetchElementDetails.apply(this, arguments);
+}
+function _fetchElementDetails() {
+  _fetchElementDetails = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(element) {
+    var modelId, url, resp, _t;
+    return _regenerator().w(function (_context4) {
+      while (1) switch (_context4.p = _context4.n) {
+        case 0:
+          modelId = element.modelId ? element.modelId : element.model;
+          if (modelId) {
+            _context4.n = 1;
+            break;
+          }
+          console.warn("Missing model ID for element", element);
+          return _context4.a(2, element);
+        case 1:
+          url = minerva.project.data.getApiUrls().baseNewApiUrl + "/projects/" + minerva.project.data.getProjectId() + "/models/" + modelId + "/bioEntities/elements/" + element.id;
+          _context4.p = 2;
+          _context4.n = 3;
+          return fetch(url);
+        case 3:
+          resp = _context4.v;
+          if (resp.ok) {
+            _context4.n = 4;
+            break;
+          }
+          return _context4.a(2, element);
+        case 4:
+          _context4.n = 5;
+          return resp.json();
+        case 5:
+          return _context4.a(2, _context4.v);
+        case 6:
+          _context4.p = 6;
+          _t = _context4.v;
+          return _context4.a(2, element);
+      }
+    }, _callee4, null, [[2, 6]]);
+  }));
+  return _fetchElementDetails.apply(this, arguments);
+}
 function elementToPinData(element) {
-  // CRITICAL FIX: Aggressively parse floats to satisfy Minerva's Zod schema.
-  // Fallback to 0 to entirely prevent NaN evaluation failures.
-  var w = parseFloat(element.width) || 0;
-  var h = parseFloat(element.height) || 0;
-  var x = parseFloat(element.x) || 0;
-  var y = parseFloat(element.y) || 0;
+  // CRITICAL FIX: Parse floats and check for nested 'bounds' to prevent NaN Zod validation errors
+  var geometry = element.bounds ? element.bounds : element;
+  var w = parseFloat(geometry.width) || 0;
+  var h = parseFloat(geometry.height) || 0;
+  var x = parseFloat(geometry.x) || 0;
+  var y = parseFloat(geometry.y) || 0;
   return {
     id: "E" + element.id,
     modelId: element.modelId ? element.modelId : element.model,
@@ -130,43 +174,65 @@ function deHighlightAll() {
 }
 
 // ===== Core =====
-function highlightMultiple(_x) {
+function highlightMultiple(_x2) {
   return _highlightMultiple.apply(this, arguments);
 }
 /**
  * Render KE table
  */
 function _highlightMultiple() {
-  _highlightMultiple = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(matches) {
-    var _iterator, _step, m, marker;
-    return _regenerator().w(function (_context4) {
-      while (1) switch (_context4.n) {
+  _highlightMultiple = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(matches) {
+    var _iterator, _step, m, full, marker, _t2, _t3;
+    return _regenerator().w(function (_context5) {
+      while (1) switch (_context5.p = _context5.n) {
         case 0:
           deHighlightAll();
           _iterator = _createForOfIteratorHelper(matches);
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              m = _step.value;
-              try {
-                // Bypassing fetchElementDetails entirely to eliminate 404 network errors.
-                // Utilizing the bulk element 'm' directly.
-                marker = elementToPinData(m); // Secondary gatekeeper to ensure no NaN values reach the Minerva API
-                if (!isNaN(marker.x) && !isNaN(marker.y)) {
-                  minerva.data.bioEntities.addSingleMarker(marker);
-                }
-              } catch (err) {
-                console.error("Error highlighting", m, err);
-              }
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
+          _context5.p = 1;
+          _iterator.s();
+        case 2:
+          if ((_step = _iterator.n()).done) {
+            _context5.n = 7;
+            break;
           }
-        case 1:
-          return _context4.a(2);
+          m = _step.value;
+          _context5.p = 3;
+          _context5.n = 4;
+          return fetchElementDetails(m);
+        case 4:
+          full = _context5.v;
+          if (full) {
+            marker = elementToPinData(full); // Final gatekeeper to ensure no bad math crashes the map
+            if (!isNaN(marker.x) && !isNaN(marker.y)) {
+              minerva.data.bioEntities.addSingleMarker(marker);
+            } else {
+              console.warn("Skipping marker due to unresolved coordinates:", full);
+            }
+          }
+          _context5.n = 6;
+          break;
+        case 5:
+          _context5.p = 5;
+          _t2 = _context5.v;
+          console.error("Error highlighting", m, _t2);
+        case 6:
+          _context5.n = 2;
+          break;
+        case 7:
+          _context5.n = 9;
+          break;
+        case 8:
+          _context5.p = 8;
+          _t3 = _context5.v;
+          _iterator.e(_t3);
+        case 9:
+          _context5.p = 9;
+          _iterator.f();
+          return _context5.f(9);
+        case 10:
+          return _context5.a(2);
       }
-    }, _callee4);
+    }, _callee5, null, [[3, 5], [1, 8, 9, 10]]);
   }));
   return _highlightMultiple.apply(this, arguments);
 }
@@ -277,46 +343,46 @@ function register() {
   return _register.apply(this, arguments);
 }
 function _register() {
-  _register = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
-    var _minerva$plugins$regi, element, _yield$Promise$all, _yield$Promise$all2, sheet, elements, _t;
-    return _regenerator().w(function (_context5) {
-      while (1) switch (_context5.p = _context5.n) {
+  _register = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
+    var _minerva$plugins$regi, element, _yield$Promise$all, _yield$Promise$all2, sheet, elements, _t4;
+    return _regenerator().w(function (_context6) {
+      while (1) switch (_context6.p = _context6.n) {
         case 0:
           console.log("Registering ".concat(PLUGIN_NAME, " plugin"));
           if (!(!minerva.plugins || !minerva.plugins.registerPlugin)) {
-            _context5.n = 1;
+            _context6.n = 1;
             break;
           }
           alert("Minerva v18 or later required");
-          return _context5.a(2);
+          return _context6.a(2);
         case 1:
           _minerva$plugins$regi = minerva.plugins.registerPlugin({
             pluginName: PLUGIN_NAME,
             pluginVersion: PLUGIN_VERSION,
             pluginUrl: PLUGIN_URL
           }), element = _minerva$plugins$regi.element;
-          _context5.p = 2;
-          _context5.n = 3;
+          _context6.p = 2;
+          _context6.n = 3;
           return Promise.all([fetchSheetData(), fetch("".concat(minerva.project.data.getApiUrls().baseApiUrl, "/projects/").concat(minerva.project.data.getProjectId(), "/models/*/bioEntities/elements/")).then(function (r) {
             return r.json();
           })]);
         case 3:
-          _yield$Promise$all = _context5.v;
+          _yield$Promise$all = _context6.v;
           _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
           sheet = _yield$Promise$all2[0];
           elements = _yield$Promise$all2[1];
           renderUI(element, sheet, elements);
-          _context5.n = 5;
+          _context6.n = 5;
           break;
         case 4:
-          _context5.p = 4;
-          _t = _context5.v;
-          $(element).html("<p style=\"color:red;\">".concat(_t.message, "</p>"));
-          console.error(_t);
+          _context6.p = 4;
+          _t4 = _context6.v;
+          $(element).html("<p style=\"color:red;\">".concat(_t4.message, "</p>"));
+          console.error(_t4);
         case 5:
-          return _context5.a(2);
+          return _context6.a(2);
       }
-    }, _callee5, null, [[2, 4]]);
+    }, _callee6, null, [[2, 4]]);
   }));
   return _register.apply(this, arguments);
 }
