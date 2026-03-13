@@ -149,20 +149,18 @@ function highlightMultiple(_x2) {
  * Render KE table
  */
 function _highlightMultiple() {
-  _highlightMultiple = function _highlightMultiple(matches) {
-    // Fetch all details first, then clear and redraw atomically
-    var promises = matches.map(function (m) {
-      return fetchElementDetails(m).catch(function (err) {
-        console.error("Error fetching element details", m, err);
+  _highlightMultiple = function(matches) {
+    var promises = matches.map(function(m) {
+      return fetchElementDetails(m).catch(function(err) {
+        console.error('Error fetching element details', m, err);
         return null;
       });
     });
-    return Promise.all(promises).then(function (fullElements) {
+    return Promise.all(promises).then(function(fullElements) {
       deHighlightAll();
-      fullElements.forEach(function (full) {
+      fullElements.forEach(function(full) {
         if (full) {
-          var marker = elementToPinData(full);
-          minerva.data.bioEntities.addSingleMarker(marker);
+          minerva.data.bioEntities.addSingleMarker(elementToPinData(full));
         }
       });
     });
@@ -284,7 +282,7 @@ function _register() {
           }), element = _minerva$plugins$regi.element;
           _context6.p = 2;
           _context6.n = 3;
-          return Promise.all([fetchSheetData(), fetch("".concat(minerva.project.data.getApiUrls().baseNewApiUrl, "/projects/").concat(minerva.project.data.getProjectId(), "/models/*/bioEntities/elements/")).then(function (r) {
+          return Promise.all([fetchSheetData(), fetch("".concat(minerva.project.data.getApiUrls().baseApiUrl, "/projects/").concat(minerva.project.data.getProjectId(), "/models/*/bioEntities/elements/")).then(function (r) {
             return r.json();
           })]);
         case 3:
