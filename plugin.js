@@ -11,8 +11,8 @@ require("core-js/modules/es.object.get-prototype-of.js");
 require("core-js/modules/es.regexp.to-string.js");
 require("core-js/modules/es.array.concat.js");
 require("core-js/modules/es.array.find.js");
-require("core-js/modules/es.array.find-index.js");
 require("core-js/modules/es.array.includes.js");
+require("core-js/modules/es.array.index-of.js");
 require("core-js/modules/es.array.iterator.js");
 require("core-js/modules/es.array.map.js");
 require("core-js/modules/es.array.slice.js");
@@ -29,6 +29,7 @@ function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLim
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -60,13 +61,14 @@ var SPREADSHEET_ID = "1lYtwYLNLfGlhj7gbbkaNCwYNsuGKM5L6uJSydlXEGLE";
 var API_KEY = "AIzaSyAIaStdq_ebxgOE7l5K5mBrBSRrf3Ywayg";
 var SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/".concat(SPREADSHEET_ID);
 var KE_NAME_COLUMN = "ke_name";
+
+// ===== Utils =====
 function normalizeName(name) {
   return (name || "").toLowerCase().replace(/\s+/g, " ").trim();
 }
 function buildEntityIndex(bioEntities) {
   var index = {};
   bioEntities.forEach(function (be) {
-    // Index by name and all available identifiers
     var keys = [normalizeName(be.name)].concat(_toConsumableArray((be.labels || []).map(normalizeName)), _toConsumableArray((be.aliases || []).map(normalizeName)));
     keys.forEach(function (k) {
       if (k) index[k] = be;
@@ -78,31 +80,47 @@ function fetchSheetData() {
   return _fetchSheetData.apply(this, arguments);
 }
 function _fetchSheetData() {
-  _fetchSheetData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+  _fetchSheetData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
     var url, resp;
-    return _regenerator().w(function (_context) {
-      while (1) switch (_context.n) {
+    return _regenerator().w(function (_context3) {
+      while (1) switch (_context3.n) {
         case 0:
-          // Defensive Tab Name: Ensure this matches your Google Sheet exactly
           url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/Data?key=").concat(API_KEY);
-          _context.n = 1;
+          _context3.n = 1;
           return fetch(url);
         case 1:
-          resp = _context.v;
+          resp = _context3.v;
           if (resp.ok) {
-            _context.n = 2;
+            _context3.n = 2;
             break;
           }
-          throw new Error("Google Sheets fetch failed");
+          throw new Error("Google Sheets fetch failed: ".concat(resp.statusText));
         case 2:
-          _context.n = 3;
+          _context3.n = 3;
           return resp.json();
         case 3:
-          return _context.a(2, _context.v);
+          return _context3.a(2, _context3.v);
       }
-    }, _callee);
+    }, _callee3);
   }));
   return _fetchSheetData.apply(this, arguments);
+}
+function elementToPinData(element) {
+  // CRITICAL FIX: Aggressively parse floats to satisfy Minerva's Zod schema.
+  // Fallback to 0 to entirely prevent NaN evaluation failures.
+  var w = parseFloat(element.width) || 0;
+  var h = parseFloat(element.height) || 0;
+  var x = parseFloat(element.x) || 0;
+  var y = parseFloat(element.y) || 0;
+  return {
+    id: "E" + element.id,
+    modelId: element.modelId ? element.modelId : element.model,
+    type: "pin",
+    color: "#FF0000",
+    opacity: 0.9,
+    x: x + w / 2,
+    y: y + h / 2
+  };
 }
 function deHighlightAll() {
   var _minerva;
@@ -110,134 +128,200 @@ function deHighlightAll() {
     minerva.data.bioEntities.removeAllMarkers();
   }
 }
-function highlightMultiple(matches) {
-  deHighlightAll();
-  matches.forEach(function (m) {
-    // CRITICAL: We use 'm' (from initial fetch) directly.
-    // Ensure we have numbers. If width/height missing, default to 0.
-    var x = parseFloat(m.x);
-    var y = parseFloat(m.y);
-    var w = parseFloat(m.width || 0);
-    var h = parseFloat(m.height || 0);
-    if (!isNaN(x) && !isNaN(y)) {
-      minerva.data.bioEntities.addSingleMarker({
-        id: "E" + m.id,
-        modelId: m.modelId || m.model,
-        type: "pin",
-        color: "#FF0000",
-        opacity: 0.8,
-        x: x + w / 2,
-        y: y + h / 2
-      });
-    }
-  });
+
+// ===== Core =====
+function highlightMultiple(_x) {
+  return _highlightMultiple.apply(this, arguments);
+}
+/**
+ * Render KE table
+ */
+function _highlightMultiple() {
+  _highlightMultiple = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(matches) {
+    var _iterator, _step, m, marker;
+    return _regenerator().w(function (_context4) {
+      while (1) switch (_context4.n) {
+        case 0:
+          deHighlightAll();
+          _iterator = _createForOfIteratorHelper(matches);
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              m = _step.value;
+              try {
+                // Bypassing fetchElementDetails entirely to eliminate 404 network errors.
+                // Utilizing the bulk element 'm' directly.
+                marker = elementToPinData(m); // Secondary gatekeeper to ensure no NaN values reach the Minerva API
+                if (!isNaN(marker.x) && !isNaN(marker.y)) {
+                  minerva.data.bioEntities.addSingleMarker(marker);
+                }
+              } catch (err) {
+                console.error("Error highlighting", m, err);
+              }
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+        case 1:
+          return _context4.a(2);
+      }
+    }, _callee4);
+  }));
+  return _highlightMultiple.apply(this, arguments);
 }
 function renderUI(container, sheet, bioEntities) {
   var $el = $(container);
   $el.empty();
   var header = sheet.values[0];
   var rows = sheet.values.slice(1);
+  var $controls = $("\n    <div class=\"d-flex justify-content-between mb-2\">\n      <input type=\"text\" id=\"search-box\" class=\"form-control form-control-sm w-50\" placeholder=\"Search...\">\n      <div>\n        <button class=\"btn btn-sm btn-primary access-btn\">Access data</button>\n        <button class=\"btn btn-sm btn-secondary clean-btn\">Clean</button>\n      </div>\n    </div>\n  ");
+  var $wrapper = $('<div class="table-wrapper"></div>');
+  var $table = $('<table class="table table-bordered table-sm"></table>');
+  var $thead = $("<thead><tr></tr></thead>");
+  var $tbody = $("<tbody></tbody>");
+  header.forEach(function (h) {
+    return $thead.find("tr").append("<th>".concat(h, "</th>"));
+  });
+  var keNameIdx = header.indexOf(KE_NAME_COLUMN);
   var entityIndex = buildEntityIndex(bioEntities);
 
-  // Bulletproof header finding
-  var keNameIdx = header.findIndex(function (h) {
-    return normalizeName(h) === normalizeName(KE_NAME_COLUMN);
-  });
-  var $controls = $("\n    <div class=\"d-flex justify-content-between mb-2\">\n      <input type=\"text\" id=\"search-box\" class=\"form-control form-control-sm w-50\" placeholder=\"Search...\">\n      <div>\n        <button class=\"btn btn-sm btn-primary access-btn\">Sheet</button>\n        <button class=\"btn btn-sm btn-secondary clean-btn\">Clear</button>\n      </div>\n    </div>\n  ");
-  var $tbody = $("<tbody></tbody>");
+  // Build rows
   rows.forEach(function (row) {
     var $row = $("<tr></tr>");
     row.forEach(function (cell, idx) {
-      var val = cell || "";
-      if (header[idx].toLowerCase() === "url" && val) val = "<a href=\"".concat(val, "\" target=\"_blank\">Link</a>");
-      $row.append("<td>".concat(val, "</td>"));
+      var value = cell || "";
+      if (header[idx].toLowerCase() === "url" && value) {
+        value = "<a href=\"".concat(value, "\" target=\"_blank\" style=\"font-weight: normal;\">").concat(value, "</a>");
+      }
+      $row.append("<td>".concat(value, "</td>"));
     });
-    if (keNameIdx !== -1) {
-      var match = entityIndex[normalizeName(row[keNameIdx])];
+    if (keNameIdx !== -1 && row[keNameIdx]) {
+      var ke = row[keNameIdx];
+      var match = entityIndex[normalizeName(ke)];
       if (match) {
-        $row.css("cursor", "pointer").on("click", function () {
-          return highlightMultiple([match]);
-        });
+        $row.css("cursor", "pointer");
+        $row.on("click", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+          return _regenerator().w(function (_context) {
+            while (1) switch (_context.n) {
+              case 0:
+                console.log("Clicked KE:", ke, "-> match:", match);
+                _context.n = 1;
+                return highlightMultiple([match]);
+              case 1:
+                return _context.a(2);
+            }
+          }, _callee);
+        })));
       }
     }
     $tbody.append($row);
   });
-  var $table = $('<table class="table table-bordered table-sm"></table>').append($tbody);
-  $el.append($controls, $('<div class="table-wrapper"></div>').append($table));
+  $table.append($thead).append($tbody);
+  $wrapper.append($table);
+  $el.append($controls, $wrapper);
 
-  // Event Listeners
-  $el.find(".access-btn").on("click", function () {
+  // ===== Events =====
+  $(".access-btn").css("font-weight", "normal").on("click", function () {
     return window.open(SPREADSHEET_URL, "_blank");
   });
-  $el.find(".clean-btn").on("click", function () {
+  $(".clean-btn").on("click", function () {
     deHighlightAll();
-    $el.find("#search-box").val("");
+    $("#search-box").val("");
     $tbody.find("tr").show();
   });
-  $el.find("#search-box").on("input", function () {
-    var val = $(this).val().toLowerCase();
-    var visibleMatches = [];
-    $tbody.find("tr").each(function () {
-      var text = $(this).text().toLowerCase();
-      var isVisible = text.includes(val);
-      $(this).toggle(isVisible);
-      if (isVisible && keNameIdx !== -1) {
-        var m = entityIndex[normalizeName($(this).find("td").eq(keNameIdx).text())];
-        if (m) visibleMatches.push(m);
+  $("#search-box").on("input", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+    var val, visibleMatches;
+    return _regenerator().w(function (_context2) {
+      while (1) switch (_context2.n) {
+        case 0:
+          val = $(this).val().toLowerCase();
+          $tbody.find("tr").each(function () {
+            var rowText = $(this).text().toLowerCase();
+            $(this).toggle(rowText.includes(val));
+          });
+
+          // highlight only visible rows
+          visibleMatches = [];
+          $tbody.find("tr:visible").each(function () {
+            var rowCells = $(this).find("td");
+            if (keNameIdx !== -1) {
+              var ke = rowCells.eq(keNameIdx).text();
+              var match = entityIndex[normalizeName(ke)];
+              if (match) visibleMatches.push(match);
+            }
+          });
+          _context2.n = 1;
+          return highlightMultiple(visibleMatches);
+        case 1:
+          return _context2.a(2);
       }
-    });
-    highlightMultiple(visibleMatches);
+    }, _callee2, this);
+  })));
+
+  // ===== Initial highlight =====
+  var allMatches = [];
+  $tbody.find("tr").each(function () {
+    var rowCells = $(this).find("td");
+    if (keNameIdx !== -1) {
+      var ke = rowCells.eq(keNameIdx).text();
+      var match = entityIndex[normalizeName(ke)];
+      if (match) allMatches.push(match);
+    }
   });
+  highlightMultiple(allMatches);
 }
+
+// ===== Main =====
 function register() {
   return _register.apply(this, arguments);
 }
 function _register() {
-  _register = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-    var _minerva$plugins;
-    var _minerva$plugins$regi, element, baseUrl, projectId, _yield$Promise$all, _yield$Promise$all2, sheet, elements, _t;
-    return _regenerator().w(function (_context2) {
-      while (1) switch (_context2.p = _context2.n) {
+  _register = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+    var _minerva$plugins$regi, element, _yield$Promise$all, _yield$Promise$all2, sheet, elements, _t;
+    return _regenerator().w(function (_context5) {
+      while (1) switch (_context5.p = _context5.n) {
         case 0:
-          if ((_minerva$plugins = minerva.plugins) !== null && _minerva$plugins !== void 0 && _minerva$plugins.registerPlugin) {
-            _context2.n = 1;
+          console.log("Registering ".concat(PLUGIN_NAME, " plugin"));
+          if (!(!minerva.plugins || !minerva.plugins.registerPlugin)) {
+            _context5.n = 1;
             break;
           }
-          return _context2.a(2);
+          alert("Minerva v18 or later required");
+          return _context5.a(2);
         case 1:
           _minerva$plugins$regi = minerva.plugins.registerPlugin({
             pluginName: PLUGIN_NAME,
             pluginVersion: PLUGIN_VERSION,
             pluginUrl: PLUGIN_URL
           }), element = _minerva$plugins$regi.element;
-          _context2.p = 2;
-          baseUrl = minerva.project.data.getApiUrls().baseApiUrl;
-          projectId = minerva.project.data.getProjectId();
-          _context2.n = 3;
-          return Promise.all([fetchSheetData(), fetch("".concat(baseUrl, "/projects/").concat(projectId, "/models/*/bioEntities/elements/")).then(function (r) {
+          _context5.p = 2;
+          _context5.n = 3;
+          return Promise.all([fetchSheetData(), fetch("".concat(minerva.project.data.getApiUrls().baseApiUrl, "/projects/").concat(minerva.project.data.getProjectId(), "/models/*/bioEntities/elements/")).then(function (r) {
             return r.json();
           })]);
         case 3:
-          _yield$Promise$all = _context2.v;
+          _yield$Promise$all = _context5.v;
           _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
           sheet = _yield$Promise$all2[0];
           elements = _yield$Promise$all2[1];
           renderUI(element, sheet, elements);
-          _context2.n = 5;
+          _context5.n = 5;
           break;
         case 4:
-          _context2.p = 4;
-          _t = _context2.v;
+          _context5.p = 4;
+          _t = _context5.v;
           $(element).html("<p style=\"color:red;\">".concat(_t.message, "</p>"));
+          console.error(_t);
         case 5:
-          return _context2.a(2);
+          return _context5.a(2);
       }
-    }, _callee2, null, [[2, 4]]);
+    }, _callee5, null, [[2, 4]]);
   }));
   return _register.apply(this, arguments);
 }
 register();
-},{"../css/styles.css":1,"./minervaAPI":3,"core-js/modules/es.array.concat.js":162,"core-js/modules/es.array.find-index.js":163,"core-js/modules/es.array.find.js":164,"core-js/modules/es.array.from.js":165,"core-js/modules/es.array.includes.js":166,"core-js/modules/es.array.iterator.js":167,"core-js/modules/es.array.map.js":168,"core-js/modules/es.array.slice.js":169,"core-js/modules/es.object.get-prototype-of.js":172,"core-js/modules/es.object.to-string.js":173,"core-js/modules/es.promise.js":177,"core-js/modules/es.regexp.exec.js":181,"core-js/modules/es.regexp.to-string.js":182,"core-js/modules/es.string.includes.js":183,"core-js/modules/es.string.iterator.js":184,"core-js/modules/es.string.replace.js":185,"core-js/modules/es.string.trim.js":186,"core-js/modules/es.symbol.description.js":188,"core-js/modules/es.symbol.iterator.js":190,"core-js/modules/es.symbol.js":191,"core-js/modules/web.dom-collections.for-each.js":193,"core-js/modules/web.dom-collections.iterator.js":194,"jquery":195}],3:[function(require,module,exports){
+},{"../css/styles.css":1,"./minervaAPI":3,"core-js/modules/es.array.concat.js":162,"core-js/modules/es.array.find.js":163,"core-js/modules/es.array.from.js":164,"core-js/modules/es.array.includes.js":165,"core-js/modules/es.array.index-of.js":166,"core-js/modules/es.array.iterator.js":167,"core-js/modules/es.array.map.js":168,"core-js/modules/es.array.slice.js":169,"core-js/modules/es.object.get-prototype-of.js":172,"core-js/modules/es.object.to-string.js":173,"core-js/modules/es.promise.js":177,"core-js/modules/es.regexp.exec.js":181,"core-js/modules/es.regexp.to-string.js":182,"core-js/modules/es.string.includes.js":183,"core-js/modules/es.string.iterator.js":184,"core-js/modules/es.string.replace.js":185,"core-js/modules/es.string.trim.js":186,"core-js/modules/es.symbol.description.js":188,"core-js/modules/es.symbol.iterator.js":190,"core-js/modules/es.symbol.js":191,"core-js/modules/web.dom-collections.for-each.js":193,"core-js/modules/web.dom-collections.iterator.js":194,"jquery":195}],3:[function(require,module,exports){
 /**
  * Definitions of minerva plugin API.
  */
@@ -3925,30 +4009,6 @@ $({ target: 'Array', proto: true, arity: 1, forced: FORCED }, {
 },{"../internals/array-method-has-species-support":16,"../internals/array-species-create":20,"../internals/create-property":31,"../internals/does-not-exceed-safe-integer":37,"../internals/environment-v8-version":46,"../internals/export":48,"../internals/fails":49,"../internals/is-array":75,"../internals/is-object":80,"../internals/length-of-array-like":91,"../internals/to-object":147,"../internals/well-known-symbol":160}],163:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
-var $findIndex = require('../internals/array-iteration').findIndex;
-var addToUnscopables = require('../internals/add-to-unscopables');
-
-var FIND_INDEX = 'findIndex';
-var SKIPS_HOLES = true;
-
-// Shouldn't skip holes
-// eslint-disable-next-line es/no-array-prototype-findindex -- testing
-if (FIND_INDEX in []) Array(1)[FIND_INDEX](function () { SKIPS_HOLES = false; });
-
-// `Array.prototype.findIndex` method
-// https://tc39.es/ecma262/#sec-array.prototype.findindex
-$({ target: 'Array', proto: true, forced: SKIPS_HOLES }, {
-  findIndex: function findIndex(callbackfn /* , that = undefined */) {
-    return $findIndex(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  }
-});
-
-// https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
-addToUnscopables(FIND_INDEX);
-
-},{"../internals/add-to-unscopables":8,"../internals/array-iteration":15,"../internals/export":48}],164:[function(require,module,exports){
-'use strict';
-var $ = require('../internals/export');
 var $find = require('../internals/array-iteration').find;
 var addToUnscopables = require('../internals/add-to-unscopables');
 
@@ -3970,7 +4030,7 @@ $({ target: 'Array', proto: true, forced: SKIPS_HOLES }, {
 // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
 addToUnscopables(FIND);
 
-},{"../internals/add-to-unscopables":8,"../internals/array-iteration":15,"../internals/export":48}],165:[function(require,module,exports){
+},{"../internals/add-to-unscopables":8,"../internals/array-iteration":15,"../internals/export":48}],164:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var from = require('../internals/array-from');
@@ -3987,7 +4047,7 @@ $({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
   from: from
 });
 
-},{"../internals/array-from":13,"../internals/check-correctness-of-iteration":22,"../internals/export":48}],166:[function(require,module,exports){
+},{"../internals/array-from":13,"../internals/check-correctness-of-iteration":22,"../internals/export":48}],165:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var $includes = require('../internals/array-includes').includes;
@@ -4011,7 +4071,32 @@ $({ target: 'Array', proto: true, forced: BROKEN_ON_SPARSE }, {
 // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
 addToUnscopables('includes');
 
-},{"../internals/add-to-unscopables":8,"../internals/array-includes":14,"../internals/export":48,"../internals/fails":49}],167:[function(require,module,exports){
+},{"../internals/add-to-unscopables":8,"../internals/array-includes":14,"../internals/export":48,"../internals/fails":49}],166:[function(require,module,exports){
+'use strict';
+/* eslint-disable es/no-array-prototype-indexof -- required for testing */
+var $ = require('../internals/export');
+var uncurryThis = require('../internals/function-uncurry-this-clause');
+var $indexOf = require('../internals/array-includes').indexOf;
+var arrayMethodIsStrict = require('../internals/array-method-is-strict');
+
+var nativeIndexOf = uncurryThis([].indexOf);
+
+var NEGATIVE_ZERO = !!nativeIndexOf && 1 / nativeIndexOf([1], 1, -0) < 0;
+var FORCED = NEGATIVE_ZERO || !arrayMethodIsStrict('indexOf');
+
+// `Array.prototype.indexOf` method
+// https://tc39.es/ecma262/#sec-array.prototype.indexof
+$({ target: 'Array', proto: true, forced: FORCED }, {
+  indexOf: function indexOf(searchElement /* , fromIndex = 0 */) {
+    var fromIndex = arguments.length > 1 ? arguments[1] : undefined;
+    return NEGATIVE_ZERO
+      // convert -0 to +0
+      ? nativeIndexOf(this, searchElement, fromIndex) || 0
+      : $indexOf(this, searchElement, fromIndex);
+  }
+});
+
+},{"../internals/array-includes":14,"../internals/array-method-is-strict":17,"../internals/export":48,"../internals/function-uncurry-this-clause":57}],167:[function(require,module,exports){
 'use strict';
 var toIndexedObject = require('../internals/to-indexed-object');
 var addToUnscopables = require('../internals/add-to-unscopables');
