@@ -51,16 +51,13 @@ require("./minervaAPI");
 
 /* globals minerva:MinervaAPI */
 
-var PLUGIN_NAME = "KE Methods Mapper";
-var PLUGIN_VERSION = "1.0.2";
+var PLUGIN_NAME = "Cardiotox KE Methods Mapper";
+var PLUGIN_VERSION = "1.1.0";
 var PLUGIN_URL = "https://raw.githubusercontent.com/luiz-ladeira/cardiotox_aop_minerva_plugin/master/plugin.js";
 var SPREADSHEET_ID = "1lYtwYLNLfGlhj7gbbkaNCwYNsuGKM5L6uJSydlXEGLE";
 var API_KEY = "AIzaSyAIaStdq_ebxgOE7l5K5mBrBSRrf3Ywayg";
 var SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/".concat(SPREADSHEET_ID);
 var KE_NAME_COLUMN = "ke_name";
-
-// === FLAGS GLOBAIS ===
-var allowInitialHighlight = true; // só no load inicial
 
 // ===== Utils =====
 function normalizeName(name) {
@@ -85,7 +82,7 @@ function _fetchSheetData() {
     return _regenerator().w(function (_context3) {
       while (1) switch (_context3.n) {
         case 0:
-          url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/data?key=").concat(API_KEY);
+          url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/Sheet1?key=").concat(API_KEY);
           _context3.n = 1;
           return fetch(url);
         case 1:
@@ -257,8 +254,6 @@ function renderUI(container, sheet, bioEntities) {
     deHighlightAll();
     $("#search-box").val("");
     $tbody.find("tr").show();
-    // depois de clean, nunca mais auto-highlight
-    allowInitialHighlight = false;
   });
   $("#search-box").on("input", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
     var val, visibleMatches;
@@ -289,20 +284,17 @@ function renderUI(container, sheet, bioEntities) {
     }, _callee2, this);
   })));
 
-  // ===== Initial highlight (only once, controlled by flag) =====
-  if (allowInitialHighlight) {
-    var allMatches = [];
-    $tbody.find("tr").each(function () {
-      var rowCells = $(this).find("td");
-      if (keNameIdx !== -1) {
-        var ke = rowCells.eq(keNameIdx).text();
-        var match = entityIndex[normalizeName(ke)];
-        if (match) allMatches.push(match);
-      }
-    });
-    highlightMultiple(allMatches);
-    allowInitialHighlight = false; // não repete nunca mais
-  }
+  // ===== Initial highlight =====
+  var allMatches = [];
+  $tbody.find("tr").each(function () {
+    var rowCells = $(this).find("td");
+    if (keNameIdx !== -1) {
+      var ke = rowCells.eq(keNameIdx).text();
+      var match = entityIndex[normalizeName(ke)];
+      if (match) allMatches.push(match);
+    }
+  });
+  highlightMultiple(allMatches);
 }
 
 // ===== Main =====
