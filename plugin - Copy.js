@@ -51,7 +51,7 @@ require("./minervaAPI");
 /* globals minerva:MinervaAPI */
 
 var PLUGIN_NAME = "KE Methods Mapper";
-var PLUGIN_VERSION = "1.6.2";
+var PLUGIN_VERSION = "1.6.1";
 var PLUGIN_URL = "https://raw.githubusercontent.com/luiz-ladeira/cardiotox_aop_minerva_plugin/master/plugin.js";
 var SPREADSHEET_ID = "1lYtwYLNLfGlhj7gbbkaNCwYNsuGKM5L6uJSydlXEGLE";
 var API_KEY = "AIzaSyAIaStdq_ebxgOE7l5K5mBrBSRrf3Ywayg";
@@ -77,28 +77,28 @@ function fetchSheetData() {
   return _fetchSheetData.apply(this, arguments);
 }
 function _fetchSheetData() {
-  _fetchSheetData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+  _fetchSheetData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
     var url, resp;
-    return _regenerator().w(function (_context2) {
-      while (1) switch (_context2.n) {
+    return _regenerator().w(function (_context3) {
+      while (1) switch (_context3.n) {
         case 0:
           url = "https://sheets.googleapis.com/v4/spreadsheets/".concat(SPREADSHEET_ID, "/values/Data?key=").concat(API_KEY);
-          _context2.n = 1;
+          _context3.n = 1;
           return fetch(url);
         case 1:
-          resp = _context2.v;
+          resp = _context3.v;
           if (resp.ok) {
-            _context2.n = 2;
+            _context3.n = 2;
             break;
           }
           throw new Error("Google Sheets fetch failed: ".concat(resp.statusText));
         case 2:
-          _context2.n = 3;
+          _context3.n = 3;
           return resp.json();
         case 3:
-          return _context2.a(2, _context2.v);
+          return _context3.a(2, _context3.v);
       }
-    }, _callee2);
+    }, _callee3);
   }));
   return _fetchSheetData.apply(this, arguments);
 }
@@ -124,6 +124,8 @@ function deHighlightAll() {
     minerva.data.bioEntities.removeAllMarkers();
   }
 }
+
+// ===== Core =====
 function highlightMultiple(_x) {
   return _highlightMultiple.apply(this, arguments);
 }
@@ -131,12 +133,12 @@ function highlightMultiple(_x) {
  * Render KE table
  */
 function _highlightMultiple() {
-  _highlightMultiple = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(matches) {
+  _highlightMultiple = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(matches) {
     var _iterator, _step, m, marker;
-    return _regenerator().w(function (_context3) {
-      while (1) switch (_context3.n) {
+    return _regenerator().w(function (_context4) {
+      while (1) switch (_context4.n) {
         case 0:
-          deHighlightAll();
+          deHighlightAll(); // Clear previous pins
           _iterator = _createForOfIteratorHelper(matches);
           try {
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -156,28 +158,23 @@ function _highlightMultiple() {
             _iterator.f();
           }
         case 1:
-          return _context3.a(2);
+          return _context4.a(2);
       }
-    }, _callee3);
+    }, _callee4);
   }));
   return _highlightMultiple.apply(this, arguments);
 }
 function renderUI(container, sheet, bioEntities) {
   var $el = $(container);
   $el.empty();
-  $el.addClass('ke-plugin-root');
   var header = sheet.values[0];
   var rows = sheet.values.slice(1);
   var keNameIdx = header.indexOf(KE_NAME_COLUMN);
   var entityIndex = buildEntityIndex(bioEntities);
-
-  // nicer layout: Fixed Top Section
-  var $headerSection = $("\n    <div class=\"ke-fixed-top border-bottom bg-light p-2\">\n      <div class=\"input-group input-group-sm mb-2\">\n        <div class=\"input-group-prepend\">\n          <span class=\"input-group-text\"><i class=\"fas fa-search\"></i> Search</span>\n        </div>\n        <input type=\"text\" id=\"search-box\" class=\"form-control\" placeholder=\"Type to filter map...\">\n      </div>\n      <div class=\"d-flex gap-2\">\n        <button class=\"btn btn-sm btn-outline-primary flex-grow-1 access-btn\">\n           Access Data\n        </button>\n        <button class=\"btn btn-sm btn-outline-danger clean-btn\" style=\"margin-left:5px;\">\n           Clean Map\n        </button>\n      </div>\n    </div>\n  ");
-
-  // Scrollable Section
-  var $scrollSection = $('<div class="ke-scroll-content"></div>');
-  var $table = $('<table class="table table-hover table-sm mb-0"></table>');
-  var $thead = $('<thead class="thead-light"><tr></tr></thead>');
+  var $controls = $("\n    <div class=\"d-flex justify-content-between mb-2\">\n      <input type=\"text\" id=\"search-box\" class=\"form-control form-control-sm w-50\" placeholder=\"Search...\">\n      <div>\n        <button class=\"btn btn-sm btn-primary access-btn\">Access data</button>\n        <button class=\"btn btn-sm btn-secondary clean-btn\">Clean</button>\n      </div>\n    </div>\n  ");
+  var $wrapper = $('<div class="table-wrapper"></div>');
+  var $table = $('<table class="table table-bordered table-sm"></table>');
+  var $thead = $("<thead><tr></tr></thead>");
   var $tbody = $("<tbody></tbody>");
   header.forEach(function (h) {
     return $thead.find("tr").append("<th>".concat(h, "</th>"));
@@ -187,15 +184,14 @@ function renderUI(container, sheet, bioEntities) {
     row.forEach(function (cell, idx) {
       var value = cell || "";
       if (header[idx].toLowerCase() === "url" && value) {
-        value = "<a href=\"".concat(value, "\" target=\"_blank\" class=\"btn btn-xs btn-link p-0 text-truncate\" style=\"max-width:100px;\">View</a>");
+        value = "<a href=\"".concat(value, "\" target=\"_blank\" style=\"font-weight: normal;\">").concat(value, "</a>");
       }
       $row.append("<td>".concat(value, "</td>"));
     });
     if (keNameIdx !== -1 && row[keNameIdx]) {
-      var ke = row[keNameIdx];
-      var match = entityIndex[normalizeName(ke)];
+      var match = entityIndex[normalizeName(row[keNameIdx])];
       if (match) {
-        $row.addClass('clickable-row').on("click", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+        $row.css("cursor", "pointer").on("click", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
           return _regenerator().w(function (_context) {
             while (1) switch (_context.n) {
               case 0:
@@ -211,8 +207,8 @@ function renderUI(container, sheet, bioEntities) {
     $tbody.append($row);
   });
   $table.append($thead).append($tbody);
-  $scrollSection.append($table);
-  $el.append($headerSection, $scrollSection);
+  $wrapper.append($table);
+  $el.append($controls, $wrapper);
 
   // Events
   $(".access-btn").on("click", function () {
@@ -223,23 +219,32 @@ function renderUI(container, sheet, bioEntities) {
     $("#search-box").val("");
     $tbody.find("tr").show();
   });
-  $("#search-box").on("input", function () {
-    var val = $(this).val().toLowerCase();
-    var visibleMatches = [];
-    $tbody.find("tr").each(function () {
-      var rowText = $(this).text().toLowerCase();
-      var isVisible = rowText.includes(val);
-      $(this).toggle(isVisible);
-      if (isVisible && keNameIdx !== -1) {
-        var keName = $(this).find("td").eq(keNameIdx).text();
-        var match = entityIndex[normalizeName(keName)];
-        if (match) visibleMatches.push(match);
+  $("#search-box").on("input", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+    var val, visibleMatches;
+    return _regenerator().w(function (_context2) {
+      while (1) switch (_context2.n) {
+        case 0:
+          val = $(this).val().toLowerCase();
+          visibleMatches = [];
+          $tbody.find("tr").each(function () {
+            var rowText = $(this).text().toLowerCase();
+            var isVisible = rowText.includes(val);
+            $(this).toggle(isVisible);
+            if (isVisible && keNameIdx !== -1) {
+              var keName = $(this).find("td").eq(keNameIdx).text();
+              var match = entityIndex[normalizeName(keName)];
+              if (match) visibleMatches.push(match);
+            }
+          });
+          _context2.n = 1;
+          return highlightMultiple(visibleMatches);
+        case 1:
+          return _context2.a(2);
       }
-    });
-    highlightMultiple(visibleMatches);
-  });
+    }, _callee2, this);
+  })));
 
-  // Initial highlight
+  // Initial highlight logic
   var allMatches = [];
   $tbody.find("tr").each(function () {
     if (keNameIdx !== -1) {
@@ -251,7 +256,7 @@ function renderUI(container, sheet, bioEntities) {
   highlightMultiple(allMatches);
 }
 
-// Babel-compatible Synchronous registration
+// ===== Main (Synchronous Wrapper for Babel Compatibility) =====
 function register() {
   if (!minerva.plugins || !minerva.plugins.registerPlugin) return;
   var pluginData = minerva.plugins.registerPlugin({
@@ -266,7 +271,7 @@ function register() {
   })]).then(function (results) {
     renderUI(pluginData.element, results[0], results[1]);
   }).catch(function (err) {
-    $(pluginData.element).html("<p style=\"color:red; padding: 10px;\">".concat(err.message, "</p>"));
+    $(pluginData.element).html("<p style=\"color:red;\">".concat(err.message, "</p>"));
   });
 }
 register();
