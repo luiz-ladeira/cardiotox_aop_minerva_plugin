@@ -2,6 +2,7 @@
 title: "KE Methods Mapper Plugin – Documentation"
 author: "Luiz Ladeira"
 date: "2025_09_23"
+updated:"2026_03_13"
 output: html_document
 ---
 
@@ -65,7 +66,7 @@ When loaded in MINERVA:
 
 -   **Plugin name**: KE Methods Mapper
 
--   **Version**: 1.0.0
+-   **Version**: 1.6.2
 
 -   **Author**: Luiz Ladeira
 
