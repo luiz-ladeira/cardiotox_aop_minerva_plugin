@@ -2,7 +2,7 @@
 title: "KE Methods Mapper Plugin – Documentation"
 author: "Luiz Ladeira"
 date: "2025_09_23"
-updated:"2026_03_13"
+updated: "2026_03_13"
 output: html_document
 ---
 
