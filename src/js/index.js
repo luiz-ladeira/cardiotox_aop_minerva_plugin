@@ -13,9 +13,8 @@ require("./minervaAPI");
 /* globals minerva:MinervaAPI */
 
 const PLUGIN_NAME = "KE Methods Mapper";
-const PLUGIN_VERSION = "1.0.0";
-const PLUGIN_URL =
-  "https://raw.githubusercontent.com/luiz-ladeira/cardiotox_aop_minerva_plugin/master/plugin.js";
+const PLUGIN_VERSION = "1.6.1";
+const PLUGIN_URL = "https://raw.githubusercontent.com/luiz-ladeira/cardiotox_aop_minerva_plugin/master/plugin.js";
 
 const SPREADSHEET_ID = "1lYtwYLNLfGlhj7gbbkaNCwYNsuGKM5L6uJSydlXEGLE";
 const API_KEY = "AIzaSyAIaStdq_ebxgOE7l5K5mBrBSRrf3Ywayg";
@@ -31,47 +30,39 @@ function normalizeName(name) {
 function buildEntityIndex(bioEntities) {
   const index = {};
   bioEntities.forEach((be) => {
+    const entityName = be.name || (be.bioEntity && be.bioEntity.name) || "";
     const keys = [
-      normalizeName(be.name),
+      normalizeName(entityName),
       ...(be.labels || []).map(normalizeName),
       ...(be.aliases || []).map(normalizeName),
     ];
-    keys.forEach((k) => {
-      if (k) index[k] = be;
-    });
+    keys.forEach((k) => { if (k) index[k] = be; });
   });
   return index;
 }
 
 async function fetchSheetData() {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Sheet1?key=${API_KEY}`;
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Data?key=${API_KEY}`;
   const resp = await fetch(url);
-  if (!resp.ok)
-    throw new Error(`Google Sheets fetch failed: ${resp.statusText}`);
+  if (!resp.ok) throw new Error(`Google Sheets fetch failed: ${resp.statusText}`);
   return await resp.json();
 }
 
-async function fetchElementDetails(element) {
-  const url =
-    minerva.project.data.getApiUrls().baseNewApiUrl +
-    "/projects/" +
-    minerva.project.data.getProjectId() +
-    "/models/" +
-    element.modelId +
-    "/bioEntities/elements/" +
-    element.id;
-  return fetch(url).then((r) => r.json());
-}
-
 function elementToPinData(element) {
+  const geometry = element.bounds ? element.bounds : element;
+  const w = parseFloat(geometry.width) || 0;
+  const h = parseFloat(geometry.height) || 0;
+  const x = parseFloat(geometry.x) || 0;
+  const y = parseFloat(geometry.y) || 0;
+
   return {
     id: "E" + element.id,
-    modelId: element.modelId ? element.modelId : element.model,
+    modelId: element.modelId || element.model,
     type: "pin",
     color: "#FF0000",
     opacity: 0.9,
-    x: element.x + element.width / 2,
-    y: element.y + element.height / 2,
+    x: x + (w / 2),
+    y: y + (h / 2),
   };
 }
 
@@ -83,12 +74,13 @@ function deHighlightAll() {
 
 // ===== Core =====
 async function highlightMultiple(matches) {
-  deHighlightAll();
+  deHighlightAll(); // Clear previous pins
   for (const m of matches) {
     try {
-      const full = await fetchElementDetails(m);
-      const marker = elementToPinData(full);
-      minerva.data.bioEntities.addSingleMarker(marker);
+      const marker = elementToPinData(m);
+      if (!isNaN(marker.x) && !isNaN(marker.y)) {
+        minerva.data.bioEntities.addSingleMarker(marker);
+      }
     } catch (err) {
       console.error("Error highlighting", m, err);
     }
@@ -104,6 +96,8 @@ function renderUI(container, sheet, bioEntities) {
 
   const header = sheet.values[0];
   const rows = sheet.values.slice(1);
+  const keNameIdx = header.indexOf(KE_NAME_COLUMN);
+  const entityIndex = buildEntityIndex(bioEntities);
 
   const $controls = $(`
     <div class="d-flex justify-content-between mb-2">
@@ -122,10 +116,6 @@ function renderUI(container, sheet, bioEntities) {
 
   header.forEach((h) => $thead.find("tr").append(`<th>${h}</th>`));
 
-  const keNameIdx = header.indexOf(KE_NAME_COLUMN);
-  const entityIndex = buildEntityIndex(bioEntities);
-
-  // Build rows
   rows.forEach((row) => {
     const $row = $("<tr></tr>");
     row.forEach((cell, idx) => {
@@ -137,17 +127,13 @@ function renderUI(container, sheet, bioEntities) {
     });
 
     if (keNameIdx !== -1 && row[keNameIdx]) {
-      const ke = row[keNameIdx];
-      const match = entityIndex[normalizeName(ke)];
+      const match = entityIndex[normalizeName(row[keNameIdx])];
       if (match) {
-        $row.css("cursor", "pointer");
-        $row.on("click", async () => {
-          console.log("Clicked KE:", ke, "-> match:", match);
-          await highlightMultiple([match]); // only clicked KE
+        $row.css("cursor", "pointer").on("click", async () => {
+          await highlightMultiple([match]);
         });
       }
     }
-
     $tbody.append($row);
   });
 
@@ -155,11 +141,9 @@ function renderUI(container, sheet, bioEntities) {
   $wrapper.append($table);
   $el.append($controls, $wrapper);
 
-  // ===== Events =====
-  $(".access-btn").css("font-weight", "normal").on("click", () =>
-    window.open(SPREADSHEET_URL, "_blank")
-  );
-
+  // Events
+  $(".access-btn").on("click", () => window.open(SPREADSHEET_URL, "_blank"));
+  
   $(".clean-btn").on("click", () => {
     deHighlightAll();
     $("#search-box").val("");
@@ -168,65 +152,56 @@ function renderUI(container, sheet, bioEntities) {
 
   $("#search-box").on("input", async function () {
     const val = $(this).val().toLowerCase();
+    const visibleMatches = [];
+
     $tbody.find("tr").each(function () {
       const rowText = $(this).text().toLowerCase();
-      $(this).toggle(rowText.includes(val));
-    });
+      const isVisible = rowText.includes(val);
+      $(this).toggle(isVisible);
 
-    // highlight only visible rows
-    const visibleMatches = [];
-    $tbody.find("tr:visible").each(function () {
-      const rowCells = $(this).find("td");
-      if (keNameIdx !== -1) {
-        const ke = rowCells.eq(keNameIdx).text();
-        const match = entityIndex[normalizeName(ke)];
+      if (isVisible && keNameIdx !== -1) {
+        const keName = $(this).find("td").eq(keNameIdx).text();
+        const match = entityIndex[normalizeName(keName)];
         if (match) visibleMatches.push(match);
       }
     });
+
     await highlightMultiple(visibleMatches);
   });
 
-  // ===== Initial highlight =====
+  // Initial highlight logic
   const allMatches = [];
   $tbody.find("tr").each(function () {
-    const rowCells = $(this).find("td");
     if (keNameIdx !== -1) {
-      const ke = rowCells.eq(keNameIdx).text();
-      const match = entityIndex[normalizeName(ke)];
+      const keName = $(this).find("td").eq(keNameIdx).text();
+      const match = entityIndex[normalizeName(keName)];
       if (match) allMatches.push(match);
     }
   });
   highlightMultiple(allMatches);
 }
 
-// ===== Main =====
-async function register() {
-  console.log(`Registering ${PLUGIN_NAME} plugin`);
+// ===== Main (Synchronous Wrapper for Babel Compatibility) =====
+function register() {
+  if (!minerva.plugins || !minerva.plugins.registerPlugin) return;
 
-  if (!minerva.plugins || !minerva.plugins.registerPlugin) {
-    alert("Minerva v18 or later required");
-    return;
-  }
-
-  const { element } = minerva.plugins.registerPlugin({
+  const pluginData = minerva.plugins.registerPlugin({
     pluginName: PLUGIN_NAME,
     pluginVersion: PLUGIN_VERSION,
     pluginUrl: PLUGIN_URL,
   });
 
-  try {
-    const [sheet, elements] = await Promise.all([
-      fetchSheetData(),
-      fetch(
-        `${minerva.project.data.getApiUrls().baseApiUrl}/projects/${minerva.project.data.getProjectId()}/models/*/bioEntities/elements/`
-      ).then((r) => r.json()),
-    ]);
+  const baseUrl = minerva.project.data.getApiUrls().baseApiUrl;
+  const projectId = minerva.project.data.getProjectId();
 
-    renderUI(element, sheet, elements);
-  } catch (err) {
-    $(element).html(`<p style="color:red;">${err.message}</p>`);
-    console.error(err);
-  }
+  Promise.all([
+    fetchSheetData(),
+    fetch(`${baseUrl}/projects/${projectId}/models/*/bioEntities/elements/`).then(r => r.json())
+  ]).then(results => {
+    renderUI(pluginData.element, results[0], results[1]);
+  }).catch(err => {
+    $(pluginData.element).html(`<p style="color:red;">${err.message}</p>`);
+  });
 }
 
 register();
